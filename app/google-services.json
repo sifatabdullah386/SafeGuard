@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "272805581289",
+    "firebase_url": "https://safeguard-fd738.firebaseio.com",
+    "project_id": "safeguard-fd738",
+    "storage_bucket": "safeguard-fd738.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272805581289:android:69b06b8eb387682e427b78",
+        "android_client_info": {
+          "package_name": "com.example.safeguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272805581289-pef6bfidplkokfdn4l3jl4n5b829piqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.safeguard",
+            "certificate_hash": "8721825f707bc690ce8e7686e6bdcf0123e22f90"
+          }
+        },
+        {
+          "client_id": "272805581289-dphe1r4mo5qulljhsrod80k1h8f4mjub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv9dZxNdhEDnteVkkZWgtdsyVB198KXoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272805581289-dphe1r4mo5qulljhsrod80k1h8f4mjub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

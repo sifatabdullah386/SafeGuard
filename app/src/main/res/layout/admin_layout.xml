@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="#8BC34A"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/adminUsername"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:backgroundTint="#0E3C10"
+        android:textColor="@color/white"
+        android:textColorHint="#fff"
+        android:textAlignment="center"
+        android:hint="Admin Username"
+        android:ems="10"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/adminPassword"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:backgroundTint="#0E3C10"
+        android:textColor="@color/white"
+        android:textColorHint="#fff"
+        android:textAlignment="center"
+        android:hint="Admin Password"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/adminButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"
+        android:text="Login" />
+</LinearLayout>

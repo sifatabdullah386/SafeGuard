@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#E72719</color>
+    <color name="colorPrimaryDark">#e23d32</color>
+    <color name="colorAccent">#CDDC39</color>
+    <color name="Aqurine">#FADCD2</color>
+    <color name="white">#fff</color>
+    <color name="colorCardView">#0B29CA</color>
+    <color name="colorHeader">#CDDC39</color>
+    <color name="colorAlertTag">#F9F7FA</color>
+    <color name="colorPanicStart">#940B01</color>
+    <color name="colorPanicMiddle">#F3382A</color>
+    <color name="colorPanicEnd">#E92E21</color>
+    <color name="colorFireServices">#f26760</color>
+    <color name="colorFeedback">#1cc2b6</color>
+    <color name="colorPoliceStation">#5a72f0</color>
+    <color name="colorEmergencyMedical">#FC382A</color>
+    <color name="colorSexualHarassment">#e5326a</color>
+    <color name="colorTrafficAccident">#FF5722</color>
+
+</resources>

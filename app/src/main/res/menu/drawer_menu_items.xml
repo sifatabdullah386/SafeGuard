@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+  <item android:title="@string/add_organizations">
+    <menu>
+      <item
+          android:id="@+id/drawer_add_fire_services"
+          android:icon="@drawable/drawer_add_organization"
+          android:title="@string/drawer_add_fire_services" />
+      <item
+          android:id="@+id/drawer_add_police_stations"
+          android:icon="@drawable/drawer_add_organization"
+          android:title="@string/drawer_add_police_stations" />
+      <item
+          android:id="@+id/drawer_add_hospitals"
+          android:icon="@drawable/drawer_add_organization"
+          android:title="@string/drawer_add_hospitals" />
+      <item
+          android:id="@+id/drawer_add_ambulances"
+          android:icon="@drawable/drawer_add_organization"
+          android:title="@string/drawer_ambulances" />
+    </menu>
+  </item>
+
+  <item android:title="@string/Communicate">
+    <menu >
+      <item
+          android:id="@+id/drawer_share"
+          android:icon="@drawable/drawer_share"
+          android:title="@string/drawer_share" />
+      <item
+          android:id="@+id/drawer_rate_us"
+          android:icon="@drawable/drawer_rate_us"
+          android:title="@string/drawer_rate_us" />
+      <item
+          android:id="@+id/drawer_about_the_apps"
+          android:icon="@drawable/drawer_about_us"
+          android:title="@string/drawer_about_the_apps" />
+    </menu>
+
+  </item>
+
+</menu>

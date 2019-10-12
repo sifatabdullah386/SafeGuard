@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/drawer_notification_settings"
+      android:title="@string/drawer_notification_settings"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/drawer_admin"
+      android:title="@string/drawer_admin"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/drawer_coordinator"
+      android:title="@string/drawer_coordinator"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/drawer_share"
+      android:title="@string/drawer_share"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/facebook"
+      android:title="@string/facebook"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/drawer_rate_us"
+      android:title="@string/drawer_rate_us"
+      app:showAsAction="never"/>
+  <item
+      android:id="@+id/drawer_exit"
+      android:title="@string/drawer_exit"
+      app:showAsAction="never"/>
+
+</menu>

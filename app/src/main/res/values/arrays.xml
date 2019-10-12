@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="add_organization_type">
+        <item>Governmental</item>
+        <item>Non-Profit</item>
+        <item>Private</item>
+    </string-array>
+    <string-array name="add_hospital_type">
+        <item>Governmental</item>
+        <item>Non-Profit</item>
+        <item>Private</item>
+    </string-array>
+</resources>
