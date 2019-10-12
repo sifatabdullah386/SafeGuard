@@ -8,6 +8,7 @@ public class userDataConstructor {
     private String email;
 
     public userDataConstructor() {
+
     }
 
     userDataConstructor(String ID, String userName, String phoneNumber, String location, String email) {

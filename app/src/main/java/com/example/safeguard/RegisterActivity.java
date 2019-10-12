@@ -22,23 +22,23 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText UserName,PhoneNumber,Address,Email,Password;
+    EditText UserName,UserPhoneNumber,UserAddress,UserEmail,UserPassword;
     Button signUpButton;
     TextView AlreadySign;
     private FirebaseAuth firebaseAuth;
-    FirebaseUser currentUser;
+    FirebaseUser CurrentUser;
     ProgressBar progressBar;
-    DatabaseReference userDatabase;
+    DatabaseReference UserDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         UserName = findViewById(R.id.userNameEditText);
-        PhoneNumber = findViewById(R.id.phoneNumberEditText);
-        Address = findViewById(R.id.locationEditText);
-        Email = findViewById(R.id.emailEditText);
-        Password = findViewById(R.id.passwordEditText);
+        UserPhoneNumber = findViewById(R.id.phoneNumberEditText);
+        UserAddress = findViewById(R.id.locationEditText);
+        UserEmail = findViewById(R.id.emailEditText);
+        UserPassword = findViewById(R.id.passwordEditText);
         signUpButton = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
 
@@ -51,24 +51,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         firebaseAuth = FirebaseAuth.getInstance();
-        userDatabase= FirebaseDatabase.getInstance().getReference("users");
+        UserDatabase= FirebaseDatabase.getInstance().getReference("Users");
         doRegistration();
     }
     @Override
     public void onStart(){
         super.onStart();
-        currentUser = firebaseAuth.getCurrentUser();
-        updateUI(currentUser);
+        CurrentUser = firebaseAuth.getCurrentUser();
+        updateUI(CurrentUser);
     }
     private void doRegistration(){
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userName = UserName.getText().toString().trim();
-                String phoneNumber = PhoneNumber.getText().toString().trim();
-                String location = Address.getText().toString().trim();
-                String email = Email.getText().toString().trim();
-                String password = Password.getText().toString().trim();
+                String phoneNumber = UserPhoneNumber.getText().toString().trim();
+                String location = UserAddress.getText().toString().trim();
+                String email = UserEmail.getText().toString().trim();
+                String password = UserPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(location) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     Toast.makeText(RegisterActivity.this, "Please enter all details!", Toast.LENGTH_SHORT).show();
@@ -94,10 +94,10 @@ public class RegisterActivity extends AppCompatActivity {
                         });
                 }
                 //For Real time Data Store
-                String id=userDatabase.push().getKey();
+                String id=UserDatabase.push().getKey();
                 userDataConstructor send=new userDataConstructor(id,userName,phoneNumber,location,email);
                 assert id != null;
-                userDatabase.child(id).setValue(send);
+                UserDatabase.child(id).setValue(send);
                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
             }
         });

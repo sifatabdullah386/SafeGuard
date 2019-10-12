@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
 public class Organizations extends Fragment {
 
     private FirebaseRecyclerOptions<addOrganizationConstructor> options;

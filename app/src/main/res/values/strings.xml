@@ -36,7 +36,7 @@
     <string name="fire_station_description">Fire Station Description</string>
     <string name="register">Register</string>
     <string name="add_fire_services">Fire Services</string>
-    <string name="add_ambulance_name">Ambulace Company</string>
+    <string name="add_ambulance_name">Ambulance Company</string>
     <string name="my_email">smilesifat@gmail.com</string>
     <string name="panic_button">Help!!</string>
     <string name="feed_back">Feed Back</string>
@@ -45,7 +45,7 @@
     <string name="emergency_medical">Emergency Medical</string>
     <string name="sexual_harassment">Sexual Harassment</string>
     <string name="traffic_accident">Traffic Accident</string>
-    <string name="organization_name">Difine Organization Name</string>
+    <string name="organization_name">Define Organization Name</string>
     <string name="organization_location">Organization Location</string>
     <string name="organization_phone_number">Organization Phone Number</string>
     <string name="organization_email">Organization Email</string>
