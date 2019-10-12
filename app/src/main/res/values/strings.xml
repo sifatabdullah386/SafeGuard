@@ -50,4 +50,5 @@
     <string name="organization_phone_number">Organization Phone Number</string>
     <string name="organization_email">Organization Email</string>
     <string name="organization_description">Organization Description</string>
+    <string name="title_activity_maps_collect_location">Collect Location Map</string>
 </resources>
