@@ -5,24 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class Profile extends Fragment {
 
-    TextView ProfileName,profilePhoneNumber,profileEmail,profileLocation;
+    private TextView ProfileName,profilePhoneNumber,profileEmail,profileLocation;
+    private FirebaseAuth firebaseAuth;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
 
         ProfileName=view.findViewById(R.id.profile_name);

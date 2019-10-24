@@ -11,6 +11,16 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,7 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText UserName,UserPhoneNumber,UserAddress,UserEmail,UserPassword;
     Button signUpButton;
-    TextView AlreadySign;
+    TextView GuestLogin;
+    int PLACE_PICKER_REQUEST=1;
     private FirebaseAuth firebaseAuth;
     FirebaseUser CurrentUser;
     ProgressBar progressBar;
@@ -42,8 +53,14 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
 
-        AlreadySign=findViewById(R.id.already_sign_text_view);
-        AlreadySign.setOnClickListener(new View.OnClickListener() {
+        UserAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPlacePicker();
+            }
+        });
+        GuestLogin=findViewById(R.id.button_guest_login);
+        GuestLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(RegisterActivity.this,MainActivity.class);
@@ -58,16 +75,23 @@ public class RegisterActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         CurrentUser = firebaseAuth.getCurrentUser();
-        updateUI(CurrentUser);
+       /* if(CurrentUser!=null){
+            finish();
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else{
+            doRegistration();
+        }*/
     }
     private void doRegistration(){
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = UserName.getText().toString().trim();
-                String phoneNumber = UserPhoneNumber.getText().toString().trim();
-                String location = UserAddress.getText().toString().trim();
-                String email = UserEmail.getText().toString().trim();
+                final String userName = UserName.getText().toString().trim();
+                final String phoneNumber = UserPhoneNumber.getText().toString().trim();
+                final String location = UserAddress.getText().toString().trim();
+                final String email = UserEmail.getText().toString().trim();
                 String password = UserPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(location) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
@@ -80,36 +104,60 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if(task.isSuccessful()){
-                                    FirebaseUser user=firebaseAuth.getCurrentUser();
-                                    updateUI(user);
-
-                                    /*Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                    startActivity(intent);*/
+                                    finish();
+                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                    startActivity(intent);
                                 }
                                 else{
                                     Toast.makeText(RegisterActivity.this, "Registration failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
                                 }
                             }
                         });
                 }
                 //For Real time Data Store
-                String id=UserDatabase.push().getKey();
-                userDataConstructor send=new userDataConstructor(id,userName,phoneNumber,location,email);
+                String id= firebaseAuth.getUid();
+                userDataConstructor send=new userDataConstructor(userName,phoneNumber,location,email);
                 assert id != null;
                 UserDatabase.child(id).setValue(send);
                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
             }
         });
-
     }
-    private void updateUI(FirebaseUser user){
-        if(user!=null){
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(intent);
+    private void openPlacePicker() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
         }
-        else{
-            doRegistration();
+    }
+    GoogleMap mGoogleMap;
+    Marker mCurrLocationMarker;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PLACE_PICKER_REQUEST) {
+                Place place = PlacePicker.getPlace(this, data);
+                String placeName = String.format("Place: %s", place.getName());
+                double latitude = place.getLatLng().latitude;
+                double longitude = place.getLatLng().longitude;
+                LatLng coordinate = new LatLng(latitude, longitude);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(coordinate);
+                markerOptions.title(placeName); //Here Total Address is address which you want to show on marker
+                mGoogleMap.clear();
+                markerOptions.icon(
+                        BitmapDescriptorFactory
+                                .defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                markerOptions.getPosition();
+                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
+                mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            } else {
+                throw new IllegalStateException("Unexpected value: " + requestCode);
+            }
         }
     }
 
