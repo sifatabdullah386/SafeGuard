@@ -41,7 +41,7 @@
     <string name="panic_button">Help!!</string>
     <string name="feed_back">Feed Back</string>
     <string name="fire_station">Fire Station</string>
-    <string name="police_staton">Police Station</string>
+    <string name="police_station">Police Station</string>
     <string name="emergency_medical">Emergency Medical</string>
     <string name="sexual_harassment">Sexual Harassment</string>
     <string name="traffic_accident">Traffic Accident</string>
@@ -52,5 +52,5 @@
     <string name="organization_description">Organization Description</string>
     <string name="title_activity_maps_collect_location">Collect Location Map</string>
     <string name="all_details">Enter all details</string>
-    <string name="enterusername">Enter Username</string>
+    <string name="enter_username">Enter Username</string>
 </resources>

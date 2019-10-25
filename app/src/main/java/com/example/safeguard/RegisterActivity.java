@@ -139,9 +139,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PLACE_PICKER_REQUEST) {
                 Place place = PlacePicker.getPlace(this, data);
-                String placeName = String.format("Place: %s", place.getName());
-                double latitude = place.getLatLng().latitude;
-                double longitude = place.getLatLng().longitude;
+                final String placeName = String.format("Place: %s", place.getName());
+                final double latitude = place.getLatLng().latitude;
+                final double longitude = place.getLatLng().longitude;
                 LatLng coordinate = new LatLng(latitude, longitude);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(coordinate);
@@ -155,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
                 mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                UserAddress.setText(placeName.toString().trim());
             } else {
                 throw new IllegalStateException("Unexpected value: " + requestCode);
             }

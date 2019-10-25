@@ -10,8 +10,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,12 +23,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".RoadAccidents"></activity>
+        <activity android:name=".SexualHarassment" />
+        <activity android:name=".EmergencyMedical" />
+        <activity android:name=".PoliceStations" />
+        <activity android:name=".FeedBack" />
+        <activity android:name=".FireStations" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_key" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -44,18 +55,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CollectLocationMapsActivity"
-            android:label="@string/title_activity_maps_collect_location" />
-<!--        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.android.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
-        </provider>-->
+        <activity android:name=".TrafficAccidents" />
     </application>
 
 </manifest>

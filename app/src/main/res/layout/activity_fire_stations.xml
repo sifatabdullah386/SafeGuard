@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:id="@+id/main_layout"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<!-- our toolbar -->
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/fire_station_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#F44336"
+    android:textAlignment="center"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+<!-- our tablayout to display tabs  -->
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/fire_station_tabLayout"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#F44336"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+<!-- View pager to swipe views -->
+<androidx.viewpager.widget.ViewPager
+    android:id="@+id/fire_station_pager"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"/>
+
+</LinearLayout>

@@ -30,7 +30,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:clickable="true"
                 app:cardBackgroundColor="@color/colorFireServices"
                 app:cardMaxElevation="80dp"
                 app:cardCornerRadius="8dp">
@@ -140,7 +139,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="@string/police_staton"
+                        android:text="@string/police_station"
                         android:textSize="16sp"
                         android:textColor="#F6F6F7"
                         android:textStyle="bold" />
@@ -179,7 +178,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:clickable="true"
                 app:cardBackgroundColor="@color/colorEmergencyMedical"
                 app:cardMaxElevation="8dp"
                 app:cardCornerRadius="8dp">
