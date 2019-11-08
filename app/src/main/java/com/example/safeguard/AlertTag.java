@@ -21,6 +21,7 @@ public class AlertTag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_alert_tag, container, false);
 
         Button ButtonHelp=view.findViewById(R.id.button_help);
+        CardView FireStation=view.findViewById(R.id.fire_station_card_view);
         ButtonHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,9 +29,17 @@ public class AlertTag extends Fragment {
                 startActivity(intent);
             }
         });
+        FireStation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),FireStations.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
-    public void cardViewOnClick(View view) {
+
+   /* public boolean onOption(View view) {
         switch (view.getId()) {
             case R.id.fire_station_card_view:
                 Intent intent=new Intent(getActivity(),FireStations.class);
@@ -57,6 +66,6 @@ public class AlertTag extends Fragment {
                 startActivity(intent5);
                 break;
         }
-    }
+    }*/
 }
 
