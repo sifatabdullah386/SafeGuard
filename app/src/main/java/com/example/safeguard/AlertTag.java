@@ -31,7 +31,6 @@ public class AlertTag extends Fragment {
             }
         });
         FireStation.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(),FireStations.class);
                 startActivity(intent);

@@ -1,5 +1,6 @@
 package com.example.safeguard;
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -9,11 +10,16 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -27,6 +33,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -40,7 +50,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     private GoogleMap mMap;
-    @Override
+    private Button mRequest;
+    private LatLng myLocation;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -51,6 +62,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+        mRequest=findViewById(R.id.help_request);
+        mRequest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("helpRequest");
+                ref.child(userId).setValue(new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+
+                GeoFire geoFire = new GeoFire(ref);
+                geoFire.setLocation(userId, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+                myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(myLocation).title("Help Here"));
+
+                getClosestOne();
+            }
+        });
+    }
+    private void getClosestOne() {
+
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
