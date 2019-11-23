@@ -39,7 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     FirebaseUser CurrentUser;
     ProgressBar progressBar;
-    DatabaseReference UserDatabase;
+    private DatabaseReference UserDatabase;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
 
-        UserAddress.setOnClickListener(new View.OnClickListener() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+/*        UserAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openPlacePicker();
             }
-        });
+        });*/
         GuestLogin=findViewById(R.id.button_guest_login);
         GuestLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         firebaseAuth = FirebaseAuth.getInstance();
-        UserDatabase= FirebaseDatabase.getInstance().getReference("Users");
         doRegistration();
     }
     @Override
@@ -103,27 +114,27 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
-                                if(task.isSuccessful()){
+                                if(!task.isSuccessful()){
+                                    Toast.makeText(RegisterActivity.this,"Error",Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    //For Real time Data Store
+                                    String user_id= firebaseAuth.getCurrentUser().getUid();
+                                    DatabaseReference UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
+                                    userDataConstructor send=new userDataConstructor(userName,phoneNumber,location,email);
+                                    UserDatabase.setValue(send);
+                                    Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
                                     finish();
                                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
-                                else{
-                                    Toast.makeText(RegisterActivity.this, "Registration failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                }
                             }
                         });
                 }
-                //For Real time Data Store
-                String id= firebaseAuth.getUid();
-                userDataConstructor send=new userDataConstructor(userName,phoneNumber,location,email);
-                assert id != null;
-                UserDatabase.child(id).setValue(send);
-                Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
             }
         });
     }
-    private void openPlacePicker() {
+   /* private void openPlacePicker() {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
@@ -133,7 +144,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
     GoogleMap mGoogleMap;
     Marker mCurrLocationMarker;
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -160,6 +170,6 @@ public class RegisterActivity extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + requestCode);
             }
         }
-    }
+    }*/
 
 }

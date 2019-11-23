@@ -22,6 +22,7 @@ public class AlertTag extends Fragment {
 
         Button ButtonHelp=view.findViewById(R.id.button_help);
         CardView FireStation=view.findViewById(R.id.fire_station_card_view);
+        CardView FeedBack=view.findViewById(R.id.feed_back_card_view);
         ButtonHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +34,13 @@ public class AlertTag extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(),FireStations.class);
+                startActivity(intent);
+            }
+        });
+        FeedBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(),FeedBack.class);
                 startActivity(intent);
             }
         });
