@@ -11,11 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <Button
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="60dp"
         android:background="#F44336"
         android:textColor="#fff"
         android:text="Request for help"
         android:id="@+id/help_request"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="bottom|center"/>
 </FrameLayout>

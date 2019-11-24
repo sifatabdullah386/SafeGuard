@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.firebaseui:firebase-ui-database:4.2.1'
-    implementation 'com.firebase:geofire-java:3.0.0'
+    implementation 'com.firebase:geofire-android:3.0.0'
 
     //picasso library
     implementation 'com.squareup.picasso:picasso:2.71828'

@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -34,12 +36,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -52,6 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Button mRequest;
     private LatLng myLocation;
+    DatabaseReference userLocation = FirebaseDatabase.getInstance().getReference().child("Users");
+    private Marker mHelperMarker;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -65,21 +75,86 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mRequest=findViewById(R.id.help_request);
         mRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("helpRequest");
-                ref.child(userId).setValue(new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
-
-                GeoFire geoFire = new GeoFire(ref);
-                geoFire.setLocation(userId, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
-                myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(myLocation).title("Help Here"));
-
-                getClosestOne();
+                getClosestSomeOne();
             }
         });
     }
-    private void getClosestOne() {
+    private int radius = 1;
+    private void getClosestSomeOne(){
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("helpRequest");
+        //ref.child(userId).setValue(new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.setLocation(userId, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(myLocation.latitude, myLocation.longitude), radius);
+        //geoQuery.removeAllListeners();
 
+        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onKeyEntered(String key, GeoLocation location) {
+                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                    String helperId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("helperRequestId", helperId);
+                    userRef.updateChildren(map);
+
+                    userLocation.addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            List<Object> map;
+                            map = (List<Object>) dataSnapshot.getValue();
+                            double locationLat = 0;
+                            double locationLng = 0;
+                            assert map != null;
+                            if(map.get(0) != null){
+                                locationLat = Double.parseDouble(map.get(0).toString());
+                            }
+                            if(map.get(1) != null){
+                                locationLng = Double.parseDouble(map.get(1).toString());
+                            }
+                            LatLng helperLatLng = new LatLng(locationLat,locationLng);
+                            if(mHelperMarker != null){
+                                mHelperMarker.remove();
+                            }
+                            Location loc1 = new Location("");
+                            loc1.setLatitude(myLocation.latitude);
+                            loc1.setLongitude(myLocation.longitude);
+
+                            Location loc2 = new Location("");
+                            loc2.setLatitude(helperLatLng.latitude);
+                            loc2.setLongitude(helperLatLng.longitude);
+
+                            float distance = loc1.distanceTo(loc2);
+                            mRequest.setText("Helper Found: " + String.valueOf(distance));
+                            mHelperMarker = mMap.addMarker(new MarkerOptions().position(helperLatLng).title("Helper"));
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+            }
+            @Override
+            public void onKeyExited(String key) {
+
+            }
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+
+            }
+            @Override
+            public void onGeoQueryReady() {
+                    radius++;
+                getClosestSomeOne();
+            }
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
+
+            }
+        });
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
