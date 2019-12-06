@@ -56,16 +56,18 @@
             android:textColor="#fff"
             android:inputType="textPhonetic"
             tools:ignore="TextFields" />
-        <EditText
-            android:id="@+id/locationEditText"
+
+        <Button
+            android:id="@+id/locationButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="User Current Address"
-            android:textSize="15sp"
-            android:textColorHint="#fff"
-            android:backgroundTint="#FF5722"
+            android:background="#282929"
+            android:fontFamily="sans-serif-black"
+            android:textAlignment="textStart"
+            android:paddingStart="5dp"
+            android:text="User Current Address"
             android:textColor="#fff"
-            android:inputType="textMultiLine"/>
+            android:textSize="15sp" />
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
@@ -110,7 +112,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
                 android:padding="5dp"
-                android:background="#0D7014"
+                android:background="#148A1D"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:text="Already sign up?"
@@ -124,7 +126,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="5dp"
                 android:padding="5dp"
-                android:background="#AC0505"
+                android:background="#FF5722"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:text="Guest Login"
