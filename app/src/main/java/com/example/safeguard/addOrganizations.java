@@ -42,8 +42,6 @@ public class addOrganizations extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pushAddOrganizationData();
-                Intent intent=new Intent(addOrganizations.this,MainActivity.class);
-                startActivity(intent);
             }
         });
 

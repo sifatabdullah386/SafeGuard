@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="3"
     tools:context=".PickPlace">
-
-    <LinearLayout
-        android:id="@+id/autocomplete_fragment_layout"
+    <SearchView
+        android:layout_weight="1"
+        android:id="@+id/search_places"
+        android:queryHint="Search Here.."
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-        <fragment
-            android:id="@+id/autocomplete_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
-    </LinearLayout>
+        android:background="#C1C5C5"
+        android:layout_height="150dp"/>
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/map"
+        android:layout_weight="1"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
     <Button
         android:id="@+id/pick_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Pick Place"
-        android:layout_alignBottom="@+id/map"/>
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="#095A52"
+        android:layout_weight="1"
+        android:text="Pick Place" />
 
-</RelativeLayout>
+</LinearLayout>

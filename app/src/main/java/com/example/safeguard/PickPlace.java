@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -58,14 +59,14 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
     String name;
-    LatLng latlang;
     private GoogleMap mMap;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
+    private Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-
+    SearchView AutocompleteSearch;
+    Button PickPlace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,27 +79,12 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
             String apiKey="AIzaSyB7S9-1M1j_LjVGo3HirR_bibNhB9tKK84";
             Places.initialize(getApplicationContext(),apiKey);
         }
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-
         fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
 
-        assert autocompleteFragment != null;
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                Log.i("Places: ", "Place: " + place.getName() + ", " + place.getId());
-            }
-
-            @Override
-            public void onError(@NonNull Status status) {
-                Log.i("Error: ", "An error occurred: " + status);
-            }
-        });
         // Create a new Places client instance.
         PlacesClient placesClient = Places.createClient(this);
 
-        LinearLayout AutocompleteSearch=findViewById(R.id.autocomplete_fragment_layout);
+        AutocompleteSearch=findViewById(R.id.search_places);
         AutocompleteSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,16 +92,7 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
                 startActivityForResult(intent,AUTOCOMPLETE_REQUEST_CODE);
             }
         });
-        final Button PickPlace=findViewById(R.id.pick_place);
-        PickPlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(PickPlace.this,RegisterActivity.class);
-                intent.putExtra("currentLocation",mLastLocation);
-                startActivity(intent);
-            }
-        });
-
+        PickPlace=findViewById(R.id.pick_place);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -124,13 +101,14 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 name = place.getName();
-                latlang=place.getLatLng();
+                final LatLng latlang = place.getLatLng();
                 assert latlang != null;
                 mMap.addMarker(new MarkerOptions().position(latlang).title(name));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
                 CameraUpdate update=CameraUpdateFactory.newLatLngZoom(latlang,8);
                 mMap.animateCamera(update);
                 Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
+                AutocompleteSearch.setTag(name);
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 assert status.getStatusMessage() != null;
@@ -142,7 +120,7 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
@@ -182,7 +160,7 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
             mCurrLocationMarker.remove();
         }
         //Showing Current Location Marker on Map
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -211,6 +189,15 @@ public class PickPlace extends FragmentActivity implements OnMapReadyCallback , 
                 e.printStackTrace();
             }
         }
+        PickPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(PickPlace.this,RegisterActivity.class);
+                intent.putExtra("currentLocation",latLng);
+                intent.putExtra("title",getTitle());
+                startActivity(intent);
+            }
+        });
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

@@ -31,7 +31,8 @@ public class Profile extends Fragment {
         profileEmail = view.findViewById(R.id.profile_email);
         profileLocation = view.findViewById(R.id.profile_location);
 
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

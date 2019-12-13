@@ -10,13 +10,16 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:background="#F44336"
-        android:textColor="#fff"
-        android:text="Request for \n help"
         android:id="@+id/help_request"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
         android:layout_marginBottom="5dp"
-        android:layout_gravity="bottom|center"/>
+        android:background="#F44336"
+        android:padding="5dp"
+        android:text="Request for help"
+        android:textColor="#fff" />
 </FrameLayout>

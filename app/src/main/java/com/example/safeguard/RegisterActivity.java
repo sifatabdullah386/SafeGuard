@@ -75,14 +75,15 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               Intent intent=new Intent(RegisterActivity.this,PickPlace.class);
+                Bundle bundle=getIntent().getExtras();
+                if(bundle!=null){
+                    String value=bundle.getString("currentLocation");
+                    UserAddress.setText(value);
+                }
               startActivity(intent);
             }
         });
-        Bundle bundle=getIntent().getExtras();
-        if(bundle!=null){
-            String value=bundle.getString("currentLocation");
-            UserAddress.setText(value);
-        }
+
         GuestLogin=findViewById(R.id.button_guest_login);
         GuestLogin.setOnClickListener(new View.OnClickListener() {
             @Override
