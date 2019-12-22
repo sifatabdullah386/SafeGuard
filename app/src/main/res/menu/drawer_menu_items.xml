@@ -2,27 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-  <item android:title="@string/add_organizations">
-    <menu>
-      <item
-          android:id="@+id/drawer_add_fire_services"
-          android:icon="@drawable/drawer_add_organization"
-          android:title="@string/drawer_add_fire_services" />
-      <item
-          android:id="@+id/drawer_add_police_stations"
-          android:icon="@drawable/drawer_add_organization"
-          android:title="@string/drawer_add_police_stations" />
-      <item
-          android:id="@+id/drawer_add_hospitals"
-          android:icon="@drawable/drawer_add_organization"
-          android:title="@string/drawer_add_hospitals" />
-      <item
-          android:id="@+id/drawer_add_ambulances"
-          android:icon="@drawable/drawer_add_organization"
-          android:title="@string/drawer_ambulances" />
-    </menu>
-  </item>
-
   <item android:title="@string/Communicate">
     <menu >
       <item
@@ -37,8 +16,21 @@
           android:id="@+id/drawer_about_the_apps"
           android:icon="@drawable/drawer_about_us"
           android:title="@string/drawer_about_the_apps" />
+      <item
+          android:id="@+id/drawer_privacy_policy"
+          android:icon="@drawable/drawer_privacy_policy_image"
+          android:title="@string/drawer_privacy_policy" />
     </menu>
 
   </item>
+
+  <item
+      android:id="@+id/drawer_admin"
+      android:icon="@drawable/drawer_admin_image"
+      android:title="@string/drawer_admin" />
+  <item
+      android:id="@+id/drawer_coordinator"
+      android:icon="@drawable/drawer_coordinator_image"
+      android:title="@string/drawer_coordinator"/>
 
 </menu>

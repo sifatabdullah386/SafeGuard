@@ -6,14 +6,6 @@
       android:title="@string/drawer_notification_settings"
       app:showAsAction="never"/>
   <item
-      android:id="@+id/drawer_admin"
-      android:title="@string/drawer_admin"
-      app:showAsAction="never"/>
-  <item
-      android:id="@+id/drawer_coordinator"
-      android:title="@string/drawer_coordinator"
-      app:showAsAction="never"/>
-  <item
       android:id="@+id/drawer_share"
       android:title="@string/drawer_share"
       app:showAsAction="never"/>

@@ -24,8 +24,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
-    EditText adminUserName,adminPassword;
-    Button adminLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AlertTag()).commit();
         }
-
-        //Admin Panel store password
-        adminUserName=findViewById(R.id.adminUsername);
-        adminPassword=findViewById(R.id.adminPassword);
-        adminLogin=findViewById(R.id.adminButton);
     }
 
     //for bottom navigation menu items in multiple selection
@@ -95,25 +88,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem item){
             switch (item.getItemId()) {
-                case R.id.drawer_add_fire_services:
-                    Intent intent=new Intent(MainActivity.this,addFireServices.class);
+                case R.id.drawer_admin:
+                    Intent intent=new Intent(MainActivity.this,AdminActivity.class);
                     startActivity(intent);
-                    Toast.makeText(getApplicationContext(),"Add Fire Station Here",Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.drawer_add_police_stations:
-                    Intent intent1=new Intent(MainActivity.this,addPoliceStations.class);
-                    startActivity(intent1);
-                    Toast.makeText(getApplicationContext(),"Add Police Station Here",Toast.LENGTH_SHORT).show();
+                case R.id.drawer_coordinator:
+                    Toast.makeText(getApplicationContext(),"Coordinator",Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.drawer_add_hospitals:
-                    Intent intent2=new Intent(MainActivity.this,addHospitals.class);
-                    startActivity(intent2);
-                    Toast.makeText(getApplicationContext(),"Add Hospitals",Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.drawer_add_ambulances:
-                    Intent intent3=new Intent(MainActivity.this,addAmbulances.class);
-                    startActivity(intent3);
-                    Toast.makeText(getApplicationContext(),"Add Ambulances",Toast.LENGTH_SHORT).show();
+                case R.id.drawer_privacy_policy:
+                    Toast.makeText(getApplicationContext(),"Privacy Policy",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.drawer_share:
                     Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
@@ -156,13 +139,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.drawer_notification_settings:
                 Toast.makeText(getApplicationContext(),"Notification Settings",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.drawer_admin:
-                setContentView(R.layout.admin_layout);
-                Toast.makeText(getApplicationContext(),"Admin Settings",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.drawer_coordinator:
-                Toast.makeText(getApplicationContext(),"Coordinator Settings",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.drawer_share:
                 Toast.makeText(getApplicationContext(),"Share Settings",Toast.LENGTH_SHORT).show();

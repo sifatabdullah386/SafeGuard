@@ -54,4 +54,5 @@
     <string name="all_details">Enter all details</string>
     <string name="enter_username">Enter Username</string>
     <string name="title_activity_pick_place">Map</string>
+    <string name="drawer_privacy_policy">Privacy Policy</string>
 </resources>
