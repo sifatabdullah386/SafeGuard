@@ -37,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -132,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                             else{
                                 //For Real time Data Store
-                                String user_id= firebaseAuth.getCurrentUser().getUid();
+                                String user_id= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
                                 DatabaseReference UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                                 userDataConstructor send=new userDataConstructor(userName,phoneNumber,location,email);
                                 UserDatabase.setValue(send);

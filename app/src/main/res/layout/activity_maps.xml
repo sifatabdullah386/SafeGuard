@@ -10,7 +10,15 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+    <EditText
+        android:id="@+id/message_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="60dp"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:hint="Write some message or you can left as blank" />
     <Button
         android:id="@+id/help_request"
         style="@android:style/Widget.Material.Light.Button.Borderless.Small"

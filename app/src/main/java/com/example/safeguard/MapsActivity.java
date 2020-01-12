@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -59,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest mLocationRequest;
     private GoogleMap mMap;
     private Button mRequest;
+    private EditText MessageRequest;
     DatabaseReference userLocation = FirebaseDatabase.getInstance().getReference().child("Users");
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
         mRequest=findViewById(R.id.help_request);
+        MessageRequest=findViewById(R.id.message_request);
 
     }
     public void onMapReady(GoogleMap googleMap) {
@@ -148,8 +151,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                String messageRequest=MessageRequest.getText().toString().trim();
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("helpRequest");
+                DatabaseReference refMessage = FirebaseDatabase.getInstance().getReference("helpMessageRequest");
                 ref.child(userId).setValue(new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
+                refMessage.child(userId).setValue(messageRequest);
             }
         });
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));

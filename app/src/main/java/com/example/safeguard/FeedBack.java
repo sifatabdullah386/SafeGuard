@@ -81,16 +81,28 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference PickupUserLocationRef = FirebaseDatabase.getInstance().getReference().child("helpRequest").child(uid);
-        PickupUserLocationRef.addValueEventListener(new ValueEventListener() {
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        final DatabaseReference PickupUserLocationRef = FirebaseDatabase.getInstance().getReference().child("helpRequest").child(uid);
+        DatabaseReference PickupUserMessageRef = FirebaseDatabase.getInstance().getReference().child("helpMessageRequest").child(uid);
+        PickupUserMessageRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
-                Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
-                LatLng location=new LatLng(latitude,longitude);
-                mMap.addMarker(new MarkerOptions().position(location).title("Help Me"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,9F));
+                final String marker_title=dataSnapshot.getValue(String.class);
+                PickupUserLocationRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
+                        Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
+                        LatLng location=new LatLng(latitude,longitude);
+                        mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
+
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,8F));
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -138,9 +150,9 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
             mCurrLocationMarker.remove();
         }
         //Showing Current Location Marker on Map
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        //LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
+        //markerOptions.position(latLng);
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         assert locationManager != null;
         String provider = locationManager.getBestProvider(new Criteria(), true);
@@ -161,16 +173,16 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     String state = listAddresses.get(0).getAdminArea();
                     String country = listAddresses.get(0).getCountryName();
                     String subLocality = listAddresses.get(0).getSubLocality();
-                    markerOptions.title("" + latLng + "," + subLocality + "," + state + "," + country);
+                    //markerOptions.title("" + latLng + "," + subLocality + "," + state + "," + country);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+       // mCurrLocationMarker = mMap.addMarker(markerOptions);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+       // mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
