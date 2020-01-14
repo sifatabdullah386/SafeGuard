@@ -55,4 +55,8 @@
     <string name="enter_username">Enter Username</string>
     <string name="title_activity_pick_place">Map</string>
     <string name="drawer_privacy_policy">Privacy Policy</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="location">Location</string>
 </resources>
