@@ -7,7 +7,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".MainActivity">
+tools:context=".FireStations">
 
 <!-- our toolbar -->
 <androidx.appcompat.widget.Toolbar
@@ -24,7 +24,7 @@ tools:context=".MainActivity">
     android:id="@+id/fire_station_tabLayout"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="#F44336"
+    android:background="@color/colorFireServices"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 <!-- View pager to swipe views -->

@@ -9,7 +9,7 @@ public class TabFireStationPagerAdapter extends FragmentStatePagerAdapter {
     private int tabCount;
 
     //Constructor to the class
-    public TabFireStationPagerAdapter(FragmentManager fm, int tabCount) {
+    TabFireStationPagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
