@@ -75,4 +75,14 @@
     <string name="add_organizations">Add Organizations</string>
     <string name="add_police_stations">Add Police Stations</string>
     <string name="add_fire_stations">add fire stations</string>
+    <string name="about_police_station">About Police Station</string>
+    <string name="police_station_email">Police Station Email</string>
+    <string name="police_station_phone_number">Police Station Phone Number</string>
+    <string name="police_station_location">Police Station Location</string>
+    <string name="police_station_name">Police Station Name</string>
+    <string name="about_fire_station">About fire station</string>
+    <string name="fire_station_email">Fire Station Email</string>
+    <string name="fire_station_phone_number">Fire Station Phone Number</string>
+    <string name="fire_station_location1">Fire Station Location</string>
+    <string name="fire_station_name">Fire Station Name</string>
 </resources>

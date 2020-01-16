@@ -42,7 +42,7 @@
           android:textStyle="bold"
           android:textSize="18sp"
           android:inputType="textPersonName"
-          android:hint="Fire Station Name" />
+          android:hint="@string/fire_station_name" />
 
       <EditText
           android:id="@+id/add_fire_station_location"
@@ -50,7 +50,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Fire Station Location"
+          android:hint="@string/fire_station_location1"
           android:inputType="textMultiLine"
           android:padding="10dp"
           android:textSize="18sp"
@@ -62,7 +62,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Fire Station Phone Number"
+          android:hint="@string/fire_station_phone_number"
           android:inputType="phone"
           android:padding="10dp"
           android:textSize="18sp"
@@ -74,7 +74,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Fire Station Email"
+          android:hint="@string/fire_station_email"
           android:inputType="textEmailAddress"
           android:padding="10dp"
           android:textSize="18sp"
@@ -86,7 +86,7 @@
           android:layout_height="50dp"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Fire Station Description"
+          android:hint="@string/about_fire_station"
           android:inputType="text|textMultiLine"
           android:padding="10dp"
           android:textSize="18sp"
