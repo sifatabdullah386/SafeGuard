@@ -45,7 +45,7 @@ public class addOrganizations extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = findViewById(R.id.add_charity_toolbar);
+        Toolbar toolbar = findViewById(R.id.add_organizations_toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);

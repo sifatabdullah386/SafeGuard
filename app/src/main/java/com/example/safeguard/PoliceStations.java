@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class PoliceStations extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
@@ -17,6 +20,8 @@ public class PoliceStations extends AppCompatActivity implements TabLayout.OnTab
 
         Toolbar toolbar = findViewById(R.id.police_station_toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         TabLayout tabLayout = findViewById(R.id.police_station_tabLayout);
 
@@ -43,5 +48,12 @@ public class PoliceStations extends AppCompatActivity implements TabLayout.OnTab
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

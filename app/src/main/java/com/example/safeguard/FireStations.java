@@ -5,8 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class FireStations extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
@@ -18,6 +21,8 @@ public class FireStations extends AppCompatActivity implements TabLayout.OnTabSe
 
         Toolbar toolbar =  findViewById(R.id.fire_station_toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         TabLayout tabLayout = findViewById(R.id.fire_station_tabLayout);
 
@@ -37,6 +42,7 @@ public class FireStations extends AppCompatActivity implements TabLayout.OnTabSe
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.setOnTabSelectedListener(FireStations.this);
+
     }
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
@@ -50,5 +56,12 @@ public class FireStations extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

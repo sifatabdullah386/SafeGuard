@@ -9,7 +9,7 @@
     tools:context=".addHospitals">
 
   <androidx.appcompat.widget.Toolbar
-      android:id="@+id/add_charity_toolbar"
+      android:id="@+id/add_hospitals_toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="#009688"
@@ -28,13 +28,14 @@
         android:textStyle="bold"
         android:gravity="center"/>
   </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
         android:background="#f3f1f4"
-        android:weightSum="6"
+        android:weightSum="7"
         android:elevation="18dp"
         android:layout_gravity="center">
 
@@ -46,9 +47,10 @@
           android:textStyle="bold"
           android:textSize="18sp"
           android:padding="10dp"
-          android:hint="Hospital Name"
+          android:hint="@string/hospital_name"
           android:ems="10"
-          android:inputType="textPersonName"/>
+          android:inputType="textPersonName"
+          android:importantForAutofill="no" />
 
       <EditText
           android:id="@+id/add_hospital_location"
@@ -56,11 +58,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Hospital Location"
+          android:hint="@string/hospital_location"
           android:inputType="textMultiLine"
           android:padding="10dp"
           android:textSize="18sp"
-          android:textStyle="bold" />
+          android:textStyle="bold"
+          android:importantForAutofill="no" />
 
       <EditText
           android:id="@+id/add_hospital_phone_number"
@@ -68,11 +71,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Hospital Phone NUmber"
+          android:hint="@string/hospital_phone_number"
           android:inputType="phone"
           android:padding="10dp"
           android:textSize="18sp"
-          android:textStyle="bold" />
+          android:textStyle="bold"
+          android:importantForAutofill="no" />
 
       <EditText
           android:id="@+id/add_hospital_email"
@@ -80,11 +84,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Hospital Email"
+          android:hint="@string/hospital_email"
           android:inputType="textEmailAddress"
           android:padding="10dp"
           android:textSize="18sp"
-          android:textStyle="bold" />
+          android:textStyle="bold"
+          android:importantForAutofill="no" />
       <Spinner
           android:id="@+id/add_hospital_type"
           android:layout_width="match_parent"
@@ -99,18 +104,19 @@
           android:layout_height="50dp"
           android:layout_weight="1"
           android:ems="10"
-          android:hint="Hospital Description"
+          android:hint="@string/hospital_description"
           android:inputType="text|textMultiLine"
           android:padding="10dp"
           android:textSize="18sp"
-          android:textStyle="bold" />
+          android:textStyle="bold"
+          android:importantForAutofill="no" />
       <Button
           android:id="@+id/add_hospital_submit"
           style="@style/Widget.AppCompat.Button.Colored"
           android:layout_marginTop="30dp"
           android:layout_width="300dp"
           android:layout_weight="1"
-          android:layout_height="70dp"
+          android:layout_height="50dp"
           android:layout_gravity="center"
           android:backgroundTint="#009688"
           android:backgroundTintMode="src_over"

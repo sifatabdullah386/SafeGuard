@@ -10,4 +10,9 @@
         <item>Non-Profit</item>
         <item>Private</item>
     </string-array>
+    <string-array name="add_ambulances_type">
+        <item>Governmental</item>
+        <item>Non-Profit</item>
+        <item>Private</item>
+    </string-array>
 </resources>

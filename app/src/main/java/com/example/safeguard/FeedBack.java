@@ -10,10 +10,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -72,6 +74,8 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
+        Toolbar toolbar = findViewById(R.id.feed_back_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     }
 
     public void onMapReady(GoogleMap googleMap) {
@@ -215,5 +219,12 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                 Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

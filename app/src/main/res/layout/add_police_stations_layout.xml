@@ -9,7 +9,7 @@
     tools:context=".addPoliceStations">
 
   <androidx.appcompat.widget.Toolbar
-      android:id="@+id/add_police_station_toolbar"
+      android:id="@+id/add_police_stations_toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       android:background="#3F51B5"

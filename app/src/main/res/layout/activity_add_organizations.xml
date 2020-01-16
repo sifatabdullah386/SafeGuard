@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".addOrganizations">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/add_charity_toolbar"
+        android:id="@+id/add_organizations_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/organization_bar"
