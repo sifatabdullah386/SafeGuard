@@ -2,6 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+  <item android:title="@string/emergency_contract">
+    <menu >
+      <item
+          android:id="@+id/drawer_ambulances"
+          android:icon="@drawable/drawer_ambulance"
+          android:title="@string/ambulances" />
+      <item
+          android:id="@+id/drawer_hospitals"
+          android:icon="@drawable/drawer_hospital"
+          android:title="@string/hospitals" />
+    </menu>
+
+  </item>
   <item android:title="@string/Communicate">
     <menu >
       <item

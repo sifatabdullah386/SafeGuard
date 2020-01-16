@@ -88,6 +88,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem item){
             switch (item.getItemId()) {
+                case R.id.drawer_ambulances:
+                    Intent ambulancesIntent=new Intent(MainActivity.this,Ambulances.class);
+                    startActivity(ambulancesIntent);
+                    break;
+                case R.id.drawer_hospitals:
+                    Intent hospitalsIntent=new Intent(MainActivity.this,Hospitals.class);
+                    startActivity(hospitalsIntent);
+                    break;
                 case R.id.drawer_admin:
                     Intent intent=new Intent(MainActivity.this,AdminActivity.class);
                     startActivity(intent);

@@ -15,40 +15,40 @@ public class AdminPanel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
 
-        Ambulances =findViewById(R.id.add_ambulance_button);
-        FireServices =findViewById(R.id.add_fire_services_button);
-        Hospitals =findViewById(R.id.add_hospitals_button);
-        Organizations =findViewById(R.id.add_organizations_button);
-        PoliceStations =findViewById(R.id.add_police_stations_button);
+        Ambulances =findViewById(R.id.admin_ambulances_button);
+        FireServices =findViewById(R.id.admin_fire_services_button);
+        Hospitals =findViewById(R.id.admin_hospitals_button);
+        Organizations =findViewById(R.id.admin_organizations_button);
+        PoliceStations =findViewById(R.id.admin_police_stations_button);
 
         Ambulances.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent=new Intent(AdminPanel.this,addAmbulances.class);
-                startActivity(intent);
+                Intent intent1=new Intent(AdminPanel.this,addAmbulances.class);
+                startActivity(intent1);
             }
         });
         FireServices.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent=new Intent(AdminPanel.this,addFireServices.class);
-                startActivity(intent);
+                Intent intent2=new Intent(AdminPanel.this,addFireServices.class);
+                startActivity(intent2);
             }
         });
         Hospitals.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent=new Intent(AdminPanel.this,addHospitals.class);
-                startActivity(intent);
+                Intent intent3=new Intent(AdminPanel.this,addHospitals.class);
+                startActivity(intent3);
             }
         });
         Organizations.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent=new Intent(AdminPanel.this,addOrganizations.class);
-                startActivity(intent);
+                Intent intent4=new Intent(AdminPanel.this,addOrganizations.class);
+                startActivity(intent4);
             }
         });
         PoliceStations.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent=new Intent(AdminPanel.this,addPoliceStations.class);
-                startActivity(intent);
+                Intent intent5=new Intent(AdminPanel.this,addPoliceStations.class);
+                startActivity(intent5);
             }
         });
     }

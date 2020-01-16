@@ -11,27 +11,27 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_ambulance_button"
-        android:text="Add Ambulances"/>
+        android:id="@+id/admin_ambulances_button"
+        android:text="@string/add_ambulances"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_fire_services_button"
-        android:text="Add Fire Services"/>
+        android:id="@+id/admin_fire_services_button"
+        android:text="@string/add_fire_stations"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_hospitals_button"
-        android:text="Add Hospitals"/>
+        android:id="@+id/admin_hospitals_button"
+        android:text="@string/add_hospitals"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_organizations_button"
-        android:text="Add Organizations"/>
+        android:id="@+id/admin_organizations_button"
+        android:text="@string/add_organizations"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_police_stations_button"
-        android:text="Add Police Stations"/>
+        android:id="@+id/admin_police_stations_button"
+        android:text="@string/add_police_stations"/>
 
 </LinearLayout>

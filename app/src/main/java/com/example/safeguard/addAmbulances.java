@@ -29,7 +29,7 @@ public class addAmbulances extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_ambulances_layout);
 
-        addAmbulanceReferences = FirebaseDatabase.getInstance().getReference("Ambulances List");
+        addAmbulanceReferences = FirebaseDatabase.getInstance().getReference("Ambulance List");
 
         AmbulanceName=findViewById(R.id.add_ambulance_name);
         AmbulanceLocation=findViewById(R.id.add_ambulance_location);
@@ -38,7 +38,7 @@ public class addAmbulances extends AppCompatActivity {
         AmbulanceDescription=findViewById(R.id.add_ambulance_description);
         AmbulanceType=findViewById(R.id.add_ambulances_type);
 
-        AmbulanceSubmit=findViewById(R.id.add_ambulance_button);
+        AmbulanceSubmit=findViewById(R.id.add_ambulance_submit);
         AmbulanceSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
