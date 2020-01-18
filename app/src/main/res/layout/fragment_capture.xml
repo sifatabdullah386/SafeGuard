@@ -31,7 +31,7 @@
           android:layout_margin="3dp"
           android:padding="3dp"
           android:fontFamily="monospace"
-          android:text="Take a Criminal Picture" />
+          android:text="@string/take_a_criminal_picture" />
       <Button
           android:id="@+id/image_upload_button"
           android:layout_width="match_parent"
@@ -45,7 +45,7 @@
           android:layout_margin="3dp"
           android:padding="3dp"
           android:fontFamily="monospace"
-          android:text="Upload from gallery" />
+          android:text="@string/upload_from_gallery" />
   </LinearLayout>
 
 </FrameLayout>

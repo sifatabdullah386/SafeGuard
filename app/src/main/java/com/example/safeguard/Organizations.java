@@ -70,7 +70,7 @@ public class Organizations extends Fragment {
             @NonNull
             @Override
             public FirebaseOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseOrganizationViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.add_organization_recyclerview,parent,false));
+                return new FirebaseOrganizationViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.organization_list_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);

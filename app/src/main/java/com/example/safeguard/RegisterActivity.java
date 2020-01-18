@@ -3,8 +3,6 @@ package com.example.safeguard;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,20 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;;
+import android.widget.Toast;
+
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
+
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -39,15 +34,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity   {
 
     EditText UserName,UserPhoneNumber,UserEmail,UserPassword;
     Button signUpButton,UserAddress,GuestLogin;
-    private FirebaseAuth firebaseAuth;
     FirebaseUser CurrentUser;
     ProgressBar progressBar;
-    private DatabaseReference UserDatabase;
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+
+    private FirebaseAuth firebaseAuth;
+    private List<Place.Field> fields;
+    final int AUTOCOMPLETE_REQUEST_CODE=1;
+    String location;
+    //private GoogleMap mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +60,6 @@ public class RegisterActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
 
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        };
         UserAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +82,22 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         firebaseAuth = FirebaseAuth.getInstance();
+
         doRegistration();
+
+        if (!Places.isInitialized()) {
+            String apiKey="AIzaSyB7S9-1M1j_LjVGo3HirR_bibNhB9tKK84";
+            Places.initialize(getApplicationContext(),apiKey);
+        }
+        fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
+
+        UserAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN,fields).build(RegisterActivity.this);
+                startActivityForResult(intent,AUTOCOMPLETE_REQUEST_CODE);
+            }
+        });
     }
     @Override
     public void onStart(){
@@ -115,11 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String userName = UserName.getText().toString().trim();
                 final String phoneNumber = UserPhoneNumber.getText().toString().trim();
-                final String location = UserAddress.getText().toString().trim();
                 final String email = UserEmail.getText().toString().trim();
                 String password = UserPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(location) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     Toast.makeText(RegisterActivity.this, "Please enter all details!", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -134,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
                             else{
                                 //For Real time Data Store
                                 String user_id= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-                                DatabaseReference UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,location,email);
+                                DatabaseReference UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Infos/").child(user_id);
+                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,email);
                                 UserDatabase.setValue(send);
                                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
                                 finish();
@@ -147,5 +149,28 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                location = place.getName();
+                final LatLng latlang = place.getLatLng();
+                Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
+                UserAddress.setTag(location);
+                String user_id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                DatabaseReference LatlagReference = FirebaseDatabase.getInstance().getReference().child("Users").child("latLangs/").child(user_id);
+                DatabaseReference location = FirebaseDatabase.getInstance().getReference().child("Users").child("locations/").child(user_id);
+                LatlagReference.setValue(latlang);
+                location.setValue(location);
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+                assert status.getStatusMessage() != null;
+                Log.i("Message", status.getStatusMessage());
+            }  // The user canceled the operation.
+
+        }
     }
 }

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class Profile extends Fragment {
 
-    private TextView ProfileName,profilePhoneNumber,profileEmail,profileLocation;
+    private TextView ProfileName;
+    private TextView profilePhoneNumber;
+    private TextView profileEmail;
+    private TextView profileLocation;
     private ImageView CaptureImage;
     private  final int PICK_IMAGE_REQUEST=71;
     private Uri filePath;
@@ -49,9 +53,10 @@ public class Profile extends Fragment {
         profileEmail = view.findViewById(R.id.profile_email);
         profileLocation = view.findViewById(R.id.profile_location);
 
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
         storageReference= FirebaseStorage.getInstance().getReference();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        final DatabaseReference location = FirebaseDatabase.getInstance().getReference().child("Users").child("locations/").child(uid);
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Infos/").child(uid);
 
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,12 +66,22 @@ public class Profile extends Fragment {
                 final String userName= u.getUserName();
                 final String userPhoneNumber= u.getPhoneNumber();
                 final String userEmail= u.getEmail();
-                final String userLocation= u.getLocation();
 
                 ProfileName.setText(userName);
                 profilePhoneNumber.setText(userPhoneNumber);
                 profileEmail.setText(userEmail);
-                profileLocation.setText(userLocation);
+
+                location.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final String loc=dataSnapshot.getValue(String.class);
+                        profileLocation.setText(loc);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -74,6 +89,7 @@ public class Profile extends Fragment {
 
             }
         });
+
         CaptureImage = view.findViewById(R.id.profile_image);
         CaptureImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)

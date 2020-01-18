@@ -3,17 +3,15 @@ package com.example.safeguard;
 public class userDataConstructor {
     private String userName;
     private String phoneNumber;
-    private String location;
     private String email;
 
     public userDataConstructor() {
 
     }
 
-    userDataConstructor(String userName, String phoneNumber, String location, String email) {
+    userDataConstructor(String userName, String phoneNumber, String email) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
-        this.location = location;
         this.email = email;
     }
     public String getUserName() {
@@ -30,14 +28,6 @@ public class userDataConstructor {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getEmail() {

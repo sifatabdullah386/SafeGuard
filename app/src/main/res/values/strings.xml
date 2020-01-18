@@ -81,8 +81,6 @@
     <string name="police_station_location">Police Station Location</string>
     <string name="police_station_name">Police Station Name</string>
     <string name="about_fire_station">About fire station</string>
-    <string name="fire_station_email">Fire Station Email</string>
-    <string name="fire_station_phone_number">Fire Station Phone Number</string>
-    <string name="fire_station_location1">Fire Station Location</string>
-    <string name="fire_station_name">Fire Station Name</string>
+    <string name="take_a_criminal_picture">Take a Criminal Picture</string>
+    <string name="upload_from_gallery">Upload from gallery</string>
 </resources>

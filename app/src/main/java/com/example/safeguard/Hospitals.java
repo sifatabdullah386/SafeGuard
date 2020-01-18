@@ -6,16 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -77,7 +74,7 @@ public class Hospitals extends AppCompatActivity {
             @NonNull
             @Override
             public FirebaseOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseOrganizationViewHolder(LayoutInflater.from(Hospitals.this).inflate(R.layout.add_organization_recyclerview,parent,false));
+                return new FirebaseOrganizationViewHolder(LayoutInflater.from(Hospitals.this).inflate(R.layout.organization_list_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);
