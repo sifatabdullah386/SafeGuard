@@ -79,7 +79,6 @@ public class addOrganizations extends AppCompatActivity {
         else{
             Toast.makeText(addOrganizations.this,"Data Entry Success",Toast.LENGTH_LONG).show();
         }
-
         //For Real time Data Store
         String id=addOrganizationReferences.push().getKey();
         assert id != null;

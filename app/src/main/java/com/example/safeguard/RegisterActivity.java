@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity   {
     Button signUpButton,UserAddress,GuestLogin;
     FirebaseUser CurrentUser;
     ProgressBar progressBar;
-
+    private DatabaseReference UserDatabase;
     private FirebaseAuth firebaseAuth;
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
@@ -52,6 +52,9 @@ public class RegisterActivity extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        firebaseAuth = FirebaseAuth.getInstance();
+
         UserName = findViewById(R.id.userNameEditText);
         UserPhoneNumber = findViewById(R.id.phoneNumberEditText);
         UserAddress = findViewById(R.id.locationButton);
@@ -60,18 +63,6 @@ public class RegisterActivity extends AppCompatActivity   {
         signUpButton = findViewById(R.id.signUpButton);
         progressBar = findViewById(R.id.progressBar);
 
-        UserAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              Intent intent=new Intent(RegisterActivity.this,PickPlace.class);
-                Bundle bundle=getIntent().getExtras();
-                if(bundle!=null){
-                    String value=bundle.getString("currentLocation");
-                    UserAddress.setText(value);
-                }
-              startActivity(intent);
-            }
-        });
 
         GuestLogin=findViewById(R.id.button_guest_login);
         GuestLogin.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity   {
                 startActivity(intent);
             }
         });
-        firebaseAuth = FirebaseAuth.getInstance();
 
         doRegistration();
 
@@ -136,9 +126,8 @@ public class RegisterActivity extends AppCompatActivity   {
                             else{
                                 //For Real time Data Store
                                 String user_id= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-                                DatabaseReference UserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Infos/").child(user_id);
                                 userDataConstructor send=new userDataConstructor(userName,phoneNumber,email);
-                                UserDatabase.setValue(send);
+                                UserDatabase.child("Info").child(user_id).setValue(send);
                                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
                                 finish();
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -157,19 +146,21 @@ public class RegisterActivity extends AppCompatActivity   {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                final LatLng latlang = place.getLatLng();
+                final LatLng latLang = place.getLatLng();
                 Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
-                UserAddress.setTag(location);
+                UserAddress.setText(location);
+
                 String user_id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                DatabaseReference LatlagReference = FirebaseDatabase.getInstance().getReference().child("Users").child("latLangs/").child(user_id);
-                DatabaseReference location = FirebaseDatabase.getInstance().getReference().child("Users").child("locations/").child(user_id);
-                LatlagReference.setValue(latlang);
+                DatabaseReference latLagReference = UserDatabase.child("latLang").child(user_id);
+                DatabaseReference location = UserDatabase.child("locations").child(user_id);
+                latLagReference.setValue(latLang);
                 location.setValue(location);
+
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 assert status.getStatusMessage() != null;
                 Log.i("Message", status.getStatusMessage());
-            }  // The user canceled the operation.
+            }
 
         }
     }

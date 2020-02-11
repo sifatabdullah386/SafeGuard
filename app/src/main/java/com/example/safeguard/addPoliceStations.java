@@ -20,7 +20,6 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -80,16 +79,12 @@ public class addPoliceStations extends AppCompatActivity {
     }
     public void AddOrganizationData(){
         String PoliceStationNameData=PoliceStationName.getText().toString().trim();
-        final String PoliceStationLocationData=PoliceStationLocation.getText().toString().trim();
         String PoliceStationPhoneNumberData=PoliceStationPhoneNumber.getText().toString().trim();
         String PoliceStationEmailData=PoliceStationEmail.getText().toString().trim();
         String PoliceStationDescriptionData=PoliceStationDescription.getText().toString().trim();
 
         if(TextUtils.isEmpty(PoliceStationNameData)){
             Toast.makeText(addPoliceStations.this,"Enter Police Station Name",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(PoliceStationLocationData)){
-            Toast.makeText(addPoliceStations.this,"Enter Your Location",Toast.LENGTH_LONG).show();
         }
         if(TextUtils.isEmpty(PoliceStationPhoneNumberData)){
             Toast.makeText(addPoliceStations.this,"Enter Your Phone Number",Toast.LENGTH_LONG).show();
@@ -110,8 +105,8 @@ public class addPoliceStations extends AppCompatActivity {
         //For Real time Data Store
         String id=addPoliceStationReferences.push().getKey();
         assert id != null;
-        addPoliceStationReferences.child(id).setValue(new addFireStationConstructor(id,PoliceStationNameData,PoliceStationLocationData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationDescriptionData));
-        Toast.makeText(addPoliceStations.this,"addPolice Stations Added Successfully",Toast.LENGTH_LONG).show();
+        addPoliceStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(id,PoliceStationNameData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationDescriptionData));
+        Toast.makeText(addPoliceStations.this,"Police Stations Added Successfully",Toast.LENGTH_LONG).show();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -120,21 +115,20 @@ public class addPoliceStations extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                final LatLng latlang = place.getLatLng();
+                final LatLng latLang = place.getLatLng();
                 Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
                 PoliceStationLocation.setTag(location);
 
-                String user_id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-                addPoliceStationReferences.child("latLangs/").child(user_id).setValue(latlang);
-                addPoliceStationReferences.child("locations/").child(user_id).setValue(location);
+                String user_id=addPoliceStationReferences.push().getKey();
+                assert user_id != null;
+                addPoliceStationReferences.child("latLang").child(user_id).setValue(latLang);
+                addPoliceStationReferences.child("locations").child(user_id).setValue(location);
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 assert status.getStatusMessage() != null;
                 Log.i("Message", status.getStatusMessage());
             }
-
         }
     }
     @Override

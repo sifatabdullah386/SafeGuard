@@ -55,8 +55,21 @@ public class Profile extends Fragment {
 
         storageReference= FirebaseStorage.getInstance().getReference();
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        final DatabaseReference location = FirebaseDatabase.getInstance().getReference().child("Users").child("locations/").child(uid);
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Infos/").child(uid);
+
+        final DatabaseReference location = FirebaseDatabase.getInstance().getReference().child("Users").child("locations").child(uid);
+        location.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String loc=dataSnapshot.getValue(String.class);
+                profileLocation.setText(loc);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Info").child(uid);
 
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,18 +83,6 @@ public class Profile extends Fragment {
                 ProfileName.setText(userName);
                 profilePhoneNumber.setText(userPhoneNumber);
                 profileEmail.setText(userEmail);
-
-                location.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final String loc=dataSnapshot.getValue(String.class);
-                        profileLocation.setText(loc);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
 
             @Override

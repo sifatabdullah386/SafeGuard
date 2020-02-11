@@ -1,6 +1,6 @@
 package com.example.safeguard;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -11,8 +11,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -20,10 +18,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
-import com.firebase.geofire.GeoQuery;
-import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -38,7 +32,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +39,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -61,7 +53,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     private GoogleMap mMap;
-    DatabaseReference PickupLocationRef = FirebaseDatabase.getInstance().getReference().child("helpRequest");
+    DatabaseReference databaseReference;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +66,8 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("helpRequest");
+
         Toolbar toolbar = findViewById(R.id.feed_back_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     }
@@ -85,34 +79,42 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        final DatabaseReference PickupUserLocationRef = FirebaseDatabase.getInstance().getReference().child("helpRequest").child(uid);
-        DatabaseReference PickupUserMessageRef = FirebaseDatabase.getInstance().getReference().child("helpMessageRequest").child(uid);
-        PickupUserMessageRef.addValueEventListener(new ValueEventListener() {
+        final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String marker_title=dataSnapshot.getValue(String.class);
-                PickupUserLocationRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
-                        Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
-                        LatLng location=new LatLng(latitude,longitude);
-                        mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
-
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,8F));
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                for (DataSnapshot s : dataSnapshot.getChildren()){
+                    FreeConstructor m = s.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String message=m.getMessage();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(message))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+/*        databaseReference.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
+                Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
+                String marker_title=dataSnapshot.child("message").getValue(String.class);
+                LatLng location=new LatLng(latitude,longitude);
+                mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,8F));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -154,9 +156,9 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
             mCurrLocationMarker.remove();
         }
         //Showing Current Location Marker on Map
-        //LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        //markerOptions.position(latLng);
+        markerOptions.position(latLng);
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         assert locationManager != null;
         String provider = locationManager.getBestProvider(new Criteria(), true);
@@ -177,16 +179,16 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     String state = listAddresses.get(0).getAdminArea();
                     String country = listAddresses.get(0).getCountryName();
                     String subLocality = listAddresses.get(0).getSubLocality();
-                    //markerOptions.title("" + latLng + "," + subLocality + "," + state + "," + country);
+                    markerOptions.title(subLocality + "," + state + "," + country +","+ latLng);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-       // mCurrLocationMarker = mMap.addMarker(markerOptions);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-       // mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+       mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }

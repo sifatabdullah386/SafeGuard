@@ -4,12 +4,11 @@ public class addFireStationConstructor {
 
     private String ID;
     private String FireStationName;
-    private String FireStationLocation;
     private String FireStationPhoneNumber;
     private String FireStationEmail;
     private String FireStationDescription;
 
-    addFireStationConstructor(String id, String fireStationNameData, String fireStationLocationData, String fireStationPhoneNumberData, String fireStationEmailData, String fireStationDescriptionData) {
+    addFireStationConstructor(String id, String fireStationNameData , String fireStationPhoneNumberData, String fireStationEmailData, String fireStationDescriptionData) {
     }
 
     public String getID() {
@@ -26,14 +25,6 @@ public class addFireStationConstructor {
 
     public void setFireStationName(String fireStationName) {
         FireStationName = fireStationName;
-    }
-
-    public String getFireStationLocation() {
-        return FireStationLocation;
-    }
-
-    public void setFireStationLocation(String fireStationLocation) {
-        FireStationLocation = fireStationLocation;
     }
 
     public String getFireStationPhoneNumber() {

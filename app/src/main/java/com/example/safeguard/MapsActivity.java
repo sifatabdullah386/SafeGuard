@@ -1,8 +1,13 @@
 package com.example.safeguard;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -10,19 +15,18 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
-import com.firebase.geofire.GeoQuery;
-import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -37,17 +41,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import static com.example.safeguard.Notification.CHANNEL_ID;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -61,7 +63,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Button mRequest;
     private EditText MessageRequest;
-    DatabaseReference userLocation = FirebaseDatabase.getInstance().getReference().child("Users");
+    private NotificationManagerCompat notificationManager;
+    DatabaseReference databaseReference;
+    private String Address_location;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -74,6 +78,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         mRequest=findViewById(R.id.help_request);
         MessageRequest=findViewById(R.id.message_request);
+        databaseReference=FirebaseDatabase.getInstance().getReference();
+        notificationManager=NotificationManagerCompat.from(this);
 
     }
     public void onMapReady(GoogleMap googleMap) {
@@ -139,10 +145,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             try {
                 List<Address> listAddresses = geocoder.getFromLocation(latitude,longitude, 1);
                 if (null != listAddresses && listAddresses.size() > 0) {
-                    String state = listAddresses.get(0).getAdminArea();
-                    String country = listAddresses.get(0).getCountryName();
-                    String subLocality = listAddresses.get(0).getSubLocality();
-                    markerOptions.title("" + latLng + "," + subLocality + "," + state + "," + country);
+                    final String state = listAddresses.get(0).getAdminArea();
+                    final String country = listAddresses.get(0).getCountryName();
+                    final String subLocality = listAddresses.get(0).getSubLocality();
+                    markerOptions.title(subLocality + "," + state + "," + country + latLng);
+                    Address_location=(subLocality + "," + state + "," + country);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -150,15 +157,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Intent intent=new Intent(MapsActivity.this,MainActivity.class);
+                startActivity(intent);
+
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                String messageRequest=MessageRequest.getText().toString().trim();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("helpRequest");
-                DatabaseReference refMessage = FirebaseDatabase.getInstance().getReference("helpMessageRequest");
-                ref.child(userId).setValue(new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
-                refMessage.child(userId).setValue(messageRequest);
+                final String message=MessageRequest.getText().toString().trim();
+
+                 //ref = FirebaseDatabase.getInstance().getReference("helpRequest");
+                //DatabaseReference refMessage = FirebaseDatabase.getInstance().getReference("helpMessageRequest");
+
+                String location=Address_location;
+                double latitude=mLastLocation.getLatitude();
+                double longitude=mLastLocation.getLongitude();
+
+                databaseReference.child("helpRequest").child(userId).setValue(new FreeConstructor(location,message,latitude,longitude));
+                //refMessage.child(userId).setValue(messageRequest);
+
+                //for back to the Feedback from the notification bar
+                Intent activityIntent=new Intent(MapsActivity.this,FeedBack.class);
+                PendingIntent contentIntent=PendingIntent.getActivity(MapsActivity.this,0,activityIntent,0);
+
+                //Toast Message
+                Intent broadcastIntent=new Intent(MapsActivity.this,NotificationReceiver.class);
+                broadcastIntent.putExtra("toastMessage", location);
+
+                //setup large icon on notification bar
+                Bitmap largeIcon= BitmapFactory.decodeResource(getResources(),R.drawable.help_icon);
+                //send notification method
+                android.app.Notification notification=new NotificationCompat.Builder(MapsActivity.this,CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_message)
+                        .setContentTitle("Help Me")
+                        //.setContentText(FoodLocationData)
+                        .setLargeIcon(largeIcon)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(message)
+                                .setBigContentTitle("Help Me Nearby ")
+                                .setSummaryText("Help me"))
+                        .setPriority(NotificationCompat.PRIORITY_LOW)
+                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                        .setColor(Color.TRANSPARENT)
+                        .setContentIntent(contentIntent)//intent passing
+                        .setAutoCancel(true)
+                        .build();
+                SystemClock.sleep(2000);
+                notificationManager.notify(1,notification);
+                Toast.makeText(MapsActivity.this,"Notified Successfully",Toast.LENGTH_LONG).show();
             }
         });
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
@@ -166,6 +212,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }
+
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
     public void checkLocationPermission() {

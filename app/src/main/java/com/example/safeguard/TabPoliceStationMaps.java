@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -21,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,10 +32,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +68,14 @@ public class TabPoliceStationMaps extends Fragment implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-        SupportMapFragment mapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.police_station_map);
+        if(mapFragment!=null){
+            FragmentManager fragmentManager=getFragmentManager();
+            assert fragmentManager != null;
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            mapFragment=SupportMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.police_station_map,mapFragment).commit();
+        }
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
@@ -75,42 +83,41 @@ public class TabPoliceStationMaps extends Fragment implements OnMapReadyCallback
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-
-        String user_id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-        addPoliceStationReferences.child("latLangs/").child(user_id);
-        addPoliceStationReferences.child("locations/").child(user_id);
-
-        addPoliceStationReferences.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference LocationReferences=addPoliceStationReferences.child("PoliceStation List").child("locations");
+        final DatabaseReference latLangReferences=addPoliceStationReferences.child("PoliceStation List").child("latLang");
+        ValueEventListener eventListener1 = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final String marker_title=dataSnapshot.getValue(String.class);
-                addPoliceStationReferences.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
-                        Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
-                        LatLng location=new LatLng(latitude,longitude);
-                        mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    final String marker_title=ds.getValue(String.class);
+                    ValueEventListener eventListener2 = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                                Double latitude=ds.child("latitude").getValue(Double.class);
+                                Double longitude=ds.child("longitude").getValue(Double.class);
+                                LatLng location=new LatLng(latitude,longitude);
+                                mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
+                            }
+                        }
 
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,8F));
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {}
+                    };
+                    latLangReferences.addListenerForSingleValueEvent(eventListener2);
+                }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        };
+         LocationReferences.addListenerForSingleValueEvent(eventListener1);
 
-            }
-        });
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -151,9 +158,9 @@ public class TabPoliceStationMaps extends Fragment implements OnMapReadyCallback
             mCurrLocationMarker.remove();
         }
         //Showing Current Location Marker on Map
-        //LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        //markerOptions.position(latLng);
+        markerOptions.position(latLng);
         LocationManager locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
         assert locationManager != null;
         String provider = locationManager.getBestProvider(new Criteria(), true);
@@ -174,16 +181,16 @@ public class TabPoliceStationMaps extends Fragment implements OnMapReadyCallback
                     String state = listAddresses.get(0).getAdminArea();
                     String country = listAddresses.get(0).getCountryName();
                     String subLocality = listAddresses.get(0).getSubLocality();
-                    //markerOptions.title("" + latLng + "," + subLocality + "," + state + "," + country);
+                    markerOptions.title(subLocality + "," + state + "," + country + latLng);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-        // mCurrLocationMarker = mMap.addMarker(markerOptions);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        // mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        mCurrLocationMarker = mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }

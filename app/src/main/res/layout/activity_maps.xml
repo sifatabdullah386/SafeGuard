@@ -22,12 +22,14 @@
     <Button
         android:id="@+id/help_request"
         style="@android:style/Widget.Material.Light.Button.Borderless.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="5dp"
-        android:background="#F44336"
+        android:background="#DF0303"
         android:padding="5dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:text="Request for help"
         android:textColor="#fff" />
 </FrameLayout>
