@@ -26,7 +26,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -182,7 +181,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 broadcastIntent.putExtra("toastMessage", location);
 
                 //setup large icon on notification bar
-                Bitmap largeIcon= BitmapFactory.decodeResource(getResources(),R.drawable.help_icon);
+                Bitmap largeIcon= BitmapFactory.decodeResource(getResources(),R.drawable.ic_help_outline_black_24dp);
                 //send notification method
                 android.app.Notification notification=new NotificationCompat.Builder(MapsActivity.this,CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_message)
@@ -204,7 +203,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(MapsActivity.this,"Notified Successfully",Toast.LENGTH_LONG).show();
             }
         });
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(8));

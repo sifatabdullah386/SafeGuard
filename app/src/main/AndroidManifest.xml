@@ -2,11 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.safeguard">
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -40,8 +36,6 @@
             android:name=".PickPlace"
             android:label="@string/title_activity_pick_place" />
         <activity android:name=".RoadAccidents" />
-        <activity android:name=".SexualHarassment" />
-        <activity android:name=".EmergencyMedical" />
         <activity android:name=".PoliceStations" />
         <activity android:name=".FeedBack" />
         <activity android:name=".FireStations" />
@@ -68,6 +62,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".SexualHarassment" />
+        <activity android:name=".EmergencyMedical" />
         <activity android:name=".TrafficAccidents" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".AdminPanel" />

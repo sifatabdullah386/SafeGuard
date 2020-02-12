@@ -41,7 +41,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -66,7 +65,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("helpRequest");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         Toolbar toolbar = findViewById(R.id.feed_back_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
@@ -79,9 +78,61 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        //final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("helpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()){
+                    FreeConstructor m = s.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String message=m.getMessage();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(message))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.child("sexualHarassmentHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()){
+                    FreeConstructor m = s.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String message=m.getMessage();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(message))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        databaseReference.child("EmergencyMedicalHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s : dataSnapshot.getChildren()){
+                    FreeConstructor m = s.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String message=m.getMessage();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(message))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        databaseReference.child("TrafficAccidentsHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
@@ -94,10 +145,8 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 /*        databaseReference.child(uid).addValueEventListener(new ValueEventListener() {

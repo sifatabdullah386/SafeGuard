@@ -52,7 +52,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class PickPlace extends FragmentActivity implements OnMapReadyCallback , GoogleApiClient.ConnectionCallbacks,
+public class PickPlace extends FragmentActivity implements OnMapReadyCallback ,
+        GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 

@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmergencyMedical" >
+    tools:context=".TrafficAccidents" >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/emergency_medical_toolbar"
+        android:id="@+id/traffic_accidents_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorEmergencyMedical"
+        android:background="@color/colorTrafficAccident"
         android:elevation="8dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/emergency_medical"
+            android:text="@string/traffic_accident"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"/>
@@ -27,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <EditText
-        android:id="@+id/emergency_medical_message_request"
+        android:id="@+id/traffic_accidents_message_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
@@ -36,17 +37,18 @@
         android:textAlignment="center"
         android:hint="Write some message or you can left as blank" />
     <Button
-        android:id="@+id/emergency_medical_help_request"
+        android:id="@+id/traffic_accidents_help_request"
         style="@android:style/Widget.Material.Light.Button.Borderless.Small"
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorEmergencyMedical"
+        android:background="@color/colorTrafficAccident"
         android:padding="5dp"
         android:textStyle="bold"
-        android:textSize="14sp"
-        android:text="Request for Emergency Medical help"
+        android:textSize="16sp"
+        android:text="Request for Traffic Accident help"
         android:textColor="#fff" />
 </FrameLayout>
+
 
