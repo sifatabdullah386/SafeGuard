@@ -56,14 +56,14 @@ public class TabFireStationMaps extends Fragment implements OnMapReadyCallback,
     private GoogleApiClient mGoogleApiClient;
     private Marker mCurrLocationMarker;
     private GoogleMap mMap;
-    private DatabaseReference addPoliceStationReferences;
+    private DatabaseReference addFireStationReferences;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_fire_station_maps, container, false);
 
-        addPoliceStationReferences= FirebaseDatabase.getInstance().getReference("FireStation List");
+        addFireStationReferences= FirebaseDatabase.getInstance().getReference("FireStation List");
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         checkLocationPermission();
@@ -88,9 +88,27 @@ public class TabFireStationMaps extends Fragment implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        final DatabaseReference LocationReferences=addPoliceStationReferences.child("FireStation List").child("locations");
-        final DatabaseReference latLangReferences=addPoliceStationReferences.child("FireStation List").child("latLang");
-        ValueEventListener eventListener1 = new ValueEventListener() {
+        addFireStationReferences.child("locations").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    FreeConstructor m = ds.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String location_title=m.getLocation();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(location_title))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+/*        ValueEventListener eventListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -115,7 +133,7 @@ public class TabFireStationMaps extends Fragment implements OnMapReadyCallback,
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-         LocationReferences.addListenerForSingleValueEvent(eventListener1);
+         LocationReferences.addListenerForSingleValueEvent(eventListener1);*/
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

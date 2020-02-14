@@ -91,6 +91,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     LatLng location=new LatLng(latitude,longitude);
                     mMap.addMarker(new MarkerOptions().position(location).title(message))
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
                 }
             }
             @Override
@@ -109,6 +110,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     LatLng location=new LatLng(latitude,longitude);
                     mMap.addMarker(new MarkerOptions().position(location).title(message))
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
                 }
             }
             @Override
@@ -126,6 +128,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     LatLng location=new LatLng(latitude,longitude);
                     mMap.addMarker(new MarkerOptions().position(location).title(message))
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
                 }
             }
             @Override
@@ -143,6 +146,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     LatLng location=new LatLng(latitude,longitude);
                     mMap.addMarker(new MarkerOptions().position(location).title(message))
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
                 }
             }
             @Override

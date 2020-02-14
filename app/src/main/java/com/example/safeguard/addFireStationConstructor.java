@@ -2,21 +2,21 @@ package com.example.safeguard;
 
 public class addFireStationConstructor {
 
-    private String ID;
     private String FireStationName;
     private String FireStationPhoneNumber;
     private String FireStationEmail;
+    private String FireStationLocation;
     private String FireStationDescription;
 
-    addFireStationConstructor(String id, String fireStationNameData , String fireStationPhoneNumberData, String fireStationEmailData, String fireStationDescriptionData) {
+    public addFireStationConstructor() {
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
+    addFireStationConstructor(String fireStationName, String fireStationPhoneNumber, String fireStationEmail, String fireStationLocation, String fireStationDescription) {
+        FireStationName = fireStationName;
+        FireStationPhoneNumber = fireStationPhoneNumber;
+        FireStationEmail = fireStationEmail;
+        FireStationLocation = fireStationLocation;
+        FireStationDescription = fireStationDescription;
     }
 
     public String getFireStationName() {
@@ -42,6 +42,15 @@ public class addFireStationConstructor {
     public void setFireStationEmail(String fireStationEmail) {
         FireStationEmail = fireStationEmail;
     }
+
+    public String getFireStationLocation() {
+        return FireStationLocation;
+    }
+
+    public void setFireStationLocation(String fireStationLocation) {
+        FireStationLocation = fireStationLocation;
+    }
+
     public String getFireStationDescription() {
         return FireStationDescription;
     }

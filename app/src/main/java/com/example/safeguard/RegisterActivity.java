@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity   {
         doRegistration();
 
         if (!Places.isInitialized()) {
-            String apiKey="AIzaSyB7S9-1M1j_LjVGo3HirR_bibNhB9tKK84";
+            String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
             Places.initialize(getApplicationContext(),apiKey);
         }
         fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);

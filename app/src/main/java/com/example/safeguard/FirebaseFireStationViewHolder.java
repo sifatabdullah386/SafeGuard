@@ -13,6 +13,5 @@ public class FirebaseFireStationViewHolder extends RecyclerView.ViewHolder  {
         FireStationListPhoneNumber=itemView.findViewById(R.id.fire_station_list_phone);
         FireStationListEmail=itemView.findViewById(R.id.fire_station_list_email);
         FireStationListLocation=itemView.findViewById(R.id.organization_list_location);
-
     }
 }

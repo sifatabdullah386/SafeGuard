@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,17 +30,22 @@ import java.util.Objects;
 
 public class addFireServices extends AppCompatActivity {
 
-    EditText FireStationName,FireStationLocation,FireStationPhoneNumber,FireStationEmail,FireStationDescription;
+    EditText FireStationName,FireStationPhoneNumber,FireStationEmail,FireStationDescription;
+    TextView FireStationLocation;
     Button FireStationSubmit;
     DatabaseReference addFireStationReferences;
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
-    String location;
-
+    private String location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_fire_services_layout);
+
+        Toolbar toolbar = findViewById(R.id.add_fire_services_toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         addFireStationReferences= FirebaseDatabase.getInstance().getReference().child("FireStation List");
 
@@ -55,12 +61,29 @@ public class addFireServices extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(addFireServices.this,AdminPanel.class);
                 startActivity(intent);
-                AddOrganizationData();
+
+                String FireStationNameData=FireStationName.getText().toString().trim();
+                String FireStationPhoneNumberData=FireStationPhoneNumber.getText().toString().trim();
+                String FireStationEmailData=FireStationEmail.getText().toString().trim();
+                String FireStationLocationData=location;
+                String FireStationDescriptionData=FireStationDescription.getText().toString().trim();
+
+                if(TextUtils.isEmpty(FireStationNameData)||TextUtils.isEmpty(FireStationPhoneNumberData)||TextUtils.isEmpty(FireStationEmailData)||TextUtils.isEmpty(FireStationDescriptionData)){
+                    Toast.makeText(addFireServices.this,"Enter All Details",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(addFireServices.this,"Data Entry Success",Toast.LENGTH_LONG).show();
+                }
+
+                String id=addFireStationReferences.push().getKey();
+                addFireStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(FireStationNameData,FireStationPhoneNumberData,FireStationEmailData,FireStationLocationData,FireStationDescriptionData));
+                Toast.makeText(addFireServices.this,"Fire Station added successfully",Toast.LENGTH_LONG).show();
+
             }
         });
 
         if (!Places.isInitialized()) {
-            String apiKey="AIzaSyB7S9-1M1j_LjVGo3HirR_bibNhB9tKK84";
+            String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
             Places.initialize(getApplicationContext(),apiKey);
         }
         fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
@@ -72,39 +95,7 @@ public class addFireServices extends AppCompatActivity {
                 startActivityForResult(intent,AUTOCOMPLETE_REQUEST_CODE);
             }
         });
-        Toolbar toolbar = findViewById(R.id.add_fire_services_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-    }
-    public void AddOrganizationData(){
-        String FireStationNameData=FireStationName.getText().toString().trim();
-        String FireStationPhoneNumberData=FireStationPhoneNumber.getText().toString().trim();
-        String FireStationEmailData=FireStationEmail.getText().toString().trim();
-        String FireStationDescriptionData=FireStationDescription.getText().toString().trim();
 
-        if(TextUtils.isEmpty(FireStationNameData)){
-            Toast.makeText(addFireServices.this,"Enter Fire Station Name",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(FireStationPhoneNumberData)){
-            Toast.makeText(addFireServices.this,"Enter Your Phone Number",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(FireStationEmailData)){
-            Toast.makeText(addFireServices.this,"Enter Your Email",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(FireStationDescriptionData)){
-            Toast.makeText(addFireServices.this,"Description",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(addFireServices.this,"Data Entry Success",Toast.LENGTH_LONG).show();
-        }
-
-        //For Real time Data Store
-        String id=addFireStationReferences.push().getKey();
-        assert id != null;
-        DatabaseReference InfoReferences=addFireStationReferences.child("Info").child(id);
-        InfoReferences.setValue(new addFireStationConstructor(id,FireStationNameData,FireStationPhoneNumberData,FireStationEmailData,FireStationDescriptionData));
-        Toast.makeText(addFireServices.this,"Fire Station added successfully",Toast.LENGTH_LONG).show();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -113,14 +104,13 @@ public class addFireServices extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                final LatLng latLang = place.getLatLng();
-                Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
-                FireStationLocation.setTag(location);
+                LatLng latLang = place.getLatLng();
+
+                FireStationLocation.setText(location);
 
                 String user_id=addFireStationReferences.push().getKey();
                 assert user_id != null;
-                addFireStationReferences.child("latLang").child(user_id).setValue(latLang);
-                addFireStationReferences.child("locations").child(user_id).setValue(location);
+                addFireStationReferences.child("locations").child(user_id).setValue(new LocationConstructor(location,latLang));
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);

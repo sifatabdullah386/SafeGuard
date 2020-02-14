@@ -32,15 +32,18 @@ public class addPoliceStations extends AppCompatActivity {
     EditText PoliceStationName,PoliceStationLocation,PoliceStationPhoneNumber,PoliceStationEmail,PoliceStationDescription;
     Button PoliceStationSubmit;
     DatabaseReference addPoliceStationReferences;
-
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
-    String location;
-
+    private  String location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_police_stations_layout);
+
+        Toolbar toolbar = findViewById(R.id.add_police_stations_toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         addPoliceStationReferences= FirebaseDatabase.getInstance().getReference("PoliceStation List");
 
@@ -54,12 +57,29 @@ public class addPoliceStations extends AppCompatActivity {
         PoliceStationSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddOrganizationData();
+                Intent intent=new Intent(addPoliceStations.this,AdminPanel.class);
+                startActivity(intent);
+                String PoliceStationNameData=PoliceStationName.getText().toString().trim();
+                String PoliceStationPhoneNumberData=PoliceStationPhoneNumber.getText().toString().trim();
+                String PoliceStationEmailData=PoliceStationEmail.getText().toString().trim();
+                String PoliceStationLocationData=location;
+                String PoliceStationDescriptionData=PoliceStationDescription.getText().toString().trim();
+
+                if(TextUtils.isEmpty(PoliceStationNameData)||TextUtils.isEmpty(PoliceStationPhoneNumberData)||TextUtils.isEmpty(PoliceStationEmailData)||TextUtils.isEmpty(PoliceStationDescriptionData)){
+                    Toast.makeText(addPoliceStations.this,"Enter All Details",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(addPoliceStations.this,"Data Entry Success",Toast.LENGTH_LONG).show();
+                }
+                String id=addPoliceStationReferences.push().getKey();
+                assert id != null;
+                addPoliceStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(PoliceStationNameData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationLocationData,PoliceStationDescriptionData));
+                Toast.makeText(addPoliceStations.this,"Police Stations Added Successfully",Toast.LENGTH_LONG).show();
             }
         });
 
         if (!Places.isInitialized()) {
-            String apiKey="AIzaSyB7S9-1M1j_LjVGo3HirR_bibNhB9tKK84";
+            String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
             Places.initialize(getApplicationContext(),apiKey);
         }
         fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
@@ -71,42 +91,6 @@ public class addPoliceStations extends AppCompatActivity {
                 startActivityForResult(intent,AUTOCOMPLETE_REQUEST_CODE);
             }
         });
-
-        Toolbar toolbar = findViewById(R.id.add_police_stations_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-    }
-    public void AddOrganizationData(){
-        String PoliceStationNameData=PoliceStationName.getText().toString().trim();
-        String PoliceStationPhoneNumberData=PoliceStationPhoneNumber.getText().toString().trim();
-        String PoliceStationEmailData=PoliceStationEmail.getText().toString().trim();
-        String PoliceStationDescriptionData=PoliceStationDescription.getText().toString().trim();
-
-        if(TextUtils.isEmpty(PoliceStationNameData)){
-            Toast.makeText(addPoliceStations.this,"Enter Police Station Name",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(PoliceStationPhoneNumberData)){
-            Toast.makeText(addPoliceStations.this,"Enter Your Phone Number",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(PoliceStationEmailData)){
-            Toast.makeText(addPoliceStations.this,"Enter Your Email",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(PoliceStationDescriptionData)){
-            Toast.makeText(addPoliceStations.this,"Description",Toast.LENGTH_LONG).show();
-        }
-        if(PoliceStationDescriptionData.length()<10){
-            Toast.makeText(addPoliceStations.this,"Enter At Least 10 Words",Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(addPoliceStations.this,"Data Entry Success",Toast.LENGTH_LONG).show();
-        }
-
-        //For Real time Data Store
-        String id=addPoliceStationReferences.push().getKey();
-        assert id != null;
-        addPoliceStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(id,PoliceStationNameData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationDescriptionData));
-        Toast.makeText(addPoliceStations.this,"Police Stations Added Successfully",Toast.LENGTH_LONG).show();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -115,14 +99,12 @@ public class addPoliceStations extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                final LatLng latLang = place.getLatLng();
-                Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
-                PoliceStationLocation.setTag(location);
+                LatLng latLang = place.getLatLng();
+                PoliceStationLocation.setText(location);
 
-                String user_id=addPoliceStationReferences.push().getKey();
-                assert user_id != null;
-                addPoliceStationReferences.child("latLang").child(user_id).setValue(latLang);
-                addPoliceStationReferences.child("locations").child(user_id).setValue(location);
+                String id=addPoliceStationReferences.push().getKey();
+                assert id != null;
+                addPoliceStationReferences.child("locations").child(id).setValue(new LocationConstructor(location,latLang));
 
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);

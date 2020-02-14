@@ -45,15 +45,8 @@ public class Hospitals extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-/*        FloatingActionButton floatingActionButton=findViewById(R.id.floating_button_add_organization);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),addOrganizations.class);
-                startActivity(intent);
-            }
-        });*/
-        RecyclerView recyclerView = findViewById(R.id.organization_recyclerView);
+
+        RecyclerView recyclerView = findViewById(R.id.hospitals_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();

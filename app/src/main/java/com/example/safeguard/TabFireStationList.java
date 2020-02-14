@@ -54,7 +54,7 @@ public class TabFireStationList extends Fragment {
                 firebaseFireStationViewHolder.FireStationListName.setText(addFireStationConstructor.getFireStationName());
                 firebaseFireStationViewHolder.FireStationListPhoneNumber.setText(addFireStationConstructor.getFireStationPhoneNumber());
                 firebaseFireStationViewHolder.FireStationListEmail.setText(addFireStationConstructor.getFireStationEmail());
-                //firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
+                firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
             }
             @NonNull
             @Override

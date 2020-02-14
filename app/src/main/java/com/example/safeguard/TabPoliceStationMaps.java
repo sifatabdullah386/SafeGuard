@@ -88,36 +88,25 @@ public class TabPoliceStationMaps extends Fragment implements OnMapReadyCallback
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        final DatabaseReference LocationReferences=addPoliceStationReferences.child("PoliceStation List").child("locations");
-        final DatabaseReference latLangReferences=addPoliceStationReferences.child("PoliceStation List").child("latLang");
-        ValueEventListener eventListener1 = new ValueEventListener() {
+        addPoliceStationReferences.child("locations").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    final String marker_title=ds.getValue(String.class);
-                    ValueEventListener eventListener2 = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                                Double latitude=ds.child("latitude").getValue(Double.class);
-                                Double longitude=ds.child("longitude").getValue(Double.class);
-                                LatLng location=new LatLng(latitude,longitude);
-                                mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    };
-                    latLangReferences.addListenerForSingleValueEvent(eventListener2);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    FreeConstructor m = ds.getValue(FreeConstructor.class);
+                    double latitude=m.getLatitude();
+                    double longitude=m.getLongitude();
+                    String location_title=m.getLocation();
+                    LatLng location=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(location).title(location_title))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        };
-         LocationReferences.addListenerForSingleValueEvent(eventListener1);
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -39,7 +39,7 @@ public class TabPoliceStationList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_police_station_list, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.fire_services_list_recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.police_station_list_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class TabPoliceStationList extends Fragment {
                 firebaseFireStationViewHolder.FireStationListName.setText(addFireStationConstructor.getFireStationName());
                 firebaseFireStationViewHolder.FireStationListPhoneNumber.setText(addFireStationConstructor.getFireStationPhoneNumber());
                 firebaseFireStationViewHolder.FireStationListEmail.setText(addFireStationConstructor.getFireStationEmail());
-                //firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
+                firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
             }
             @NonNull
             @Override
