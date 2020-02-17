@@ -74,7 +74,7 @@
     <string name="add_hospitals">Add Hospitals</string>
     <string name="add_organizations">Add Organizations</string>
     <string name="add_police_stations">Add Police Stations</string>
-    <string name="add_fire_stations">add fire stations</string>
+    <string name="add_fire_stations">Add Fire Stations</string>
     <string name="about_police_station">About Police Station</string>
     <string name="police_station_email">Police Station Email</string>
     <string name="police_station_phone_number">Police Station Phone Number</string>
@@ -83,4 +83,6 @@
     <string name="about_fire_station">About fire station</string>
     <string name="take_a_criminal_picture">Take a Criminal Picture</string>
     <string name="upload_from_gallery">Upload from gallery</string>
+    <string name="criminal_photos">Criminal Photos Send from the Victims</string>
+    <string name="admin_panel">Admin Panel</string>
 </resources>

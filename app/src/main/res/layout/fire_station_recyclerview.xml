@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="Phone Number"
+                        android:text="@string/phone_number"
                         android:textColor="#3C3D3D"
                         android:textSize="14sp"
                         android:textStyle="bold"/>

@@ -13,13 +13,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -86,13 +88,14 @@ public class addFireServices extends AppCompatActivity {
             String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
             Places.initialize(getApplicationContext(),apiKey);
         }
-        fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
+        //fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
 
         FireStationLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN,fields).build(addFireServices.this);
-                startActivityForResult(intent,AUTOCOMPLETE_REQUEST_CODE);
+                fields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(addFireServices.this);
+                startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
             }
         });
 

@@ -4,14 +4,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class LocationConstructor {
     private  String location;
-    private LatLng latLang;
+    private LatLng locationLatLang;
 
     public LocationConstructor() {
     }
 
-    LocationConstructor(String location, LatLng latLang) {
+    LocationConstructor(String location, LatLng locationLatLang) {
         this.location = location;
-        this.latLang = latLang;
+        this.locationLatLang = locationLatLang;
     }
 
     public String getLocation() {
@@ -22,11 +22,11 @@ public class LocationConstructor {
         this.location = location;
     }
 
-    public LatLng getLatLang() {
-        return latLang;
+    public LatLng getLocationLatLang() {
+        return locationLatLang;
     }
 
-    public void setLatLang(LatLng latLang) {
-        this.latLang = latLang;
+    public void setLocationLatLang(LatLng locationLatLang) {
+        this.locationLatLang = locationLatLang;
     }
 }

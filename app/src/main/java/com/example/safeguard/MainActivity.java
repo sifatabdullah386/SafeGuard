@@ -3,6 +3,7 @@ package com.example.safeguard;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,15 +20,35 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
+    FirebaseUser user;
+    static String LoggedIn_User_Email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        Log.d("LOGGED", "user: " + user);
+
+        //Setting the tags for Current User.
+        LoggedIn_User_Email =user.getEmail();
+        OneSignal.sendTag("User_ID", LoggedIn_User_Email);
 
         //calling toolbar actionbar
         Toolbar toolbar=  findViewById(R.id.toolbar);

@@ -50,44 +50,25 @@ public class addAmbulances extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-
-
     }
     public void AddAmbulanceData(){
-        String OrganizationNameData=AmbulanceName.getText().toString().trim();
-        String OrganizationLocationData=AmbulanceLocation.getText().toString().trim();
-        String OrganizationPhoneNumberData=AmbulancePhoneNumber.getText().toString().trim();
-        String OrganizationEmailData=AmbulanceEmail.getText().toString().trim();
-        String OrganizationDescriptionData=AmbulanceDescription.getText().toString().trim();
+        String AmbulanceNameData=AmbulanceName.getText().toString().trim();
+        String AmbulanceLocationData=AmbulanceLocation.getText().toString().trim();
+        String AmbulancePhoneNumberData=AmbulancePhoneNumber.getText().toString().trim();
+        String AmbulanceEmailData=AmbulanceEmail.getText().toString().trim();
+        String AmbulanceDescriptionData=AmbulanceDescription.getText().toString().trim();
+        String AmbulanceTypeData=AmbulanceType.getSelectedItem().toString().trim();
 
-        String OrganizationTypeData=AmbulanceType.getSelectedItem().toString().trim();
-
-        if(TextUtils.isEmpty(OrganizationNameData)){
-            Toast.makeText(addAmbulances.this,"Enter Your Name",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationLocationData)){
-            Toast.makeText(addAmbulances.this,"Enter Your Location",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationPhoneNumberData)){
-            Toast.makeText(addAmbulances.this,"Enter Your Phone Number",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationEmailData)){
-            Toast.makeText(addAmbulances.this,"Enter Your Email",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationDescriptionData)){
-            Toast.makeText(addAmbulances.this,"Description",Toast.LENGTH_LONG).show();
-        }
-        if(OrganizationDescriptionData.length()<10){
-            Toast.makeText(addAmbulances.this,"Enter At Least 10 Words",Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(AmbulanceNameData)||TextUtils.isEmpty(AmbulanceLocationData)||TextUtils.isEmpty(AmbulancePhoneNumberData)||TextUtils.isEmpty(AmbulanceDescriptionData)){
+            Toast.makeText(addAmbulances.this,"Enter Your All Details",Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(addAmbulances.this,"Data Entry Success",Toast.LENGTH_LONG).show();
         }
-
         //For Real time Data Store
         String id=addAmbulanceReferences.push().getKey();
         assert id != null;
-        addAmbulanceReferences.child(id).setValue(new addOrganizationConstructor(id,OrganizationNameData,OrganizationLocationData,OrganizationPhoneNumberData,OrganizationEmailData,OrganizationTypeData,OrganizationDescriptionData));
+        addAmbulanceReferences.child(id).setValue(new addOrganizationConstructor(id,AmbulanceNameData,AmbulanceLocationData,AmbulancePhoneNumberData,AmbulanceEmailData,AmbulanceTypeData,AmbulanceDescriptionData));
         Toast.makeText(addAmbulances.this,"Ambulance Details added successfully",Toast.LENGTH_LONG).show();
     }
     @Override

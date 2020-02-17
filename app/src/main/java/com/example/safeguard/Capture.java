@@ -129,8 +129,8 @@ public class Capture extends Fragment {
 
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String imageFileName = "JPEG_" + timeStamp +"."+getFileExt(contentUri);
-            Log.d("tag", "onActivityResult: Gallery Image Uri:  " +  imageFileName);
-            //captureImage.setImageURI(contentUri);
+
+            captureImage.setImageURI(contentUri);
 
             uploadImageToServer(imageFileName,contentUri);
         }

@@ -1,8 +1,21 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.6'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     compileOptions.encoding = 'windows-1251'
     defaultConfig {
         applicationId "com.example.safeguard"
@@ -12,6 +25,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+        manifestPlaceholders = [
+                onesignal_app_id:'69759a1c-2546-46ee-b060-aa2532799dee',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         debug {
@@ -56,6 +74,11 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
+    //One Signal for sending notification
+    implementation 'com.onesignal:OneSignal:3.12.6'
+
+    //API for sever response
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     //picasso library
     implementation 'com.squareup.picasso:picasso:2.71828'

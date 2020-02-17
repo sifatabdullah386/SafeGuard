@@ -1,29 +1,24 @@
 package com.example.safeguard;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import com.google.android.gms.common.ConnectionResult;
@@ -44,11 +39,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Scanner;
 
-import static com.example.safeguard.Notification.CHANNEL_ID;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -62,9 +61,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Button mRequest;
     private EditText MessageRequest;
-    private NotificationManagerCompat notificationManager;
     DatabaseReference databaseReference;
     private String Address_location;
+    String message;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -78,7 +78,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mRequest=findViewById(R.id.help_request);
         MessageRequest=findViewById(R.id.message_request);
         databaseReference=FirebaseDatabase.getInstance().getReference();
-        notificationManager=NotificationManagerCompat.from(this);
 
     }
     public void onMapReady(GoogleMap googleMap) {
@@ -160,47 +159,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
 
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                final String message=MessageRequest.getText().toString().trim();
-
-                 //ref = FirebaseDatabase.getInstance().getReference("helpRequest");
-                //DatabaseReference refMessage = FirebaseDatabase.getInstance().getReference("helpMessageRequest");
+                message=MessageRequest.getText().toString().trim();
 
                 String location=Address_location;
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
                 databaseReference.child("helpRequest").child(userId).setValue(new FreeConstructor(location,message,latitude,longitude));
-                //refMessage.child(userId).setValue(messageRequest);
 
-                //for back to the Feedback from the notification bar
-                Intent activityIntent=new Intent(MapsActivity.this,FeedBack.class);
-                PendingIntent contentIntent=PendingIntent.getActivity(MapsActivity.this,0,activityIntent,0);
-
-                //Toast Message
-                Intent broadcastIntent=new Intent(MapsActivity.this,NotificationReceiver.class);
-                broadcastIntent.putExtra("toastMessage", location);
-
-                //setup large icon on notification bar
-                Bitmap largeIcon= BitmapFactory.decodeResource(getResources(),R.drawable.ic_help_outline_black_24dp);
-                //send notification method
-                android.app.Notification notification=new NotificationCompat.Builder(MapsActivity.this,CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_message)
-                        .setContentTitle("Help Me")
-                        //.setContentText(FoodLocationData)
-                        .setLargeIcon(largeIcon)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(message)
-                                .setBigContentTitle("Help Me Nearby ")
-                                .setSummaryText("Help me"))
-                        .setPriority(NotificationCompat.PRIORITY_LOW)
-                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                        .setColor(Color.TRANSPARENT)
-                        .setContentIntent(contentIntent)//intent passing
-                        .setAutoCancel(true)
-                        .build();
-                SystemClock.sleep(2000);
-                notificationManager.notify(1,notification);
-                Toast.makeText(MapsActivity.this,"Notified Successfully",Toast.LENGTH_LONG).show();
+                sendNotification();
             }
         });
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -237,5 +204,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    private void sendNotification() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic ZjUzY2FkOTktOTJjZS00OGMzLWExZjItZDMzM2RkYjRhMTFh");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"69759a1c-2546-46ee-b060-aa2532799dee\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"Type\", \"relation\": \"=\", \"value\": \"" + "Tags" + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "}";
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes(StandardCharsets.UTF_8);
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 }

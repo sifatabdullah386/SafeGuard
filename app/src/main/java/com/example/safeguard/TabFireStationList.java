@@ -16,7 +16,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 
 public class TabFireStationList extends Fragment {
 
@@ -28,7 +27,6 @@ public class TabFireStationList extends Fragment {
         super.onStart();
         adapter.startListening();
     }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -43,7 +41,6 @@ public class TabFireStationList extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.fire_services_list_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ArrayList<addFireStationConstructor> arrayList = new ArrayList<>();
         DatabaseReference databaseFireStationReference = FirebaseDatabase.getInstance().getReference().child("FireStation List").child("Info");
         databaseFireStationReference.keepSynced(true);
         options=new FirebaseRecyclerOptions.Builder<addFireStationConstructor>().setQuery(databaseFireStationReference,addFireStationConstructor.class).build();

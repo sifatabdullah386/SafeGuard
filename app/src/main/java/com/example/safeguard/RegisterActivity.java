@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity   {
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
     String location;
-    //private GoogleMap mMap;
+    LatLng latLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity   {
                 final String userName = UserName.getText().toString().trim();
                 final String phoneNumber = UserPhoneNumber.getText().toString().trim();
                 final String email = UserEmail.getText().toString().trim();
+                final String Location=location;
+                final LatLng LocatonLatLng=latLang;
                 String password = UserPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
@@ -126,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity   {
                             else{
                                 //For Real time Data Store
                                 String user_id= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,email);
+                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,email,Location,LocatonLatLng);
                                 UserDatabase.child("Info").child(user_id).setValue(send);
                                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
                                 finish();
@@ -146,8 +148,7 @@ public class RegisterActivity extends AppCompatActivity   {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                final LatLng latLang = place.getLatLng();
-                Log.i("Place", "Place: " + place.getName() + ", " + place.getId());
+                latLang = place.getLatLng();
                 UserAddress.setText(location);
 
                 String user_id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();

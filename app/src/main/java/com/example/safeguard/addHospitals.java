@@ -52,40 +52,23 @@ public class addHospitals extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     }
     public void AddHospitalData(){
-        String OrganizationNameData=HospitalName.getText().toString().trim();
-        String OrganizationLocationData=HospitalLocation.getText().toString().trim();
-        String OrganizationPhoneNumberData=HospitalPhoneNumber.getText().toString().trim();
-        String OrganizationEmailData=HospitalEmail.getText().toString().trim();
-        String OrganizationDescriptionData=HospitalDescription.getText().toString().trim();
+        String HospitalNameData=HospitalName.getText().toString().trim();
+        String HospitalLocationData=HospitalLocation.getText().toString().trim();
+        String HospitalPhoneNumberData=HospitalPhoneNumber.getText().toString().trim();
+        String HospitalEmailData=HospitalEmail.getText().toString().trim();
+        String HospitalDescriptionData=HospitalDescription.getText().toString().trim();
 
-        String OrganizationTypeData=HospitalType.getSelectedItem().toString().trim();
+        String HospitalTypeData=HospitalType.getSelectedItem().toString().trim();
 
-        if(TextUtils.isEmpty(OrganizationNameData)){
-            Toast.makeText(addHospitals.this,"Enter your Hospital name",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationLocationData)){
-            Toast.makeText(addHospitals.this,"Enter Your Location",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationPhoneNumberData)){
-            Toast.makeText(addHospitals.this,"Enter Your Phone Number",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationEmailData)){
-            Toast.makeText(addHospitals.this,"Enter Your Email",Toast.LENGTH_LONG).show();
-        }
-        if(TextUtils.isEmpty(OrganizationDescriptionData)){
-            Toast.makeText(addHospitals.this,"Description",Toast.LENGTH_LONG).show();
-        }
-        if(OrganizationDescriptionData.length()<10){
-            Toast.makeText(addHospitals.this,"Enter At Least 10 Words",Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(HospitalNameData)||TextUtils.isEmpty(HospitalLocationData)||TextUtils.isEmpty(HospitalPhoneNumberData)||TextUtils.isEmpty(HospitalEmailData)||TextUtils.isEmpty(HospitalDescriptionData)){
+            Toast.makeText(addHospitals.this,"Enter your Hospital Details",Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(addHospitals.this,"Data Entry Success",Toast.LENGTH_LONG).show();
         }
-
-        //For Real time Data Store
         String id=addHospitalReferences.push().getKey();
         assert id != null;
-        addHospitalReferences.child(id).setValue(new addOrganizationConstructor(id,OrganizationNameData,OrganizationLocationData,OrganizationPhoneNumberData,OrganizationEmailData,OrganizationTypeData,OrganizationDescriptionData));
+        addHospitalReferences.child(id).setValue(new addOrganizationConstructor(id,HospitalNameData,HospitalLocationData,HospitalPhoneNumberData,HospitalEmailData,HospitalTypeData,HospitalDescriptionData));
         Toast.makeText(addHospitals.this,"Hospital details added successfully",Toast.LENGTH_LONG).show();
     }
     @Override

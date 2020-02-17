@@ -25,21 +25,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Hospitals"/>
-        <activity android:name=".Ambulances" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".PickPlace"
             android:label="@string/title_activity_pick_place" />
-        <activity android:name=".RoadAccidents" />
-        <activity android:name=".PoliceStations" />
-        <activity android:name=".FeedBack" />
-        <activity android:name=".FireStations" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -65,8 +57,17 @@
         <activity android:name=".SexualHarassment" />
         <activity android:name=".EmergencyMedical" />
         <activity android:name=".TrafficAccidents" />
+        <activity android:name=".RoadAccidents" />
+        <activity android:name=".PoliceStations" />
+        <activity android:name=".FeedBack" />
+        <activity android:name=".FireStations" />
+        <activity android:name=".CriminalPhotos"/>
+        <activity android:name=".Hospitals" />
+        <activity android:name=".Ambulances" />
+
         <activity android:name=".AdminActivity" />
         <activity android:name=".AdminPanel" />
+
         <receiver android:name=".NotificationReceiver" />
     </application>
 

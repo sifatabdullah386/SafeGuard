@@ -79,10 +79,12 @@ public class Profile extends Fragment {
                 final String userName= u.getUserName();
                 final String userPhoneNumber= u.getPhoneNumber();
                 final String userEmail= u.getEmail();
+                final String userLocation= u.getLocation();
 
                 ProfileName.setText(userName);
                 profilePhoneNumber.setText(userPhoneNumber);
                 profileEmail.setText(userEmail);
+                profileLocation.setText(userLocation);
             }
 
             @Override
