@@ -44,10 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+
+        user = mAuth.getCurrentUser();
         Log.d("LOGGED", "user: " + user);
 
+
         //Setting the tags for Current User.
-        LoggedIn_User_Email =user.getEmail();
+        if (user != null) {
+            LoggedIn_User_Email =user.getEmail();
+        }
         OneSignal.sendTag("User_ID", LoggedIn_User_Email);
 
         //calling toolbar actionbar

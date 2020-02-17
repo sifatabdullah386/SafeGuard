@@ -1,35 +1,26 @@
 package com.example.safeguard;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.view.MenuItem;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -48,11 +39,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Scanner;
 
-import static com.example.safeguard.Notification.CHANNEL_ID;
 
 public class EmergencyMedical extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -66,7 +61,6 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private Button mEMRequest;
     private EditText EMMessageRequest;
-    private NotificationManagerCompat notificationManager;
     DatabaseReference EmergencyMedicalDatabaseReference;
     private String EmergencyMedicalAddressLocation;
     @Override
@@ -83,7 +77,6 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
         mEMRequest=findViewById(R.id.emergency_medical_help_request);
         EMMessageRequest=findViewById(R.id.emergency_medical_message_request);
         EmergencyMedicalDatabaseReference= FirebaseDatabase.getInstance().getReference();
-        notificationManager= NotificationManagerCompat.from(this);
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -164,42 +157,14 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
                 startActivity(intent);
 
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                final String message=EMMessageRequest.getText().toString().trim();
+                String helpEMMessage=EMMessageRequest.getText().toString().trim();
                 String location=EmergencyMedicalAddressLocation;
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
-                EmergencyMedicalDatabaseReference.child("EmergencyMedicalHelpRequest").child(userId).setValue(new FreeConstructor(location,message,latitude,longitude));
+                EmergencyMedicalDatabaseReference.child("EmergencyMedicalHelpRequest").child(userId).setValue(new FreeConstructor(location,helpEMMessage,latitude,longitude));
 
-                //for back to the Feedback from the notification bar
-                Intent activityIntent=new Intent(EmergencyMedical.this,FeedBack.class);
-                PendingIntent contentIntent=PendingIntent.getActivity(EmergencyMedical.this,0,activityIntent,0);
-
-                //Toast Message
-                Intent broadcastIntent=new Intent(EmergencyMedical.this,NotificationReceiver.class);
-                broadcastIntent.putExtra("toastMessage", location);
-
-                //setup large icon on notification bar
-                Bitmap largeIcon= BitmapFactory.decodeResource(getResources(),R.drawable.ic_help_outline_black_24dp);
-                //send notification method
-                android.app.Notification notification=new NotificationCompat.Builder(EmergencyMedical.this,CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_message)
-                        .setContentTitle("Help Me fro Emergency Medical")
-                        //.setContentText(FoodLocationData)
-                        .setLargeIcon(largeIcon)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(message)
-                                .setBigContentTitle("Help Me Nearby ")
-                                .setSummaryText("Help me for Emergency Medical"))
-                        .setPriority(NotificationCompat.PRIORITY_LOW)
-                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                        .setColor(Color.TRANSPARENT)
-                        .setContentIntent(contentIntent)//intent passing
-                        .setAutoCancel(true)
-                        .build();
-                SystemClock.sleep(2000);
-                notificationManager.notify(1,notification);
-                Toast.makeText(EmergencyMedical.this,"Notified Successfully",Toast.LENGTH_LONG).show();
+                sendNotification(helpEMMessage);
             }
         });
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
@@ -236,5 +201,68 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
                 Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    private void sendNotification(final String helpEMMessage) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    //ZjUzY2FkOTktOTJjZS00OGMzLWExZjItZDMzM2RkYjRhMTFh
+                    //69759a1c-2546-46ee-b060-aa2532799dee
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic ZjUzY2FkOTktOTJjZS00OGMzLWExZjItZDMzM2RkYjRhMTFh");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                +   "\"app_id\": \"69759a1c-2546-46ee-b060-aa2532799dee\","
+                                +   "\"included_segments\": [\"All\"],"
+                                +   "\"data\": {\"foo\": \"bar\"},"
+                                +   "\"contents\": {\"en\": \"" + helpEMMessage + "\"}"
+                                + "}";
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes(StandardCharsets.UTF_8);
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (  httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch(Throwable t) {
+                        t.printStackTrace();
+                    }
+
+                }
+            }
+        });
     }
 }

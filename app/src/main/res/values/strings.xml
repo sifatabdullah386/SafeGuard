@@ -85,4 +85,5 @@
     <string name="upload_from_gallery">Upload from gallery</string>
     <string name="criminal_photos">Criminal Photos Send from the Victims</string>
     <string name="admin_panel">Admin Panel</string>
+    <string name="guest_login">Guest Login</string>
 </resources>

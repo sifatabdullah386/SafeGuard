@@ -63,7 +63,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private EditText MessageRequest;
     DatabaseReference databaseReference;
     private String Address_location;
-    String message;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,7 +158,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
 
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                message=MessageRequest.getText().toString().trim();
+                String message=MessageRequest.getText().toString().trim();
 
                 String location=Address_location;
                 double latitude=mLastLocation.getLatitude();
@@ -167,7 +166,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 databaseReference.child("helpRequest").child(userId).setValue(new FreeConstructor(location,message,latitude,longitude));
 
-                sendNotification();
+                sendNotification(message);
             }
         });
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -205,22 +204,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-    private void sendNotification() {
+    private void sendNotification(final String helpMessage) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 int SDK_INT = android.os.Build.VERSION.SDK_INT;
                 if (SDK_INT > 8) {
-                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                            .permitAll().build();
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
 
-
+                    //ZjUzY2FkOTktOTJjZS00OGMzLWExZjItZDMzM2RkYjRhMTFh
+                    //69759a1c-2546-46ee-b060-aa2532799dee
                     try {
                         String jsonResponse;
 
                         URL url = new URL("https://onesignal.com/api/v1/notifications");
-                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        HttpURLConnection con = (HttpURLConnection)url.openConnection();
                         con.setUseCaches(false);
                         con.setDoOutput(true);
                         con.setDoInput(true);
@@ -230,13 +229,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                + "\"app_id\": \"69759a1c-2546-46ee-b060-aa2532799dee\","
-
-                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"Type\", \"relation\": \"=\", \"value\": \"" + "Tags" + "\"}],"
-
-                                + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"English Message\"}"
+                                +   "\"app_id\": \"69759a1c-2546-46ee-b060-aa2532799dee\","
+                                +   "\"included_segments\": [\"All\"],"
+                                +   "\"data\": {\"foo\": \"bar\"},"
+                                +   "\"contents\": {\"en\": \"" + helpMessage + "\"}"
                                 + "}";
+
                         System.out.println("strJsonBody:\n" + strJsonBody);
 
                         byte[] sendBytes = strJsonBody.getBytes(StandardCharsets.UTF_8);
@@ -248,21 +246,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         int httpResponse = con.getResponseCode();
                         System.out.println("httpResponse: " + httpResponse);
 
-                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                        if (  httpResponse >= HttpURLConnection.HTTP_OK
                                 && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
                             Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
                             jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
                             scanner.close();
-                        } else {
+                        }
+                        else {
                             Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
                             jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
                             scanner.close();
                         }
                         System.out.println("jsonResponse:\n" + jsonResponse);
 
-                    } catch (Throwable t) {
+                    } catch(Throwable t) {
                         t.printStackTrace();
                     }
+
                 }
             }
         });

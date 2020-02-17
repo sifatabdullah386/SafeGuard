@@ -99,41 +99,21 @@
             android:textStyle="bold"
             android:textColor="#fff"
             android:text="sign up"
-            android:textSize="25sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/button_already_sign_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:padding="5dp"
-                android:background="#148A1D"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:text="Already sign up?"
-                android:textSize="14sp">
-            </Button>
-            <Button
-                android:id="@+id/button_guest_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="5dp"
-                android:padding="5dp"
-                android:background="#FF5722"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:text="Guest Login"
-                android:textSize="14sp">
-            </Button>
-
-        </LinearLayout>
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/button_guest_login"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:background="#FF5722"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:text="@string/guest_login"
+            android:textSize="20sp">
+        </Button>
 
     </LinearLayout>
 

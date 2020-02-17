@@ -10,10 +10,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -31,7 +29,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,9 +63,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        Toolbar toolbar = findViewById(R.id.feed_back_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     }
 
     public void onMapReady(GoogleMap googleMap) {
@@ -77,8 +71,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
-
-        //final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         databaseReference.child("helpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -153,21 +145,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-/*        databaseReference.child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Double latitude=dataSnapshot.child("latitude").getValue(Double.class);
-                Double longitude=dataSnapshot.child("longitude").getValue(Double.class);
-                String marker_title=dataSnapshot.child("message").getValue(String.class);
-                LatLng location=new LatLng(latitude,longitude);
-                mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,8F));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -274,12 +251,5 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                 Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
             }
         }
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

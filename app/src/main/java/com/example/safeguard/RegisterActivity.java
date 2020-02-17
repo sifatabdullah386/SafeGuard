@@ -89,19 +89,6 @@ public class RegisterActivity extends AppCompatActivity   {
             }
         });
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-        CurrentUser = firebaseAuth.getCurrentUser();
-       /* if(CurrentUser!=null){
-            finish();
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-        else{
-            doRegistration();
-        }*/
-    }
     private void doRegistration(){
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

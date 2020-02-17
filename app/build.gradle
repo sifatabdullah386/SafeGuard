@@ -63,7 +63,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.2.0'
 
-    //firebase dependencies
+    //FireBase dependencies
     implementation 'com.google.firebase:firebase-core:17.2.2'
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
@@ -75,7 +75,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
     //One Signal for sending notification
-    implementation 'com.onesignal:OneSignal:3.12.6'
+    implementation 'com.onesignal:OneSignal:3.12.6@aar'
 
     //API for sever response
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'

@@ -41,7 +41,7 @@ public class Hospitals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospitals);
 
-        Toolbar toolbar = findViewById(R.id.add_hospitals_toolbar);
+        Toolbar toolbar = findViewById(R.id.hospitals_toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
