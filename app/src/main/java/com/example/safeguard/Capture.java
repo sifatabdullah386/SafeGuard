@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,8 +58,10 @@ public class Capture extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         captureImage = view.findViewById(R.id.image_capture);
-        Button Capture = view.findViewById(R.id.image_capture_button);
-        Button Upload = view.findViewById(R.id.image_upload_button);
+        LinearLayout Capture = view.findViewById(R.id.image_capture_layout);
+        LinearLayout Upload = view.findViewById(R.id.image_upload_layout);
+        LinearLayout Video=view.findViewById(R.id.video_upload_layout);
+        LinearLayout Audio=view.findViewById(R.id.audio_record_layout);
 
         Capture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,18 @@ public class Capture extends Fragment {
             public void onClick(View v) {
                 Intent gallery = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+            }
+        });
+        Video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        Audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         return view;

@@ -81,9 +81,16 @@
     <string name="police_station_location">Police Station Location</string>
     <string name="police_station_name">Police Station Name</string>
     <string name="about_fire_station">About fire station</string>
-    <string name="take_a_criminal_picture">Take a Criminal Picture</string>
-    <string name="upload_from_gallery">Upload from gallery</string>
+    <string name="take_a_criminal_picture">Take a \n Criminal Picture</string>
+    <string name="upload_from_gallery">Upload from \n gallery</string>
     <string name="criminal_photos">Criminal Photos Send from the Victims</string>
     <string name="admin_panel">Admin Panel</string>
     <string name="guest_login">Guest Login</string>
+    <string name="live_record">Live Record</string>
+    <string name="record_video">Record Video</string>
+    <string name="record_audio">Record Audio</string>
+    <string name="record_what_s_happening">Record what\'s Happening</string>
+    <string name="emergency_contracts">Emergency Contracts</string>
+    <string name="emergency_services">Emergency Services</string>
+    <string name="alert_my_contract">Alert My Contract</string>
 </resources>

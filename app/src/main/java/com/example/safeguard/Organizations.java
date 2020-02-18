@@ -49,7 +49,7 @@ public class Organizations extends Fragment {
                 startActivity(intent);
             }
         });
-        RecyclerView recyclerView = view.findViewById(R.id.organization_recyclerView);
+        final RecyclerView recyclerView = view.findViewById(R.id.organization_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();
@@ -59,12 +59,26 @@ public class Organizations extends Fragment {
 
         adapter=new FirebaseRecyclerAdapter<addOrganizationConstructor, FirebaseOrganizationViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseOrganizationViewHolder firebaseOrganizationViewHolder, int i, @NonNull addOrganizationConstructor addOrganizationConstructor) {
+            protected void onBindViewHolder(@NonNull FirebaseOrganizationViewHolder firebaseOrganizationViewHolder, int i, @NonNull final addOrganizationConstructor addOrganizationConstructor) {
                 firebaseOrganizationViewHolder.OrganizationListName.setText(addOrganizationConstructor.getOrganizationName());
                 firebaseOrganizationViewHolder.OrganizationListPhoneNumber.setText(addOrganizationConstructor.getOrganizationPhoneNumber());
                 firebaseOrganizationViewHolder.OrganizationListEmail.setText(addOrganizationConstructor.getOrganizationEmail());
                 firebaseOrganizationViewHolder.OrganizationListType.setText(addOrganizationConstructor.getOrganizationType());
                 firebaseOrganizationViewHolder.OrganizationListLocation.setText(addOrganizationConstructor.getOrganizationLocation());
+
+                firebaseOrganizationViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(Intent.ACTION_CALL);
+                        intent.putExtra(Intent.EXTRA_PHONE_NUMBER,addOrganizationConstructor.getOrganizationPhoneNumber());
+                        intent.setType("text/number");
+                        startActivity(intent);
+
+                        //intent.putExtra("Organization Phone Number",addOrganizationConstructor.getOrganizationPhoneNumber());
+                        //Onclick item new class
+                        //String CharityListName=getInstance().getStringExtra(name:"CharityListName");
+                    }
+                });
             }
 
             @NonNull

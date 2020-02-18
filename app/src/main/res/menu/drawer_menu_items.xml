@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-  <item android:title="@string/emergency_contract">
+  <item android:title="@string/emergency_services">
     <menu >
       <item
           android:id="@+id/drawer_ambulances"
@@ -12,6 +12,10 @@
           android:id="@+id/drawer_hospitals"
           android:icon="@drawable/drawer_hospital"
           android:title="@string/hospitals" />
+      <item
+          android:id="@+id/drawer_emergency_contracts"
+          android:icon="@drawable/ic_contact_phone_black_24dp"
+          android:title="@string/emergency_contracts" />
     </menu>
 
   </item>

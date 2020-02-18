@@ -25,13 +25,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".EmergencyContracts"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".PickPlace"
             android:label="@string/title_activity_pick_place" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -61,10 +64,9 @@
         <activity android:name=".PoliceStations" />
         <activity android:name=".FeedBack" />
         <activity android:name=".FireStations" />
-        <activity android:name=".CriminalPhotos"/>
+        <activity android:name=".CriminalPhotos" />
         <activity android:name=".Hospitals" />
         <activity android:name=".Ambulances" />
-
         <activity android:name=".AdminActivity" />
         <activity android:name=".AdminPanel" />
 

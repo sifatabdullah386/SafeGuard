@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
                     Intent hospitalsIntent=new Intent(MainActivity.this,Hospitals.class);
                     startActivity(hospitalsIntent);
                     break;
+                case R.id.drawer_emergency_contracts:
+                    Intent ecIntent=new Intent(MainActivity.this,EmergencyContracts.class);
+                    startActivity(ecIntent);
+                    break;
                 case R.id.drawer_admin:
                     Intent intent=new Intent(MainActivity.this,AdminActivity.class);
                     startActivity(intent);
