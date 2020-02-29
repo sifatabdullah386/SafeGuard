@@ -26,6 +26,8 @@ import com.onesignal.OneSignal;
 
 import java.util.Objects;
 
+import static java.lang.System.exit;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(hospitalsIntent);
                     break;
                 case R.id.drawer_emergency_contracts:
-                    Intent ecIntent=new Intent(MainActivity.this,EmergencyContracts.class);
+                    Intent ecIntent=new Intent(MainActivity.this,EmergencyContacts.class);
                     startActivity(ecIntent);
                     break;
                 case R.id.drawer_admin:
@@ -188,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Rate Us Settings",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.drawer_exit:
+                exit(0);
                 Toast.makeText(getApplicationContext(),"Exit Settings",Toast.LENGTH_SHORT).show();
                 break;
             default:

@@ -6,7 +6,7 @@
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
-    <string name="nav_alert_tag">Alert Tag</string>
+    <string name="nav_alert_tag">Alert Tags</string>
     <string name="nav_organization">Organizations</string>
     <string name="nav_current_location">Current Location</string>
     <string name="nav_profile">Profile</string>
@@ -69,7 +69,7 @@
     <string name="hospital_description">Hospital Description</string>
     <string name="ambulances">Ambulances</string>
     <string name="hospitals">Hospitals</string>
-    <string name="emergency_contract">Emergency Contract</string>
+    <string name="emergency_contact">Emergency Contact</string>
     <string name="add_ambulances">Add Ambulances</string>
     <string name="add_hospitals">Add Hospitals</string>
     <string name="add_organizations">Add Organizations</string>
@@ -90,7 +90,7 @@
     <string name="record_video">Record Video</string>
     <string name="record_audio">Record Audio</string>
     <string name="record_what_s_happening">Record what\'s Happening</string>
-    <string name="emergency_contracts">Emergency Contracts</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
     <string name="emergency_services">Emergency Services</string>
-    <string name="alert_my_contract">Alert My Contract</string>
+    <string name="alert_my_contact">Alert My Contacts</string>
 </resources>

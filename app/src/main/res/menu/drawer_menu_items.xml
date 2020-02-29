@@ -15,7 +15,7 @@
       <item
           android:id="@+id/drawer_emergency_contracts"
           android:icon="@drawable/ic_contact_phone_black_24dp"
-          android:title="@string/emergency_contracts" />
+          android:title="@string/emergency_contacts" />
     </menu>
 
   </item>
