@@ -5,9 +5,7 @@ The development phase describes the coding part of the system to be developed. T
 ### User session 
 At the beginning of the app screen we developed a user registration session where the users can register themselves providing proper information and authenticity. We save all the information about the users in the database for statistical analysis. A user must be registered before going into guest login.
   				
-(a) Register as user
-(b) Accept the user account
-(c) Hit the registration data		                   
+(a) Register as user	                   
 (d) Profile section in the app
 
 ### Home Screen
