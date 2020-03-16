@@ -7,10 +7,6 @@ At the beginning of the app screen we developed a user registration session wher
 
 ❮img src="images/register.jpg" width="100" ❯
 
-![alt text](register.jpg)
-
-![alt text](https://github.com/smilesifat/SafeGuard/blob/master/images/register.jpg)
-
 (a) Register as user	                   (d) Profile section in the app
 
 ### Home Screen
