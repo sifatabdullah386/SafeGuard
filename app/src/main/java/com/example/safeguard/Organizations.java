@@ -1,4 +1,5 @@
 package  com.example.safeguard;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +18,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 public class Organizations extends Fragment {
 
-    private FirebaseRecyclerOptions<addOrganizationConstructor> options;
-    private FirebaseRecyclerAdapter<addOrganizationConstructor,FirebaseOrganizationViewHolder> adapter;
+    private FirebaseRecyclerOptions<addOrganizationsConstructor> options;
+    private FirebaseRecyclerAdapter<addOrganizationsConstructor,FirebaseOrganizationViewHolder> adapter;
 
     @Override
     public void onStart() {
@@ -52,25 +52,24 @@ public class Organizations extends Fragment {
         final RecyclerView recyclerView = view.findViewById(R.id.organization_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();
         DatabaseReference databaseOrganizationReference = FirebaseDatabase.getInstance().getReference().child("Organization List");
         databaseOrganizationReference.keepSynced(true);
-        options=new FirebaseRecyclerOptions.Builder<addOrganizationConstructor>().setQuery(databaseOrganizationReference,addOrganizationConstructor.class).build();
+        options=new FirebaseRecyclerOptions.Builder<addOrganizationsConstructor>().setQuery(databaseOrganizationReference,addOrganizationsConstructor.class).build();
 
-        adapter=new FirebaseRecyclerAdapter<addOrganizationConstructor, FirebaseOrganizationViewHolder>(options) {
+        adapter=new FirebaseRecyclerAdapter<addOrganizationsConstructor, FirebaseOrganizationViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseOrganizationViewHolder firebaseOrganizationViewHolder, int i, @NonNull final addOrganizationConstructor addOrganizationConstructor) {
-                firebaseOrganizationViewHolder.OrganizationListName.setText(addOrganizationConstructor.getOrganizationName());
-                firebaseOrganizationViewHolder.OrganizationListPhoneNumber.setText(addOrganizationConstructor.getOrganizationPhoneNumber());
-                firebaseOrganizationViewHolder.OrganizationListEmail.setText(addOrganizationConstructor.getOrganizationEmail());
-                firebaseOrganizationViewHolder.OrganizationListType.setText(addOrganizationConstructor.getOrganizationType());
-                firebaseOrganizationViewHolder.OrganizationListLocation.setText(addOrganizationConstructor.getOrganizationLocation());
+            protected void onBindViewHolder(@NonNull FirebaseOrganizationViewHolder firebaseOrganizationViewHolder, int i, @NonNull final addOrganizationsConstructor addOrganizationsConstructor) {
+                firebaseOrganizationViewHolder.OrganizationListName.setText(addOrganizationsConstructor.getOrganizationName());
+                firebaseOrganizationViewHolder.OrganizationListPhoneNumber.setText(addOrganizationsConstructor.getOrganizationPhoneNumber());
+                firebaseOrganizationViewHolder.OrganizationListEmail.setText(addOrganizationsConstructor.getOrganizationEmail());
+                firebaseOrganizationViewHolder.OrganizationListType.setText(addOrganizationsConstructor.getOrganizationType());
+                firebaseOrganizationViewHolder.OrganizationListLocation.setText(addOrganizationsConstructor.getOrganizationLocation());
 
                 firebaseOrganizationViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(Intent.ACTION_CALL);
-                        intent.putExtra(Intent.EXTRA_PHONE_NUMBER,addOrganizationConstructor.getOrganizationPhoneNumber());
+                        intent.putExtra(Intent.EXTRA_PHONE_NUMBER,addOrganizationsConstructor.getOrganizationPhoneNumber());
                         intent.setType("text/number");
                         startActivity(intent);
 

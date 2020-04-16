@@ -93,4 +93,12 @@
     <string name="emergency_contacts">Emergency Contacts</string>
     <string name="emergency_services">Emergency Services</string>
     <string name="alert_my_contact">Alert My Contacts</string>
+    <string name="contact_name_1">Contact Name 1</string>
+    <string name="phone_number_1">Phone Number 1</string>
+    <string name="contact_name_2">Contact Name 2</string>
+    <string name="phone_number_2">Phone Number 2</string>
+    <string name="contact_name_3">Contact Name 3</string>
+    <string name="phone_number_3">Phone Number 3</string>
+    <string name="add_three_important_emergency_contacts_here">Add Three Important Emergency Contacts Here</string>
+    <string name="add_contacts">Add contacts</string>
 </resources>

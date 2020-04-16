@@ -1,6 +1,6 @@
 package com.example.safeguard;
 
-public class addFireStationConstructor {
+public class addFireStationsConstructor {
 
     private String FireStationName;
     private String FireStationPhoneNumber;
@@ -8,10 +8,10 @@ public class addFireStationConstructor {
     private String FireStationLocation;
     private String FireStationDescription;
 
-    public addFireStationConstructor() {
+    public addFireStationsConstructor() {
     }
 
-    addFireStationConstructor(String fireStationName, String fireStationPhoneNumber, String fireStationEmail, String fireStationLocation, String fireStationDescription) {
+    addFireStationsConstructor(String fireStationName, String fireStationPhoneNumber, String fireStationEmail, String fireStationLocation, String fireStationDescription) {
         FireStationName = fireStationName;
         FireStationPhoneNumber = fireStationPhoneNumber;
         FireStationEmail = fireStationEmail;

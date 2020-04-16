@@ -7,10 +7,10 @@
     android:orientation="vertical"
     tools:context=".EmergencyContracts">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/feed_back_toolbar"
+        android:id="@+id/emergency_contact_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#F32A1C"
+        android:background="@color/colorEmergencyContracts"
         android:elevation="8dp">
         <TextView
             android:layout_width="match_parent"
@@ -20,11 +20,30 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"/>
+
     </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_button_add_emergency_contract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:backgroundTint="#F44336"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add_black_24dp"
+        app:elevation="6dp"
+        app:fabSize="normal" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emergency_contract_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
-        android:id="@+id/alert_my_contract_layout"
+        android:id="@+id/alert_my_contact_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:layout_margin="5dp"
         android:orientation="horizontal">
         <ImageView
@@ -42,21 +61,4 @@
             android:textSize="19sp"
             android:text="@string/alert_my_contact" />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/emergency_contract_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </androidx.recyclerview.widget.RecyclerView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button_add_emergency_contract"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:backgroundTint="#F44336"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add_black_24dp"
-        app:elevation="6dp"
-        app:fabSize="normal" />
 </LinearLayout>

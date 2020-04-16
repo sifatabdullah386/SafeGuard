@@ -19,6 +19,16 @@
     </menu>
 
   </item>
+
+  <item
+      android:id="@+id/drawer_admin"
+      android:icon="@drawable/drawer_admin_image"
+      android:title="@string/drawer_admin" />
+  <item
+      android:id="@+id/drawer_coordinator"
+      android:icon="@drawable/drawer_coordinator_image"
+      android:title="@string/drawer_coordinator"/>
+
   <item android:title="@string/Communicate">
     <menu >
       <item
@@ -41,13 +51,5 @@
 
   </item>
 
-  <item
-      android:id="@+id/drawer_admin"
-      android:icon="@drawable/drawer_admin_image"
-      android:title="@string/drawer_admin" />
-  <item
-      android:id="@+id/drawer_coordinator"
-      android:icon="@drawable/drawer_coordinator_image"
-      android:title="@string/drawer_coordinator"/>
 
 </menu>

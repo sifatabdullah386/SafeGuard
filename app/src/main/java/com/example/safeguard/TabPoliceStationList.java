@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class TabPoliceStationList extends Fragment {
 
-    private FirebaseRecyclerOptions<addFireStationConstructor> options;
-    private FirebaseRecyclerAdapter<addFireStationConstructor,FirebaseFireStationViewHolder> adapter;
+    private FirebaseRecyclerOptions<addPoliceStationsConstructor> options;
+    private FirebaseRecyclerAdapter<addPoliceStationsConstructor,FirebasePoliceStationsViewHolder> adapter;
 
     @Override
     public void onStart() {
@@ -42,23 +42,23 @@ public class TabPoliceStationList extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.police_station_list_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();
+        ArrayList<addPoliceStationsConstructor> arrayList = new ArrayList<>();
         DatabaseReference PoliceStationReference = FirebaseDatabase.getInstance().getReference().child("PoliceStation List").child("Info");
         PoliceStationReference.keepSynced(true);
-        options=new FirebaseRecyclerOptions.Builder<addFireStationConstructor>().setQuery(PoliceStationReference,addFireStationConstructor.class).build();
+        options=new FirebaseRecyclerOptions.Builder<addPoliceStationsConstructor>().setQuery(PoliceStationReference,addPoliceStationsConstructor.class).build();
 
-        adapter=new FirebaseRecyclerAdapter<addFireStationConstructor, FirebaseFireStationViewHolder>(options) {
+        adapter=new FirebaseRecyclerAdapter<addPoliceStationsConstructor, FirebasePoliceStationsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseFireStationViewHolder  firebaseFireStationViewHolder , int i, @NonNull addFireStationConstructor addFireStationConstructor) {
-                firebaseFireStationViewHolder.FireStationListName.setText(addFireStationConstructor.getFireStationName());
-                firebaseFireStationViewHolder.FireStationListPhoneNumber.setText(addFireStationConstructor.getFireStationPhoneNumber());
-                firebaseFireStationViewHolder.FireStationListEmail.setText(addFireStationConstructor.getFireStationEmail());
-                firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
+            protected void onBindViewHolder(@NonNull FirebasePoliceStationsViewHolder  firebasePoliceStationViewHolder , int i, @NonNull addPoliceStationsConstructor addPoliceStationsConstructor) {
+                firebasePoliceStationViewHolder.PoliceStationListName.setText(addPoliceStationsConstructor.getPoliceStationsName());
+                firebasePoliceStationViewHolder.PoliceStationListPhoneNumber.setText(addPoliceStationsConstructor.getPoliceStationsPhoneNumber());
+                firebasePoliceStationViewHolder.PoliceStationListEmail.setText(addPoliceStationsConstructor.getPoliceStationsEmail());
+                firebasePoliceStationViewHolder.PoliceStationListLocation.setText(addPoliceStationsConstructor.getPoliceStationsLocation());
             }
             @NonNull
             @Override
-            public FirebaseFireStationViewHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseFireStationViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.fire_station_recyclerview,parent,false));
+            public FirebasePoliceStationsViewHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new FirebasePoliceStationsViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.police_stations_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);

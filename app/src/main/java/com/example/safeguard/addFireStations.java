@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -30,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class addFireServices extends AppCompatActivity {
+public class addFireStations extends AppCompatActivity {
 
     EditText FireStationName,FireStationPhoneNumber,FireStationEmail,FireStationDescription;
     TextView FireStationLocation;
@@ -42,7 +41,7 @@ public class addFireServices extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_fire_services_layout);
+        setContentView(R.layout.activity_add_fire_services_layout);
 
         Toolbar toolbar = findViewById(R.id.add_fire_services_toolbar);
         setSupportActionBar(toolbar);
@@ -61,7 +60,7 @@ public class addFireServices extends AppCompatActivity {
         FireStationSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(addFireServices.this,AdminPanel.class);
+                Intent intent=new Intent(addFireStations.this,AdminPanel.class);
                 startActivity(intent);
 
                 String FireStationNameData=FireStationName.getText().toString().trim();
@@ -71,15 +70,15 @@ public class addFireServices extends AppCompatActivity {
                 String FireStationDescriptionData=FireStationDescription.getText().toString().trim();
 
                 if(TextUtils.isEmpty(FireStationNameData)||TextUtils.isEmpty(FireStationPhoneNumberData)||TextUtils.isEmpty(FireStationEmailData)||TextUtils.isEmpty(FireStationDescriptionData)){
-                    Toast.makeText(addFireServices.this,"Enter All Details",Toast.LENGTH_LONG).show();
+                    Toast.makeText(addFireStations.this,"Enter All Details",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(addFireServices.this,"Data Entry Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(addFireStations.this,"Data Entry Success",Toast.LENGTH_LONG).show();
                 }
 
                 String id=addFireStationReferences.push().getKey();
-                addFireStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(FireStationNameData,FireStationPhoneNumberData,FireStationEmailData,FireStationLocationData,FireStationDescriptionData));
-                Toast.makeText(addFireServices.this,"Fire Station added successfully",Toast.LENGTH_LONG).show();
+                addFireStationReferences.child("Info").child(id).setValue(new addFireStationsConstructor(FireStationNameData,FireStationPhoneNumberData,FireStationEmailData,FireStationLocationData,FireStationDescriptionData));
+                Toast.makeText(addFireStations.this,"Fire Station added successfully",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -94,7 +93,7 @@ public class addFireServices extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
-                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(addFireServices.this);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(addFireStations.this);
                 startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
             }
         });

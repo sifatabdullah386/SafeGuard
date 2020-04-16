@@ -82,7 +82,7 @@ public class addOrganizations extends AppCompatActivity {
         //For Real time Data Store
         String id=addOrganizationReferences.push().getKey();
         assert id != null;
-        addOrganizationReferences.child(id).setValue(new addOrganizationConstructor(id,OrganizationNameData,OrganizationLocationData,OrganizationPhoneNumberData,OrganizationEmailData,OrganizationTypeData,OrganizationDescriptionData));
+        addOrganizationReferences.child(id).setValue(new addOrganizationsConstructor(id,OrganizationNameData,OrganizationLocationData,OrganizationPhoneNumberData,OrganizationEmailData,OrganizationTypeData,OrganizationDescriptionData));
         Toast.makeText(addOrganizations.this,"Organization Add Successfully",Toast.LENGTH_LONG).show();
     }
     @Override

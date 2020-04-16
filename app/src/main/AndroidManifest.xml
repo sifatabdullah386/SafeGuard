@@ -50,6 +50,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".addAmbulances" />
+        <activity android:name=".addEmergencyContacts" />
         <activity android:name=".addFireServices" />
         <activity android:name=".addHospitals" />
         <activity android:name=".addPoliceStations" />
@@ -65,8 +66,8 @@
         <activity android:name=".FeedBack" />
         <activity android:name=".FireStations" />
         <activity android:name=".CriminalPhotos" />
-        <activity android:name=".Hospitals" />
-        <activity android:name=".Ambulances" />
+        <activity android:name=".HospitalsActivity" />
+        <activity android:name=".AmbulancesActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".AdminPanel" />
 

@@ -38,7 +38,7 @@ public class addPoliceStations extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_police_stations_layout);
+        setContentView(R.layout.activity_add_police_stations_layout);
 
         Toolbar toolbar = findViewById(R.id.add_police_stations_toolbar);
         setSupportActionBar(toolbar);
@@ -73,7 +73,7 @@ public class addPoliceStations extends AppCompatActivity {
                 }
                 String id=addPoliceStationReferences.push().getKey();
                 assert id != null;
-                addPoliceStationReferences.child("Info").child(id).setValue(new addFireStationConstructor(PoliceStationNameData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationLocationData,PoliceStationDescriptionData));
+                addPoliceStationReferences.child("Info").child(id).setValue(new addPoliceStationsConstructor(PoliceStationNameData,PoliceStationPhoneNumberData,PoliceStationEmailData,PoliceStationLocationData,PoliceStationDescriptionData));
                 Toast.makeText(addPoliceStations.this,"Police Stations Added Successfully",Toast.LENGTH_LONG).show();
             }
         });

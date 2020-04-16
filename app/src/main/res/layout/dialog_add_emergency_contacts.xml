@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    android:layout_height="700dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="10dp"
+    android:background="#EDEBEB"
+    android:weightSum="8"
+    android:elevation="18dp"
+    tools:context=".addEmergencyContacts">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorEmergencyContracts"
+            android:hint="@string/add_three_important_emergency_contacts_here" />
+        <EditText
+            android:id="@+id/add_emergency_contact_name1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            android:hint="@string/contact_name_1"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/add_emergency_contact_phone_number1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:hint="@string/phone_number_1"
+            android:autofillHints="yes" />
+        <EditText
+            android:id="@+id/add_emergency_contact_name2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="textPersonName"
+            android:hint="@string/contact_name_2"
+            android:importantForAutofill="no" />
+        <EditText
+            android:id="@+id/add_emergency_contact_phone_number2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textSize="14sp"
+            android:inputType="phone"
+            android:hint="@string/phone_number_2"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/add_emergency_contact_name3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:hint="@string/contact_name_3"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/add_emergency_contact_phone_number3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/phone_number_3"
+            android:inputType="phone"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:importantForAutofill="no" />
+        <Button
+            android:id="@+id/add_emergency_contact_submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="200dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorEmergencyContracts"
+            android:backgroundTintMode="src_over"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:elevation="8dp"
+            android:text="@string/add_contacts" />
+
+</LinearLayout>

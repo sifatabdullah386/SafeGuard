@@ -17,5 +17,8 @@
     <color name="colorEmergencyMedical">#FC382A</color>
     <color name="colorSexualHarassment">#e5326a</color>
     <color name="colorTrafficAccident">#FF5722</color>
+    <color name="colorAmbulances">#E91E63</color>
+    <color name="colorHospitals">#009688</color>
+    <color name="colorEmergencyContracts">#D61305</color>
 
 </resources>

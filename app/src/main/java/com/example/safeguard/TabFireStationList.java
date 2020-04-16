@@ -16,11 +16,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 public class TabFireStationList extends Fragment {
 
-    private FirebaseRecyclerOptions<addFireStationConstructor> options;
-    private FirebaseRecyclerAdapter<addFireStationConstructor,FirebaseFireStationViewHolder> adapter;
+    private FirebaseRecyclerOptions<addFireStationsConstructor> options;
+    private FirebaseRecyclerAdapter<addFireStationsConstructor,FirebaseFireStationViewHolder> adapter;
 
     @Override
     public void onStart() {
@@ -43,15 +42,15 @@ public class TabFireStationList extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         DatabaseReference databaseFireStationReference = FirebaseDatabase.getInstance().getReference().child("FireStation List").child("Info");
         databaseFireStationReference.keepSynced(true);
-        options=new FirebaseRecyclerOptions.Builder<addFireStationConstructor>().setQuery(databaseFireStationReference,addFireStationConstructor.class).build();
+        options=new FirebaseRecyclerOptions.Builder<addFireStationsConstructor>().setQuery(databaseFireStationReference,addFireStationsConstructor.class).build();
 
-        adapter=new FirebaseRecyclerAdapter<addFireStationConstructor, FirebaseFireStationViewHolder>(options) {
+        adapter=new FirebaseRecyclerAdapter<addFireStationsConstructor, FirebaseFireStationViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseFireStationViewHolder  firebaseFireStationViewHolder , int i, @NonNull addFireStationConstructor addFireStationConstructor) {
-                firebaseFireStationViewHolder.FireStationListName.setText(addFireStationConstructor.getFireStationName());
-                firebaseFireStationViewHolder.FireStationListPhoneNumber.setText(addFireStationConstructor.getFireStationPhoneNumber());
-                firebaseFireStationViewHolder.FireStationListEmail.setText(addFireStationConstructor.getFireStationEmail());
-                firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationConstructor.getFireStationLocation());
+            protected void onBindViewHolder(@NonNull FirebaseFireStationViewHolder  firebaseFireStationViewHolder , int i, @NonNull addFireStationsConstructor addFireStationsConstructor) {
+                firebaseFireStationViewHolder.FireStationListName.setText(addFireStationsConstructor.getFireStationName());
+                firebaseFireStationViewHolder.FireStationListPhoneNumber.setText(addFireStationsConstructor.getFireStationPhoneNumber());
+                firebaseFireStationViewHolder.FireStationListEmail.setText(addFireStationsConstructor.getFireStationEmail());
+                firebaseFireStationViewHolder.FireStationListLocation.setText(addFireStationsConstructor.getFireStationLocation());
             }
             @NonNull
             @Override

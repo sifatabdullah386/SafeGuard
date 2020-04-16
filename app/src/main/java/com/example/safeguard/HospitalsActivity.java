@@ -16,13 +16,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
-public class Hospitals extends AppCompatActivity {
+public class HospitalsActivity extends AppCompatActivity {
 
-    private FirebaseRecyclerOptions<addOrganizationConstructor> options;
-    private FirebaseRecyclerAdapter<addOrganizationConstructor,FirebaseOrganizationViewHolder> adapter;
+    private FirebaseRecyclerOptions<addHospitalsConstructor> options;
+    private FirebaseRecyclerAdapter<addHospitalsConstructor,FirebaseHospitalsViewHolder> adapter;
 
     @Override
     public void onStart() {
@@ -49,25 +48,24 @@ public class Hospitals extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.hospitals_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<addOrganizationConstructor> arrayList = new ArrayList<>();
         DatabaseReference databaseHospitalsReference = FirebaseDatabase.getInstance().getReference().child("Hospital List");
         databaseHospitalsReference.keepSynced(true);
-        options=new FirebaseRecyclerOptions.Builder<addOrganizationConstructor>().setQuery(databaseHospitalsReference,addOrganizationConstructor.class).build();
+        options=new FirebaseRecyclerOptions.Builder<addHospitalsConstructor>().setQuery(databaseHospitalsReference,addHospitalsConstructor.class).build();
 
-        adapter=new FirebaseRecyclerAdapter<addOrganizationConstructor, FirebaseOrganizationViewHolder>(options) {
+        adapter=new FirebaseRecyclerAdapter<addHospitalsConstructor, FirebaseHospitalsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseOrganizationViewHolder firebaseOrganizationViewHolder, int i, @NonNull addOrganizationConstructor addOrganizationConstructor) {
-                firebaseOrganizationViewHolder.OrganizationListName.setText(addOrganizationConstructor.getOrganizationName());
-                firebaseOrganizationViewHolder.OrganizationListPhoneNumber.setText(addOrganizationConstructor.getOrganizationPhoneNumber());
-                firebaseOrganizationViewHolder.OrganizationListEmail.setText(addOrganizationConstructor.getOrganizationEmail());
-                firebaseOrganizationViewHolder.OrganizationListType.setText(addOrganizationConstructor.getOrganizationType());
-                firebaseOrganizationViewHolder.OrganizationListLocation.setText(addOrganizationConstructor.getOrganizationLocation());
+            protected void onBindViewHolder(@NonNull FirebaseHospitalsViewHolder firebaseHospitalsViewHolder, int i, @NonNull addHospitalsConstructor addHospitalsConstructor) {
+                firebaseHospitalsViewHolder.HospitalListName.setText(addHospitalsConstructor.getHospitalName());
+                firebaseHospitalsViewHolder.HospitalListPhoneNumber.setText(addHospitalsConstructor.getHospitalPhoneNumber());
+                firebaseHospitalsViewHolder.HospitalListEmail.setText(addHospitalsConstructor.getHospitalEmail());
+                firebaseHospitalsViewHolder.HospitalListType.setText(addHospitalsConstructor.getHospitalType());
+                firebaseHospitalsViewHolder.HospitalListLocation.setText(addHospitalsConstructor.getHospitalLocation());
             }
 
             @NonNull
             @Override
-            public FirebaseOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseOrganizationViewHolder(LayoutInflater.from(Hospitals.this).inflate(R.layout.organization_list_recyclerview,parent,false));
+            public FirebaseHospitalsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new FirebaseHospitalsViewHolder(LayoutInflater.from(HospitalsActivity.this).inflate(R.layout.hospitals_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);

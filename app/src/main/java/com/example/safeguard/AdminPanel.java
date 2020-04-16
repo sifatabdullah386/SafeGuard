@@ -31,7 +31,7 @@ public class AdminPanel extends AppCompatActivity {
         });
         FireServices.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent2=new Intent(AdminPanel.this,addFireServices.class);
+                Intent intent2=new Intent(AdminPanel.this,addFireStations.class);
                 startActivity(intent2);
             }
         });

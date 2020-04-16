@@ -117,11 +117,11 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(MenuItem item){
             switch (item.getItemId()) {
                 case R.id.drawer_ambulances:
-                    Intent ambulancesIntent=new Intent(MainActivity.this,Ambulances.class);
+                    Intent ambulancesIntent=new Intent(MainActivity.this,AmbulancesActivity.class);
                     startActivity(ambulancesIntent);
                     break;
                 case R.id.drawer_hospitals:
-                    Intent hospitalsIntent=new Intent(MainActivity.this,Hospitals.class);
+                    Intent hospitalsIntent=new Intent(MainActivity.this,HospitalsActivity.class);
                     startActivity(hospitalsIntent);
                     break;
                 case R.id.drawer_emergency_contracts:

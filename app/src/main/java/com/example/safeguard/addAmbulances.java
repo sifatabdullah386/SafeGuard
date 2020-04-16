@@ -27,7 +27,7 @@ public class addAmbulances extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_ambulances_layout);
+        setContentView(R.layout.activity_add_ambulances_layout);
 
         addAmbulanceReferences = FirebaseDatabase.getInstance().getReference("Ambulance List");
 
@@ -68,7 +68,7 @@ public class addAmbulances extends AppCompatActivity {
         //For Real time Data Store
         String id=addAmbulanceReferences.push().getKey();
         assert id != null;
-        addAmbulanceReferences.child(id).setValue(new addOrganizationConstructor(id,AmbulanceNameData,AmbulanceLocationData,AmbulancePhoneNumberData,AmbulanceEmailData,AmbulanceTypeData,AmbulanceDescriptionData));
+        addAmbulanceReferences.child(id).setValue(new addAmbulancesConstructor(AmbulanceNameData,AmbulanceLocationData,AmbulancePhoneNumberData,AmbulanceEmailData,AmbulanceTypeData,AmbulanceDescriptionData));
         Toast.makeText(addAmbulances.this,"Ambulance Details added successfully",Toast.LENGTH_LONG).show();
     }
     @Override
