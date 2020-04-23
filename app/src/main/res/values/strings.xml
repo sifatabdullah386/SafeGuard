@@ -101,4 +101,5 @@
     <string name="phone_number_3">Phone Number 3</string>
     <string name="add_three_important_emergency_contacts_here">Add Three Important Emergency Contacts Here</string>
     <string name="add_contacts">Add contacts</string>
+    <string name="sign_in">Sign In</string>
 </resources>

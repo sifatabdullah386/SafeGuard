@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".addFireServices">
+    tools:context=".addFireStations">
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/add_fire_services_toolbar"
