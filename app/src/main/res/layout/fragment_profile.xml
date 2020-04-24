@@ -26,8 +26,8 @@
             android:layout_height="match_parent"
             android:src="@drawable/profile1"
             android:padding="20dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#F5EFEE"/>
+            app:civ_border_width="4dp"
+            app:civ_border_color="#151515"/>
 
       </LinearLayout>
 

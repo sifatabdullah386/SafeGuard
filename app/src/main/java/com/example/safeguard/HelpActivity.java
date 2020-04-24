@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+public class HelpActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -151,7 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent=new Intent(MapsActivity.this,MainActivity.class);
+                Intent intent=new Intent(HelpActivity.this,MainActivity.class);
                 startActivity(intent);
 
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();

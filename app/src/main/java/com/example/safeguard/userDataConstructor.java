@@ -1,63 +1,83 @@
 package com.example.safeguard;
 
-import com.google.android.gms.maps.model.LatLng;
+import android.location.Location;
 
 public class userDataConstructor {
-    private String userName;
-    private String phoneNumber;
-    private String email;
-    private String location;
-    private LatLng latLang;
+    private String UserName;
+    private String PhoneNumber;
+    private String Email;
+    private Location AddressLocation;
+    private String UserLocation;
+    private double Latitude;
+    private double Longitude;
 
     public userDataConstructor() {
 
     }
 
-    public userDataConstructor(String userName, String phoneNumber, String email, String location, LatLng latLang) {
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.location = location;
-        this.latLang = latLang;
+    public userDataConstructor(String userName, String phoneNumber, String email, Location addressLocation, String userLocation, double latitude, double longitude) {
+        UserName = userName;
+        PhoneNumber = phoneNumber;
+        Email = email;
+        AddressLocation = addressLocation;
+        UserLocation = userLocation;
+        Latitude = latitude;
+        Longitude = longitude;
     }
 
     public String getUserName() {
-        return userName;
+        return UserName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        UserName = userName;
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return PhoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        PhoneNumber = phoneNumber;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        Email = email;
     }
 
-    public String getLocation() {
-        return location;
+    public Location getAddressLocation() {
+        return AddressLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddressLocation(Location addressLocation) {
+        AddressLocation = addressLocation;
     }
 
-    public LatLng getLatLang() {
-        return latLang;
+    public String getUserLocation() {
+        return UserLocation;
     }
 
-    public void setLatLang(LatLng latLang) {
-        this.latLang = latLang;
+    public void setUserLocation(String userLocation) {
+        UserLocation = userLocation;
+    }
+
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
     }
 }

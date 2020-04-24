@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="40dp"
+        android:padding="30dp"
         android:layout_centerVertical="true">
 
         <TextView
@@ -31,62 +31,113 @@
             android:text="@string/app_name"
             android:textSize="40sp"
             android:fontFamily="cursive"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="50dp"
             android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_account_box_black_24dp"/>
+            <EditText
+                android:id="@+id/userNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:textSize="18sp"
+                android:textColorHint="#fff"
+                android:backgroundTint="#FF5722"
+                android:textColor="#fff"
+                android:inputType="textPersonName"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_phone_black_24dp"/>
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Phone Number"
+                android:textSize="15sp"
+                android:textColorHint="#fff"
+                android:backgroundTint="#FF5722"
+                android:textColor="#fff"
+                android:inputType="textPhonetic"
+                tools:ignore="TextFields" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/userNameEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="User Name"
-            android:textSize="15sp"
-            android:textColorHint="#fff"
-            android:backgroundTint="#FF5722"
-            android:textColor="#fff"
-            android:inputType="textPersonName"/>
-        <EditText
-            android:id="@+id/phoneNumberEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="User Phone Number"
-            android:textSize="15sp"
-            android:textColorHint="#fff"
-            android:backgroundTint="#FF5722"
-            android:textColor="#fff"
-            android:inputType="textPhonetic"
-            tools:ignore="TextFields" />
-        <TextView
-            android:id="@+id/locationTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:backgroundTint="#FF5722"
-            android:paddingStart="5dp"
-            android:text="User Current Address"
-            android:textColor="#fff"
-            android:textSize="15sp" />
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="User Email"
-            android:textSize="15sp"
-            android:textColorHint="#fff"
-            android:backgroundTint="#FF5722"
-            android:textColor="#fff"
-            android:inputType="textEmailAddress"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_location_black_24dp"/>
+            <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:backgroundTint="#FF5722"
+                android:paddingStart="5dp"
+                android:text="User Current Address"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/passwordEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="User Password"
-            android:textColorHint="#fff"
-            android:backgroundTint="#FF5722"
-            android:textColor="#fff"
-            android:textSize="15sp"
-            android:inputType="textPassword"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_mail_white_24dp"/>
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Email"
+                android:textSize="15sp"
+                android:textColorHint="#fff"
+                android:backgroundTint="#FF5722"
+                android:textColor="#fff"
+                android:inputType="textEmailAddress"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_lock_outline_black_24dp"/>
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Password"
+                android:textColorHint="#fff"
+                android:backgroundTint="#FF5722"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:inputType="textPassword"/>
+        </LinearLayout>
+
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="200dp"

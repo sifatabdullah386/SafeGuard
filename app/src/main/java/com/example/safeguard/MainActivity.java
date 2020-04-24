@@ -125,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(hospitalsIntent);
                     break;
                 case R.id.drawer_emergency_contracts:
-                    Intent ecIntent=new Intent(MainActivity.this,EmergencyContacts.class);
-                    startActivity(ecIntent);
+                    Toast.makeText(getApplicationContext(),"Under development",Toast.LENGTH_SHORT).show();
+                    /*Intent ecIntent=new Intent(MainActivity.this,EmergencyContacts.class);
+                    startActivity(ecIntent);*/
                     break;
                 case R.id.drawer_admin:
                     Intent intent=new Intent(MainActivity.this,AdminActivity.class);

@@ -30,7 +30,7 @@ public class AlertTag extends Fragment {
         ButtonHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),MapsActivity.class);
+                Intent intent=new Intent(getActivity(),HelpActivity.class);
                 startActivity(intent);
             }
         });

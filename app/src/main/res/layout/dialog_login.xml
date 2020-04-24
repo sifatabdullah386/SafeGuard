@@ -6,27 +6,45 @@
     android:orientation="vertical"
     android:background="#282929"
     android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/loginEmailEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Email"
-        android:textSize="15sp"
-        android:textColorHint="#fff"
-        android:backgroundTint="#FF5722"
-        android:textColor="#fff"
-        android:inputType="textEmailAddress"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_mail_white_24dp"/>
+        <EditText
+            android:id="@+id/loginEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Email"
+            android:textSize="15sp"
+            android:textColorHint="#fff"
+            android:backgroundTint="#FF5722"
+            android:textColor="#fff"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/loginPasswordEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User Password"
-        android:textColorHint="#fff"
-        android:backgroundTint="#FF5722"
-        android:textColor="#fff"
-        android:textSize="15sp"
-        android:inputType="textPassword"/>
-
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_lock_outline_black_24dp"/>
+        <EditText
+            android:id="@+id/loginPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Password"
+            android:textColorHint="#fff"
+            android:backgroundTint="#FF5722"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
+    </LinearLayout>
 </LinearLayout>
