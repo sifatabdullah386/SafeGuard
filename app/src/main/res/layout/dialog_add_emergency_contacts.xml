@@ -10,7 +10,7 @@
     android:background="#EDEBEB"
     android:weightSum="8"
     android:elevation="18dp"
-    tools:context=".addEmergencyContacts">
+    tools:context=".admin.addEmergencyContacts">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

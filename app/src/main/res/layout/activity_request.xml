@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeScreen.Request">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/request_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPanicMiddle"
+        android:elevation="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/personal_requests"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+    <SearchView
+        android:id="@+id/request_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DAD7D7"
+        android:queryHint="Search Organizations Here">
+    </SearchView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/request_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

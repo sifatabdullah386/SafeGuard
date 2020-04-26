@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".addAmbulances">
+    tools:context=".admin.addAmbulances">
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/add_ambulances_toolbar"

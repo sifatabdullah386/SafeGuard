@@ -37,6 +37,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
+import com.example.safeguard.constractor.userDataConstructor;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DialogLogin.DialogLoginListener {
 
     EditText UserName,UserPhoneNumber,UserEmail,UserPassword,LoginUserName,LoginPassword;
@@ -174,7 +176,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 final String phoneNumber = UserPhoneNumber.getText().toString().trim();
                 final String email = UserEmail.getText().toString().trim();
                 final String UserLocation=userLocation;
-                final Location AddressLocation=location;
                 final double LocationLatitude=latitude;
                 final double LocationLongitude=longitude;
                 final String password = UserPassword.getText().toString().trim();
@@ -202,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                                 //For Real time Data Store
                                 String user_id= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,email,AddressLocation,UserLocation,LocationLatitude,LocationLongitude);
+                                userDataConstructor send=new userDataConstructor(userName,phoneNumber,email,UserLocation,LocationLatitude,LocationLongitude);
                                 UserDatabase.child("Info").child(user_id).setValue(send);
                                 Toast.makeText(RegisterActivity.this,"Information Added Successfully",Toast.LENGTH_LONG).show();
                                 finish();

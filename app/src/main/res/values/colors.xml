@@ -20,5 +20,7 @@
     <color name="colorAmbulances">#E91E63</color>
     <color name="colorHospitals">#009688</color>
     <color name="colorEmergencyContracts">#D61305</color>
+    <color name="colorResponse">#4CAF50</color>
+    <color name="colorRequest">#FF5722</color>
 
 </resources>

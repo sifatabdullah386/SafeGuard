@@ -6,22 +6,36 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FeedBack">
+    tools:context=".HomeScreen.FeedBack">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/feed_back_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorFeedback"
         android:elevation="8dp">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:gravity="center"
+            android:paddingStart="30dp"
+            android:paddingEnd="40dp"
             android:text="@string/feed_back"
             android:textColor="@color/white"
+            android:layout_gravity="center"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/go_response_activity"
+            android:layout_width="70dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorFeedback"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_assignment_turned_in_white_24dp" />
     </androidx.appcompat.widget.Toolbar>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

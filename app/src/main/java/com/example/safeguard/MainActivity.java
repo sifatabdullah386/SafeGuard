@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -18,6 +16,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.safeguard.admin.AdminActivity;
+import com.example.safeguard.bottommenu.AlertTag;
+import com.example.safeguard.bottommenu.Capture;
+import com.example.safeguard.bottommenu.CurrentLocation;
+import com.example.safeguard.bottommenu.Organizations;
+import com.example.safeguard.bottommenu.Profile;
+import com.example.safeguard.navigationmenu.AmbulancesActivity;
+import com.example.safeguard.navigationmenu.HospitalsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -117,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(MenuItem item){
             switch (item.getItemId()) {
                 case R.id.drawer_ambulances:
-                    Intent ambulancesIntent=new Intent(MainActivity.this,AmbulancesActivity.class);
+                    Intent ambulancesIntent=new Intent(MainActivity.this, AmbulancesActivity.class);
                     startActivity(ambulancesIntent);
                     break;
                 case R.id.drawer_hospitals:
-                    Intent hospitalsIntent=new Intent(MainActivity.this,HospitalsActivity.class);
+                    Intent hospitalsIntent=new Intent(MainActivity.this, HospitalsActivity.class);
                     startActivity(hospitalsIntent);
                     break;
                 case R.id.drawer_emergency_contracts:
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(ecIntent);*/
                     break;
                 case R.id.drawer_admin:
-                    Intent intent=new Intent(MainActivity.this,AdminActivity.class);
+                    Intent intent=new Intent(MainActivity.this, AdminActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.drawer_coordinator:

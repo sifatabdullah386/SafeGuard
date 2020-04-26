@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FireStations">
+    tools:context=".HomeScreen.FireStations">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/police_station_toolbar"
         android:layout_width="match_parent"

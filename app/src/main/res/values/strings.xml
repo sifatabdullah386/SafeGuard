@@ -102,4 +102,12 @@
     <string name="add_three_important_emergency_contacts_here">Add Three Important Emergency Contacts Here</string>
     <string name="add_contacts">Add contacts</string>
     <string name="sign_in">Sign In</string>
+    <string name="delete_request">Delete Request</string>
+    <string name="_0">0</string>
+    <string name="help_request">Help Request</string>
+    <string name="personal_requests">Personal Requests</string>
+    <string name="public_request">Public Request</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="your_requests">Your Requests</string>
+    <string name="your_response">Your response</string>
 </resources>

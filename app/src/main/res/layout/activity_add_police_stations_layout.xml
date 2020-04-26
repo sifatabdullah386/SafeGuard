@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".addPoliceStations">
+    tools:context=".admin.addPoliceStations">
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/add_police_stations_toolbar"

@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="#0C0C0C"
     android:layout_height="match_parent"
-    tools:context=".AdminPanel">
+    tools:context=".admin.AdminPanel">
     <EditText
         android:id="@+id/adminUsername"
         android:layout_width="300dp"
