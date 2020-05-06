@@ -48,12 +48,11 @@
         android:hint="Write some message or you can left as blank" />
     <Button
         android:id="@+id/help_request"
-        style="@android:style/Widget.Material.Light.Button.Borderless.Small"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="5dp"
-        android:background="@color/colorPanicMiddle"
+        android:background="@drawable/btn_shape_gradient"
         android:padding="5dp"
         android:textStyle="bold"
         android:textSize="18sp"

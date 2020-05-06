@@ -1,10 +1,8 @@
 package com.example.safeguard.bottommenu;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 
 import android.view.MenuItem;
@@ -19,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.safeguard.R;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,10 +29,12 @@ import com.example.safeguard.constractor.userDataConstructor;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Profile extends Fragment {
 
+    private static final int CAMERA_REQUEST_CODE =201 ;
     private TextView ProfileName;
     private TextView profilePhoneNumber;
     private TextView profileEmail;
@@ -45,7 +44,6 @@ public class Profile extends Fragment {
     private ImageView CaptureImage,ProfileSettings;
     private FirebaseAuth fAuth;
     private DatabaseReference userReference;
-    private StorageReference storageReference;
     private StorageReference userStorageReference;
     private String uid;
     @Nullable
@@ -63,12 +61,9 @@ public class Profile extends Fragment {
         ProfileSettings = view.findViewById(R.id.go_profile_settings);
 
         fAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
-
         uid = fAuth.getCurrentUser().getUid();
-
+        userStorageReference=FirebaseStorage.getInstance().getReference().child("profileImages/");
         userReference = FirebaseDatabase.getInstance().getReference("Users").child("Info").child(uid);
-        userStorageReference = FirebaseStorage.getInstance().getReferenceFromUrl("Users").child(uid).child("profile.jpg");
 
         userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -93,53 +88,46 @@ public class Profile extends Fragment {
         CaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // open gallery
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent,1000);
-
+                Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, CAMERA_REQUEST_CODE);
             }
         });
+
         return view;
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000){
-            if(resultCode == Activity.RESULT_OK){
-                Uri imageUri = data.getData();
+        if(requestCode==CAMERA_REQUEST_CODE){
+            if (requestCode == RESULT_OK) {
+                Uri ImageData=data.getData();
+                final StorageReference ImageName=userStorageReference.child("image"+ImageData.getLastPathSegment());
 
-                //profileImage.setImageURI(imageUri);
-                uploadImageToFirebase(imageUri);
-            }
-        }
-
-    }
-
-    private void uploadImageToFirebase(Uri imageUri) {
-        // Upload image to firebase storage
-        final StorageReference fileRef = storageReference.child("Users/"+uid+"/profile.jpg");
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(CaptureImage);
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(getActivity(),"Upload Successfully",Toast.LENGTH_SHORT).show();
+ /*                       ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                DatabaseReference profileImages=FirebaseDatabase.getInstance().getReference("userProfile").child(uid);
+                                HashMap<String, String> hashMap=new HashMap<>();
+                                hashMap.put("ImageUrl", String.valueOf(hashMap));
+                                profileImages.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getActivity(),"Upload Successfully",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });*/
                     }
                 });
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Failed.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
     }
-    @Override
-    public  void onStart(){
-        super.onStart();
 
-    }
     //for settings menu items multiple selection
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

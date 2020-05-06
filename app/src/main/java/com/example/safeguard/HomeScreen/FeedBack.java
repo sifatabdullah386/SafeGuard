@@ -56,7 +56,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
     LocationRequest mLocationRequest;
     private GoogleMap mMap;
     private DatabaseReference databaseReference;
-    private ImageView ResponseRecyclerView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +69,8 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        ResponseRecyclerView=findViewById(R.id.go_response_activity);
-        ResponseRecyclerView.setOnClickListener(new View.OnClickListener() {
+        ImageView responseRecyclerView = findViewById(R.id.go_response_activity);
+        responseRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ResponseIntent=new Intent(FeedBack.this,Response.class);
@@ -217,6 +216,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         if (null != locations && providerList.size() > 0) {
             double longitude = locations.getLongitude();
             double latitude = locations.getLatitude();
+
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
             try {
                 List<Address> listAddresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -233,7 +233,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-       mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(8));
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }

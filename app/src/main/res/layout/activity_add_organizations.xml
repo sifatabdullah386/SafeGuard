@@ -98,16 +98,17 @@
             <Button
                 android:id="@+id/add_organization_submit"
                 android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/organization_bar"
-                android:elevation="120dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#6200EA"
+                android:background="@drawable/btn_pressed"
+                android:elevation="4dp"
                 android:text="@string/register"
                 android:textAlignment="center"
                 android:textColor="#fff"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

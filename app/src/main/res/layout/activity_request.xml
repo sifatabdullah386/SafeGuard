@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#DAD7D7"
-        android:queryHint="Search Organizations Here">
+        android:queryHint="Search Personal Request Here">
     </SearchView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/request_recyclerView"

@@ -1,10 +1,13 @@
 package com.example.safeguard.bottommenu;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.safeguard.FirebaseViewHolder.FirebaseOrganizationViewHolder;
 import com.example.safeguard.R;
 import com.example.safeguard.admin.addOrganizations;
+import com.example.safeguard.constractor.userDataConstructor;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.example.safeguard.constractor.addOrganizationsConstructor;
+import com.google.firebase.database.ValueEventListener;
 
 public class Organizations extends Fragment {
 
@@ -57,7 +64,7 @@ public class Organizations extends Fragment {
         final RecyclerView recyclerView = view.findViewById(R.id.organization_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        DatabaseReference databaseOrganizationReference = FirebaseDatabase.getInstance().getReference().child("Organization List");
+        final DatabaseReference databaseOrganizationReference = FirebaseDatabase.getInstance().getReference().child("Organization List");
         databaseOrganizationReference.keepSynced(true);
         options=new FirebaseRecyclerOptions.Builder<addOrganizationsConstructor>().setQuery(databaseOrganizationReference,addOrganizationsConstructor.class).build();
 
@@ -73,14 +80,10 @@ public class Organizations extends Fragment {
                 firebaseOrganizationViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(Intent.ACTION_CALL);
-                        intent.putExtra(Intent.EXTRA_PHONE_NUMBER,addOrganizationsConstructor.getOrganizationPhoneNumber());
-                        intent.setType("text/number");
-                        startActivity(intent);
-
-                        //intent.putExtra("Organization Phone Number",addOrganizationConstructor.getOrganizationPhoneNumber());
-                        //Onclick item new class
-                        //String CharityListName=getInstance().getStringExtra(name:"CharityListName");
+                        String visitorPhoneNumber="949082321";
+                        Intent callIntent=new Intent(Intent.ACTION_DIAL);
+                        callIntent.putExtra("data",visitorPhoneNumber);
+                        startActivity(callIntent);
                     }
                 });
             }

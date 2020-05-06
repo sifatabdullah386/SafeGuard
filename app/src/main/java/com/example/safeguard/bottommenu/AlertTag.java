@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.example.safeguard.R;
 import com.example.safeguard.HomeScreen.TrafficAccidents;
 
 public class AlertTag extends Fragment {
+
 
     @Nullable
     @Override

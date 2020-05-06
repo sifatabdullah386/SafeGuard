@@ -37,6 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/btn_shape_round"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="30dp"
@@ -47,9 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="User Name"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColorHint="#fff"
-                android:backgroundTint="#FF5722"
                 android:textColor="#fff"
                 android:inputType="textPersonName"/>
         </LinearLayout>
@@ -57,11 +61,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/btn_shape_round"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_phone_black_24dp"/>
+                android:src="@drawable/ic_phone_white_24dp"/>
             <EditText
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="match_parent"
@@ -69,7 +78,6 @@
                 android:hint="User Phone Number"
                 android:textSize="15sp"
                 android:textColorHint="#fff"
-                android:backgroundTint="#FF5722"
                 android:textColor="#fff"
                 android:inputType="textPhonetic"
                 tools:ignore="TextFields" />
@@ -79,6 +87,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/btn_shape_round"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="30dp"
@@ -99,6 +112,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/btn_shape_round"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="30dp"
@@ -111,7 +129,6 @@
                 android:hint="User Email"
                 android:textSize="15sp"
                 android:textColorHint="#fff"
-                android:backgroundTint="#FF5722"
                 android:textColor="#fff"
                 android:inputType="textEmailAddress"/>
         </LinearLayout>
@@ -120,6 +137,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:background="@drawable/btn_shape_round"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center">
             <ImageView
                 android:layout_width="30dp"
@@ -131,7 +153,6 @@
                 android:layout_height="wrap_content"
                 android:hint="User Password"
                 android:textColorHint="#fff"
-                android:backgroundTint="#FF5722"
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:inputType="textPassword"/>
@@ -143,7 +164,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:background="#F44336"
+            android:background="@drawable/btn_shape_gradient"
             android:textStyle="bold"
             android:textColor="#fff"
             android:text="sign up"

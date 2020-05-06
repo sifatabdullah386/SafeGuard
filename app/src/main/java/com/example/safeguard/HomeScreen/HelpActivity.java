@@ -1,4 +1,5 @@
 package com.example.safeguard.HomeScreen;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.safeguard.MainActivity;
 import com.example.safeguard.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -67,21 +67,11 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
     private EditText MessageRequest;
     DatabaseReference databaseReference;
     private String Address_location;
-    private ImageView SendRequest;
-    private ImageView ReceiveResponse;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_request);
 
-        SendRequest=findViewById(R.id.go_request_activity);
-        SendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent request=new Intent(HelpActivity.this,Request.class);
-                startActivity(request);
-            }
-        });
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -92,6 +82,15 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
         MessageRequest=findViewById(R.id.message_request);
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
+        ImageView sendRequest = findViewById(R.id.go_request_activity);
+        sendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent request=new Intent(HelpActivity.this,Request.class);
+                startActivity(request);
+            }
+        });
+
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -99,6 +98,13 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+        mMap.getUiSettings().setRotateGesturesEnabled(true);
+        mMap.getUiSettings().setScrollGesturesEnabled(true);
+        mMap.getUiSettings().setTiltGesturesEnabled(true);
+        mMap.getUiSettings().setAllGesturesEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setIndoorLevelPickerEnabled(true);
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -111,11 +117,7 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
         mGoogleApiClient.connect();
     }
     public void onConnected(Bundle bundle) {
@@ -134,6 +136,7 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
+
         //Showing Current Location Marker on Map
         final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
@@ -160,7 +163,7 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
                     final String country = listAddresses.get(0).getCountryName();
                     final String subLocality = listAddresses.get(0).getSubLocality();
                     markerOptions.title(subLocality + "," + state + "," + country + latLng);
-                    Address_location=(subLocality + "," + state + "," + country);
+                    Address_location= subLocality + "," + state + "," + country;
                 }
             } catch (IOException e) {
                 e.printStackTrace();

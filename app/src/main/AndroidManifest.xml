@@ -28,7 +28,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".HomeScreen.Response"></activity>
+        <activity android:name=".HomeScreen.TotalVolunteers"></activity>
+        <activity android:name=".HomeScreen.TotalUsers" />
+        <activity android:name=".HomeScreen.Response" />
         <activity android:name=".HomeScreen.Request" />
         <activity android:name=".navigationmenu.EmergencyContacts" />
 
