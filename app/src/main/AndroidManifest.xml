@@ -28,11 +28,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".HomeScreen.TotalVolunteers"></activity>
+        <activity android:name=".HomeScreen.TotalVolunteers" />
         <activity android:name=".HomeScreen.TotalUsers" />
         <activity android:name=".HomeScreen.Response" />
         <activity android:name=".HomeScreen.Request" />
-        <activity android:name=".navigationmenu.EmergencyContacts" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -68,8 +67,8 @@
         <activity android:name=".HomeScreen.FeedBack" />
         <activity android:name=".HomeScreen.FireStations" />
         <activity android:name=".admin.CriminalPhotos" />
-        <activity android:name=".navigationmenu.HospitalsActivity" />
-        <activity android:name=".navigationmenu.AmbulancesActivity" />
+        <activity android:name=".DrawerMenu.HospitalsActivity" />
+        <activity android:name=".DrawerMenu.AmbulancesActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".admin.AdminPanel" />
 

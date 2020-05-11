@@ -12,7 +12,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -33,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +43,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -68,8 +68,8 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        ImageView responseRecyclerView = findViewById(R.id.go_response_activity);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Request");
+        FloatingActionButton responseRecyclerView = findViewById(R.id.go_response_activity);
         responseRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

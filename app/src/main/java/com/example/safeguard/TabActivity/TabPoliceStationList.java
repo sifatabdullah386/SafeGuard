@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import com.example.safeguard.constractor.addPoliceStationsConstructor;
+import com.example.safeguard.Constractor.addPoliceStationsConstructor;
 
 public class TabPoliceStationList extends Fragment {
 
@@ -62,7 +62,7 @@ public class TabPoliceStationList extends Fragment {
             @NonNull
             @Override
             public FirebasePoliceStationsViewHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebasePoliceStationsViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.police_stations_recyclerview,parent,false));
+                return new FirebasePoliceStationsViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.list_cardview_police_stations_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);

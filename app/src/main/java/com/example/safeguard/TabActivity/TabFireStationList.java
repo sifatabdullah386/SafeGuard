@@ -18,7 +18,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import com.example.safeguard.constractor.addFireStationsConstructor;
+import com.example.safeguard.Constractor.addFireStationsConstructor;
 
 public class TabFireStationList extends Fragment {
 
@@ -59,7 +59,7 @@ public class TabFireStationList extends Fragment {
             @NonNull
             @Override
             public FirebaseFireStationViewHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new FirebaseFireStationViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.fire_station_recyclerview,parent,false));
+                return new FirebaseFireStationViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.list_cardview_fire_station_recyclerview,parent,false));
             }
         };
         recyclerView.setAdapter(adapter);

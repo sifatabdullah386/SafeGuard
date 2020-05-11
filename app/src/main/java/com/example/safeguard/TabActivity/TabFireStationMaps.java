@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 public class TabFireStationMaps extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,

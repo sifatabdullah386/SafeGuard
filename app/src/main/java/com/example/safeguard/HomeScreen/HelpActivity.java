@@ -16,7 +16,6 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -37,6 +36,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,7 +51,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 public class HelpActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -80,9 +80,9 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         mRequest=findViewById(R.id.help_request);
         MessageRequest=findViewById(R.id.message_request);
-        databaseReference=FirebaseDatabase.getInstance().getReference();
+        databaseReference=FirebaseDatabase.getInstance().getReference().child("Request");
 
-        ImageView sendRequest = findViewById(R.id.go_request_activity);
+        FloatingActionButton sendRequest = findViewById(R.id.go_request_activity);
         sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

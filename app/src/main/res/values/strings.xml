@@ -39,10 +39,10 @@
     <string name="my_email">smilesifat@gmail.com</string>
     <string name="panic_button">Help!!</string>
     <string name="feed_back">Feed Back</string>
-    <string name="fire_station">Fire \n Station</string>
-    <string name="police_station">Police \n Station</string>
+    <string name="fire_station">Fire Station</string>
+    <string name="police_station">Police Station</string>
     <string name="emergency_medical">Emergency \n Medical</string>
-    <string name="sexual_harassment">Sexual \n Harassment</string>
+    <string name="sexual_harassment">Sexual \n  Harassment</string>
     <string name="traffic_accident">Traffic \n Accident</string>
     <string name="organization_name">Define Organization Name</string>
     <string name="organization_location">Organization Location</string>
@@ -112,11 +112,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="help_request">Help Request</string>
 
-    <string name="total_user">Total \n User</string>
-    <string name="total_user_number">...</string>
-    <string name="total_organization">Total \n Organization</string>
-    <string name="total_user_organization">...</string>
-    <string name="total_volunteer">Total \n Volunteer</string>
-    <string name="total_user_volunteer">...</string>
+    <string name="total_user">Total User</string>
+    <string name="total_user_number">…</string>
+    <string name="total_organization">Total Organization</string>
+    <string name="total_user_organization">…</string>
+    <string name="total_volunteer">Total Volunteer</string>
+    <string name="total_user_volunteer">…</string>
 
 </resources>

@@ -52,7 +52,7 @@
         android:background="@drawable/app_bar_baackground"
         app:itemIconTint="@drawable/item_selector"
         app:itemTextColor="@drawable/item_selector"
-        app:menu="@menu/nav_items"
+        app:menu="@menu/bottom_menu_items"
         tools:layout_editor_absoluteX="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/fragment_container"
@@ -67,7 +67,7 @@
       android:layout_height="match_parent"
       android:layout_gravity="start"
       android:id="@+id/nav_view"
-      app:headerLayout="@layout/nav_header"
+      app:headerLayout="@layout/drawer_navigation_header"
       app:menu="@menu/drawer_menu_items"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

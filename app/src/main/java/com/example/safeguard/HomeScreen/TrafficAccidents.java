@@ -51,7 +51,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 public class TrafficAccidents extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -80,7 +80,7 @@ public class TrafficAccidents extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
         mRequest=findViewById(R.id.traffic_accidents_help_request);
         MessageRequest=findViewById(R.id.traffic_accidents_message_request);
-        TrafficAccidentsDatabaseReference= FirebaseDatabase.getInstance().getReference();
+        TrafficAccidentsDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Request");
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

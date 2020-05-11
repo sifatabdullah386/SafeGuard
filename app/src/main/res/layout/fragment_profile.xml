@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FCF9F9"
-    tools:context=".bottommenu.Profile">
+    tools:context=".BottomMenu.Profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,45 +14,35 @@
         android:orientation="vertical">
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
-          android:background="#282929"
-          android:gravity="end">
-
-        <ImageButton
-            android:id="@+id/go_profile_settings"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="#282929 "
-            android:layout_gravity="end"
-            android:src="@drawable/ic_settings_black_24dp" />
-      </LinearLayout>
-
-      <LinearLayout
-          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
           android:elevation="10dp"
           android:background="#282929"
           android:orientation="vertical">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/profile1"
-            android:padding="10dp"
-            app:civ_border_width="4dp"
-            app:civ_border_color="#FFFFFF"/>
+          <ImageButton
+              android:id="@+id/go_profile_settings"
+              android:layout_width="70dp"
+              android:layout_height="?attr/actionBarSize"
+              android:background="#282929 "
+              android:layout_gravity="end"
+              android:src="@drawable/ic_settings_black_24dp" />
+          <de.hdodenhof.circleimageview.CircleImageView
+              android:id="@+id/profile_image"
+              android:layout_width="100dp"
+              android:layout_height="100dp"
+              android:src="@drawable/ic_person_black_24dp"
+              app:civ_border_width="4dp"
+              app:civ_border_color="#FFFFFF"/>
 
           <TextView
               android:id="@+id/profile_name"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:paddingBottom="20dp"
+              android:paddingBottom="10dp"
               android:text="@string/name"
               android:textAlignment="center"
               android:textColor="#FFFDFD"
-              android:textSize="20sp"
+              android:textSize="14sp"
               android:textStyle="bold"/>
 
       </LinearLayout>
@@ -81,7 +71,7 @@
               android:layout_marginStart="15dp"
               android:text="@string/phone_number"
               android:textColor="#3C3D3D"
-              android:textSize="14sp"
+              android:textSize="13sp"
               android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
@@ -101,7 +91,7 @@
               android:layout_marginStart="15dp"
               android:text="@string/email"
               android:textColor="#3C3D3D"
-              android:textSize="14sp"
+              android:textSize="13sp"
               android:textStyle="italic"/>
         </LinearLayout>
         <LinearLayout
@@ -122,7 +112,7 @@
               android:layout_marginStart="15dp"
               android:text="@string/location"
               android:textColor="#3C3D3D"
-              android:textSize="14sp"
+              android:textSize="13sp"
               android:textStyle="italic"/>
         </LinearLayout>
         <LinearLayout
@@ -143,7 +133,7 @@
               android:text="User Statistics"
               android:textAlignment="center"
               android:textColor="#FFFDFD"
-              android:textSize="18sp"
+              android:textSize="14sp"
               android:textStyle="bold"/>
         </LinearLayout>
         <LinearLayout
@@ -163,7 +153,7 @@
               android:layout_marginStart="5dp"
               android:text="Request :"
               android:textColor="#3C3D3D"
-              android:textSize="16sp"
+              android:textSize="14sp"
               android:textStyle="bold"/>
           <TextView
               android:id="@+id/profile_send_request"
@@ -187,7 +177,7 @@
               android:layout_marginStart="5dp"
               android:text="Response :"
               android:textColor="#3C3D3D"
-              android:textSize="16sp"
+              android:textSize="14sp"
               android:textStyle="bold"/>
           <TextView
               android:id="@+id/profile_response"

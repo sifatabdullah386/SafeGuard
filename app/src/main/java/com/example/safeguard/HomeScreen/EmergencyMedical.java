@@ -51,7 +51,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 
 public class EmergencyMedical extends FragmentActivity implements OnMapReadyCallback,
@@ -81,7 +81,7 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
         mEMRequest=findViewById(R.id.emergency_medical_help_request);
         EMMessageRequest=findViewById(R.id.emergency_medical_message_request);
-        EmergencyMedicalDatabaseReference= FirebaseDatabase.getInstance().getReference();
+        EmergencyMedicalDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Request");
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

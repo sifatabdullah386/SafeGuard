@@ -37,7 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import com.example.safeguard.constractor.userDataConstructor;
+import com.example.safeguard.Constractor.userDataConstructor;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DialogLogin.DialogLoginListener {
 

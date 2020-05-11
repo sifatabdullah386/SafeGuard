@@ -6,16 +6,8 @@
       android:title="@string/drawer_notification_settings"
       app:showAsAction="never"/>
   <item
-      android:id="@+id/drawer_share"
-      android:title="@string/drawer_share"
-      app:showAsAction="never"/>
-  <item
       android:id="@+id/facebook"
       android:title="@string/facebook"
-      app:showAsAction="never"/>
-  <item
-      android:id="@+id/drawer_rate_us"
-      android:title="@string/drawer_rate_us"
       app:showAsAction="never"/>
   <item
       android:id="@+id/drawer_exit"

@@ -52,7 +52,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
-import com.example.safeguard.constractor.FreeConstructor;
+import com.example.safeguard.Constractor.FreeConstructor;
 
 public class SexualHarassment extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -82,7 +82,7 @@ public class SexualHarassment extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
         mRequest=findViewById(R.id.sexual_harassment_help_request);
         MessageRequest=findViewById(R.id.sexual_harassment_message_request);
-        sexualHarassmentDatabaseReference= FirebaseDatabase.getInstance().getReference();
+        sexualHarassmentDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Request");
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

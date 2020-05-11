@@ -18,13 +18,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.safeguard.admin.AdminActivity;
-import com.example.safeguard.bottommenu.AlertTag;
-import com.example.safeguard.bottommenu.Capture;
-import com.example.safeguard.bottommenu.CurrentLocation;
-import com.example.safeguard.bottommenu.Organizations;
-import com.example.safeguard.bottommenu.Profile;
-import com.example.safeguard.navigationmenu.AmbulancesActivity;
-import com.example.safeguard.navigationmenu.HospitalsActivity;
+import com.example.safeguard.BottomMenu.AlertTag;
+import com.example.safeguard.BottomMenu.Capture;
+import com.example.safeguard.BottomMenu.CurrentLocation;
+import com.example.safeguard.BottomMenu.Organizations;
+import com.example.safeguard.BottomMenu.Profile;
+import com.example.safeguard.DrawerMenu.AmbulancesActivity;
+import com.example.safeguard.DrawerMenu.HospitalsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(android.R.color.white));
         toggle.syncState();
-
         //three dot coloring
         Objects.requireNonNull(toolbar.getOverflowIcon()).setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
 
@@ -130,11 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.drawer_hospitals:
                     Intent hospitalsIntent=new Intent(MainActivity.this, HospitalsActivity.class);
                     startActivity(hospitalsIntent);
-                    break;
-                case R.id.drawer_emergency_contracts:
-                    Toast.makeText(getApplicationContext(),"Under development",Toast.LENGTH_SHORT).show();
-                    /*Intent ecIntent=new Intent(MainActivity.this,EmergencyContacts.class);
-                    startActivity(ecIntent);*/
                     break;
                 case R.id.drawer_admin:
                     Intent intent=new Intent(MainActivity.this, AdminActivity.class);
@@ -188,14 +182,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawer_notification_settings:
                 Toast.makeText(getApplicationContext(),"Notification Settings",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.drawer_share:
-                Toast.makeText(getApplicationContext(),"Share Settings",Toast.LENGTH_SHORT).show();
-                break;
             case R.id.facebook:
                 Toast.makeText(getApplicationContext(),"Facebook Settings",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.drawer_rate_us:
-                Toast.makeText(getApplicationContext(),"Rate Us Settings",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.drawer_exit:
                 exit(0);

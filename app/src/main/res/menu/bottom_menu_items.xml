@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/nav_alert_tag"
+      android:icon="@drawable/nav_alert_tag"
+      android:title="@string/nav_alert_tag" />
+  <item
+      android:id="@+id/nav_organization"
+      android:icon="@drawable/ic_group_black_24dp"
+      android:title="@string/nav_organization" />
+  <item
+      android:id="@+id/nav_current_location"
+      android:icon="@drawable/ic_location_black_24dp"
+      android:title="@string/nav_current_location" />
+  <item
+      android:id="@+id/nav_capture"
+      android:icon="@drawable/ic_camera_white_24dp"
+      android:title="@string/nav_capture" />
+  <item
+      android:id="@+id/nav_profile"
+      android:icon="@drawable/ic_account_circle_white_24dp"
+      android:title="@string/nav_profile" />
+</menu>

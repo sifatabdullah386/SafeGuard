@@ -12,17 +12,13 @@
           android:id="@+id/drawer_hospitals"
           android:icon="@drawable/drawer_hospital"
           android:title="@string/hospitals" />
-      <item
-          android:id="@+id/drawer_emergency_contracts"
-          android:icon="@drawable/ic_contact_phone_black_24dp"
-          android:title="@string/emergency_contacts" />
     </menu>
 
   </item>
 
   <item
       android:id="@+id/drawer_admin"
-      android:icon="@drawable/drawer_admin_image"
+      android:icon="@drawable/ic_person_add_black_24dp"
       android:title="@string/drawer_admin" />
   <item
       android:id="@+id/drawer_coordinator"
@@ -33,19 +29,19 @@
     <menu >
       <item
           android:id="@+id/drawer_share"
-          android:icon="@drawable/drawer_share"
+          android:icon="@drawable/ic_share_black_24dp"
           android:title="@string/drawer_share" />
       <item
           android:id="@+id/drawer_rate_us"
-          android:icon="@drawable/drawer_rate_us"
+          android:icon="@drawable/ic_star_border_black_24dp"
           android:title="@string/drawer_rate_us" />
       <item
           android:id="@+id/drawer_about_the_apps"
-          android:icon="@drawable/drawer_about_us"
+          android:icon="@drawable/ic_perm_identity_black_24dp"
           android:title="@string/drawer_about_the_apps" />
       <item
           android:id="@+id/drawer_privacy_policy"
-          android:icon="@drawable/drawer_privacy_policy_image"
+          android:icon="@drawable/ic_check_box_black_24dp"
           android:title="@string/drawer_privacy_policy" />
     </menu>
 
