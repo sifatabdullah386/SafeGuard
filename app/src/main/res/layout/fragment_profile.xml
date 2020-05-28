@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FCF9F9"
-    tools:context=".BottomMenu.Profile">
+    tools:context=".bottomMenu.Profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -156,13 +156,13 @@
               android:textSize="14sp"
               android:textStyle="bold"/>
           <TextView
-              android:id="@+id/profile_send_request"
+              android:id="@+id/profile_request"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginStart="5dp"
               android:layout_marginEnd="25dp"
               android:padding="5dp"
-              android:text="0"
+              android:text="@string/_0"
               android:textColor="#3C3D3D"
               android:textSize="16sp"
               android:textStyle="bold"/>

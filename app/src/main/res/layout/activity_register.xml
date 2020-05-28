@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#282929"
+    android:background="@drawable/background"
     tools:context=".RegisterActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -19,17 +19,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="30dp"
+        android:padding="50dp"
         android:layout_centerVertical="true">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/help_logo"/>
 
         <TextView
             android:id="@+id/helloText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="#fff"
+            android:textColor="@color/white"
             android:text="@string/app_name"
-            android:textSize="40sp"
+            android:textSize="24sp"
             android:fontFamily="cursive"
             android:layout_marginBottom="50dp"
             android:textStyle="bold"/>
@@ -37,22 +42,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:paddingStart="10dp"
-            android:background="@drawable/btn_shape_round"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_account_box_black_24dp"/>
             <EditText
                 android:id="@+id/userNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape_round"
+                android:drawableStart="@drawable/ic_account_box_black_24dp"
+                android:drawablePadding="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:hint="User Name"
-                android:textSize="16sp"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:inputType="textPersonName"/>
@@ -61,73 +65,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:paddingStart="10dp"
-            android:background="@drawable/btn_shape_round"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_phone_white_24dp"/>
             <EditText
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape_round"
+                android:drawableStart="@drawable/ic_phone_white_24dp"
+                android:drawablePadding="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:hint="User Phone Number"
-                android:textSize="15sp"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:inputType="textPhonetic"
                 tools:ignore="TextFields" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp"
-            android:paddingStart="10dp"
-            android:background="@drawable/btn_shape_round"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_location_black_24dp"/>
             <TextView
                 android:id="@+id/locationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textStart"
-                android:backgroundTint="#FF5722"
-                android:paddingStart="5dp"
-                android:text="User Current Address"
+                android:background="@drawable/btn_shape_round"
+                android:drawableStart="@drawable/ic_location_black_24dp"
+                android:drawablePadding="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:hint="User Current Address"
+                android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                tools:ignore="TextFields" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:paddingStart="10dp"
-            android:background="@drawable/btn_shape_round"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_mail_white_24dp"/>
             <EditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape_round"
+                android:drawableStart="@drawable/ic_mail_white_24dp"
+                android:drawablePadding="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:hint="User Email"
-                android:textSize="15sp"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:inputType="textEmailAddress"/>
@@ -137,24 +136,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:paddingStart="10dp"
-            android:background="@drawable/btn_shape_round"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_lock_outline_black_24dp"/>
             <EditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape_round"
+                android:drawableStart="@drawable/ic_lock_outline_black_24dp"
+                android:drawablePadding="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
                 android:hint="User Password"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:textSize="15sp"
                 android:inputType="textPassword"/>
         </LinearLayout>
 
@@ -168,7 +166,7 @@
             android:textStyle="bold"
             android:textColor="#fff"
             android:text="sign up"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,8 +179,7 @@
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:text="Already Sign Up? "
-                android:textSize="18sp"
-                android:layout_marginBottom="10dp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/loginTextView"
@@ -193,7 +190,6 @@
                 android:textColor="#F44336"
                 android:text="Login"
                 android:textSize="18sp"
-                android:layout_marginBottom="10dp"
                 android:textStyle="bold"/>
         </LinearLayout>
 

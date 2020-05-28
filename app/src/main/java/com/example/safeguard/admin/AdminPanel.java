@@ -12,7 +12,7 @@ import com.example.safeguard.R;
 
 public class AdminPanel extends AppCompatActivity {
 
-    CardView Ambulances,FireServices,Hospitals,Organizations,PoliceStations,CriminalPhotos;
+    CardView Ambulances,FireServices,Hospitals,Organizations,PoliceStations,Volunteers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +23,7 @@ public class AdminPanel extends AppCompatActivity {
         Hospitals =findViewById(R.id.admin_add_hospitals_card_view);
         Organizations =findViewById(R.id.admin_add_organizations_card_view);
         PoliceStations =findViewById(R.id.admin_add_police_stations_card_view);
-        CriminalPhotos =findViewById(R.id.admin_watch_criminal_card_view);
+        Volunteers =findViewById(R.id.admin_add_volunteer_card_view);
 
         Ambulances.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -55,9 +55,9 @@ public class AdminPanel extends AppCompatActivity {
                 startActivity(intent5);
             }
         });
-        CriminalPhotos.setOnClickListener(new View.OnClickListener() {
+        Volunteers.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent5=new Intent(AdminPanel.this, com.example.safeguard.admin.CriminalPhotos.class);
+                Intent intent5=new Intent(AdminPanel.this, addVolunteers.class);
                 startActivity(intent5);
             }
         });

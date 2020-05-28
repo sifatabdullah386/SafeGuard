@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.safeguard.Constractor.LocationConstructor;
+import com.example.safeguard.constractor.LocationConstructor;
 import com.example.safeguard.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import com.example.safeguard.Constractor.addPoliceStationsConstructor;
+import com.example.safeguard.constractor.addPoliceStationsConstructor;
 
 public class addPoliceStations extends AppCompatActivity {
 

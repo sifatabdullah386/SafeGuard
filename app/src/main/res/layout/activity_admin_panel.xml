@@ -10,7 +10,7 @@
         android:id="@+id/feed_back_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/app_bar_baackground"
+        android:background="@drawable/background"
         android:elevation="8dp">
         <TextView
             android:layout_width="match_parent"
@@ -239,7 +239,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/admin_watch_criminal_card_view"
+                android:id="@+id/admin_add_volunteer_card_view"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -259,14 +259,14 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:padding="10dp"
-                        android:src="@drawable/ic_face_black_24dp" />
+                        android:src="@drawable/ic_group_black_24dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="@string/criminal_photos"
+                        android:text="@string/add_volunteers"
                         android:textSize="16sp"
                         android:textColor="#F7F3F3"
                         android:textStyle="bold" />

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#FF5722</color>
     <color name="colorPrimaryDark">#e23d32</color>
     <color name="colorAccent">#CDDC39</color>
-    <color name="Aqurine">#FADCD2</color>
+    <color name="Aqurine">#BDBDBC</color>
     <color name="white">#fff</color>
     <color name="colorCardView">#0B29CA</color>
     <color name="colorHeader">#CDDC39</color>
@@ -23,8 +23,8 @@
     <color name="colorEmergencyContracts">#D61305</color>
     <color name="colorResponse">#4CAF50</color>
     <color name="colorRequest">#FF5722</color>
-    <color name="colorTotalList">#282929</color>
-    <color name="colorTotalCardView">#B8B8B8</color>
+    <color name="colorTotalList">#FFFFFF</color>
+    <color name="colorTotalCardView">#F44336</color>
     <color name="colorHelpListText">#FBFAFA</color>
     <color name="colorHelpListCardView">#FFFFFF</color>
     <color name="colorHelpLisView">#FFFFFF</color>

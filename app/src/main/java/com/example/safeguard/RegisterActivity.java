@@ -11,6 +11,8 @@ import androidx.core.content.ContextCompat;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,7 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import com.example.safeguard.Constractor.userDataConstructor;
+import com.example.safeguard.constractor.userDataConstructor;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DialogLogin.DialogLoginListener {
 
@@ -52,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private double  longitude;
     private static final int REQUEST_CODE_LOCATION_PERMISSION=1;
     private ResultReceiver resultReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -220,26 +223,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         progressBar.setVisibility(View.VISIBLE);
         //read data from shared preferences
         SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-        if(sharedPreferences.contains("usernameKey")&& sharedPreferences.contains("emailKey") && sharedPreferences.contains("passwordKey")){
-            String userEmail=sharedPreferences.getString("emailKey","Data Not Found");
-            String password=sharedPreferences.getString("passwordKey","Data Not Found");
 
-            //firebase login
-            firebaseAuth.signInWithEmailAndPassword(userEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+
+            if(sharedPreferences.contains("usernameKey")&& sharedPreferences.contains("emailKey") && sharedPreferences.contains("passwordKey")){
+                String userEmail=sharedPreferences.getString("emailKey","Data Not Found");
+                String password=sharedPreferences.getString("passwordKey","Data Not Found");
+
+                //firebase login
+                firebaseAuth.signInWithEmailAndPassword(userEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(RegisterActivity.this, "Login failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else{
-                        Toast.makeText(RegisterActivity.this, "Login failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                });
+            }
+            else{
+                Toast.makeText(RegisterActivity.this,"Complete your Registration First ",Toast.LENGTH_LONG).show();
+            }
         }
         else{
-            Toast.makeText(RegisterActivity.this,"Complete your Registration First ",Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this,"Connect your Internet/wifi",Toast.LENGTH_LONG).show();
         }
         progressBar.setVisibility(View.GONE);
     }

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".admin.CriminalPhotos">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/volunteers_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#004D40"
+        android:elevation="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/add_volunteers"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="18dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="7">
+
+        <EditText
+            android:id="@+id/add_volunteer_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/volunteer_name"
+            android:inputType="textPersonName"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:autofillHints=" " />
+
+        <EditText
+            android:id="@+id/add_volunteer_location"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/location"
+            android:inputType="textMultiLine"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_location_on_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:autofillHints="@string/organization_location" />
+
+        <EditText
+            android:id="@+id/add_volunteer_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_phone_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:autofillHints="@string/organization_phone_number" />
+        <EditText
+            android:id="@+id/add_volunteer_email"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:autofillHints="@string/organization_email" />
+        <EditText
+            android:id="@+id/add_volunteer_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/about_yourself"
+            android:inputType="text|textMultiLine"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/ic_description_black_24dp"
+            android:drawablePadding="15dp"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:autofillHints="no" />
+        <Button
+            android:id="@+id/add_volunteer_submit"
+            android:layout_weight="1"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#004D40"
+            android:background="@drawable/btn_pressed"
+            android:elevation="4dp"
+            android:text="@string/register"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

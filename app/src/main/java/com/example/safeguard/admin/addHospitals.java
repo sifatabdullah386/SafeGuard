@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import com.example.safeguard.Constractor.addHospitalsConstructor;
+import com.example.safeguard.constractor.addHospitalsConstructor;
 
 public class addHospitals extends AppCompatActivity {
 

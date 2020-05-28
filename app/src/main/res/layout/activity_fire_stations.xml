@@ -7,7 +7,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".HomeScreen.FireStations">
+tools:context=".homeScreen.FireStations">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/fire_station_toolbar"
         android:layout_width="match_parent"

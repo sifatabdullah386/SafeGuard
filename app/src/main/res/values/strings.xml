@@ -36,7 +36,7 @@
     <string name="register">Register</string>
     <string name="add_fire_services">Fire Services</string>
     <string name="add_ambulance_name">Ambulance Name</string>
-    <string name="my_email">smilesifat@gmail.com</string>
+    <string name="my_email">sifatabdullah386@gmail.com</string>
     <string name="panic_button">Help!!</string>
     <string name="feed_back">Feed Back</string>
     <string name="fire_station">Fire Station</string>
@@ -78,7 +78,7 @@
     <string name="police_station_phone_number">Police Station Phone Number</string>
     <string name="police_station_location">Police Station Location</string>
     <string name="police_station_name">Police Station Name</string>
-    <string name="about_fire_station">About fire station</string>
+    <string name="about_fire_station">About Fire Station</string>
     <string name="take_a_criminal_picture">Take a \n Criminal Picture</string>
     <string name="upload_from_gallery">Upload from \n gallery</string>
     <string name="criminal_photos">Criminal Photos Send from the Victims</string>
@@ -112,11 +112,28 @@
     <string name="phone_number">Phone Number</string>
     <string name="help_request">Help Request</string>
 
-    <string name="total_user">Total User</string>
+    <string name="total_user">Total \n User</string>
     <string name="total_user_number">…</string>
-    <string name="total_organization">Total Organization</string>
+    <string name="total_organization">Total \n Organization</string>
     <string name="total_user_organization">…</string>
-    <string name="total_volunteer">Total Volunteer</string>
+    <string name="total_volunteer">Total \n Volunteer</string>
     <string name="total_user_volunteer">…</string>
+    <string name="nav_volunteers">Volunteers</string>
+    <string name="request_for_help">Request for help</string>
+    <string name="write_message">Write some messages or you can leave as blank</string>
+    <string name="traffic_help">Request Help For Traffic Accident</string>
+    <string name="sexual_harassment_help">"Request Help For Sexual Harassment "</string>
+    <string name="request_for_emergency_medical_help">Request For Emergency Medical Help</string>
+    <string name="app_theme">Request For Any Help \n Response it Willingly</string>
+    <string name="donate">Donate Food / Clothes / Utilities</string>
+    <string name="donation_feedback">Donation \n Feedback</string>
+    <string name="request_food_clothes_utilities">Request Food / Clothes / Utilities</string>
+    <string name="admin_password">Admin Password</string>
+    <string name="login">Login</string>
+    <string name="admin_username">Admin Username</string>
+    <string name="add_volunteers">Add Volunteers</string>
+    <string name="volunteer_name">Volunteer Name</string>
+    <string name="volunteer_location">Volunteer Location</string>
+    <string name="about_yourself">About Yourself</string>
 
 </resources>

@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import com.example.safeguard.Constractor.addOrganizationsConstructor;
+import com.example.safeguard.constractor.addOrganizationsConstructor;
 
 public class addOrganizations extends AppCompatActivity {
     EditText OrganizationName,OrganizationLocation,OrganizationPhoneNumber,OrganizationEmail,OrganizationDescription;

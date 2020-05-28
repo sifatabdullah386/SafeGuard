@@ -28,11 +28,6 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".HomeScreen.TotalVolunteers" />
-        <activity android:name=".HomeScreen.TotalUsers" />
-        <activity android:name=".HomeScreen.Response" />
-        <activity android:name=".HomeScreen.Request" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -41,7 +36,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".admin.addAmbulances" />
         <activity android:name=".admin.addEmergencyContacts" />
@@ -57,20 +53,25 @@
         <activity android:name=".admin.addPoliceStations" />
         <activity android:name=".admin.addOrganizations" />
         <activity
-            android:name=".HomeScreen.HelpActivity"
+            android:name=".homeScreen.HelpActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".HomeScreen.SexualHarassment" />
-        <activity android:name=".HomeScreen.EmergencyMedical" />
-        <activity android:name=".HomeScreen.TrafficAccidents" />
-        <activity android:name=".RoadAccidents" />
-        <activity android:name=".HomeScreen.PoliceStations" />
-        <activity android:name=".HomeScreen.FeedBack" />
-        <activity android:name=".HomeScreen.FireStations" />
+        <activity android:name=".homeScreen.SexualHarassment" />
+        <activity android:name=".homeScreen.EmergencyMedical" />
+        <activity android:name=".homeScreen.TrafficAccidents" />
+        <activity android:name=".homeScreen.PoliceStations" />
+        <activity android:name=".homeScreen.FeedBack" />
+        <activity android:name=".homeScreen.TotalVolunteers" />
+        <activity android:name=".homeScreen.TotalUsers" />
+        <activity android:name=".homeScreen.Response" />
+        <activity android:name=".homeScreen.Request" />
+
+        <activity android:name=".homeScreen.FireStations" />
         <activity android:name=".admin.CriminalPhotos" />
-        <activity android:name=".DrawerMenu.HospitalsActivity" />
-        <activity android:name=".DrawerMenu.AmbulancesActivity" />
+        <activity android:name=".drawerMenu.HospitalsActivity" />
+        <activity android:name=".drawerMenu.AmbulancesActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".admin.AdminPanel" />
+        <activity android:name=".admin.addVolunteers" />
 
         <service android:name=".FetchAddressIntentService" />
 

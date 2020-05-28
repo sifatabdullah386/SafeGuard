@@ -17,14 +17,14 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.safeguard.bottomMenu.Volunteers;
 import com.example.safeguard.admin.AdminActivity;
-import com.example.safeguard.BottomMenu.AlertTag;
-import com.example.safeguard.BottomMenu.Capture;
-import com.example.safeguard.BottomMenu.CurrentLocation;
-import com.example.safeguard.BottomMenu.Organizations;
-import com.example.safeguard.BottomMenu.Profile;
-import com.example.safeguard.DrawerMenu.AmbulancesActivity;
-import com.example.safeguard.DrawerMenu.HospitalsActivity;
+import com.example.safeguard.bottomMenu.AlertTag;
+import com.example.safeguard.bottomMenu.CurrentLocation;
+import com.example.safeguard.bottomMenu.Organizations;
+import com.example.safeguard.bottomMenu.Profile;
+import com.example.safeguard.drawerMenu.AmbulancesActivity;
+import com.example.safeguard.drawerMenu.HospitalsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_current_location:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CurrentLocation()).commit();
                     break;
-                case R.id.nav_capture:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Capture()).commit();
+                case R.id.nav_volunteers:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Volunteers()).commit();
                     break;
                 case R.id.nav_profile:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Profile()).commit();
