@@ -183,11 +183,11 @@ public class EmergencyMedical extends FragmentActivity implements OnMapReadyCall
                 startActivity(intent);
 
                 String helpEMMessage=EMMessageRequest.getText().toString().trim();
-                String location=EmergencyMedicalAddressLocation;
+                String requestType="Emergency Medical Help Request";
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
-                EmergencyMedicalDatabaseReference.child("Requests").child("EmergencyMedicalHelpRequest").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,location,helpEMMessage,latitude,longitude));
+                EmergencyMedicalDatabaseReference.child("Requests").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,EmergencyMedicalAddressLocation,helpEMMessage,requestType,latitude,longitude));
                 String helpMessage="Emergency Medical Help Request: "+helpEMMessage;
                 sendNotification(helpMessage);
             }

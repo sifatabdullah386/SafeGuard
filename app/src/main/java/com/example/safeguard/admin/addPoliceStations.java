@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,8 @@ import com.example.safeguard.constractor.addPoliceStationsConstructor;
 
 public class addPoliceStations extends AppCompatActivity {
 
-    EditText PoliceStationName,PoliceStationLocation,PoliceStationPhoneNumber,PoliceStationEmail,PoliceStationDescription;
+    EditText PoliceStationName,PoliceStationPhoneNumber,PoliceStationEmail,PoliceStationDescription;
+    TextView PoliceStationLocation;
     Button PoliceStationSubmit;
     DatabaseReference addPoliceStationReferences;
     private List<Place.Field> fields;
@@ -83,7 +85,7 @@ public class addPoliceStations extends AppCompatActivity {
         });
 
         if (!Places.isInitialized()) {
-            String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
+            String apiKey="@string/google_maps_key";
             Places.initialize(getApplicationContext(),apiKey);
         }
         fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);

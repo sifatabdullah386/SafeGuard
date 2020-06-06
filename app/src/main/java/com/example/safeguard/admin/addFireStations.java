@@ -42,6 +42,7 @@ public class addFireStations extends AppCompatActivity {
     private List<Place.Field> fields;
     final int AUTOCOMPLETE_REQUEST_CODE=1;
     private String location;
+    private LatLng latLang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +89,7 @@ public class addFireStations extends AppCompatActivity {
         });
 
         if (!Places.isInitialized()) {
-            String apiKey="AIzaSyDuzb58bZ3zMAbDn8pEsTq867UYGaC6RPA";
+            String apiKey="@string/google_maps_key";
             Places.initialize(getApplicationContext(),apiKey);
         }
         //fields= Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
@@ -110,7 +111,7 @@ public class addFireStations extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 location = place.getName();
-                LatLng latLang = place.getLatLng();
+                latLang = place.getLatLng();
 
                 FireStationLocation.setText(location);
 

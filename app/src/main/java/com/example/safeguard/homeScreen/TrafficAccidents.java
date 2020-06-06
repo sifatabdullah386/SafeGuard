@@ -184,11 +184,11 @@ public class TrafficAccidents extends FragmentActivity implements OnMapReadyCall
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
                 String helpTAMessage=MessageRequest.getText().toString().trim();
-                String location=TrafficAccidentsAddressLocation;
+                String requestType="Traffic Accidents Help Request";
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
-                TrafficAccidentsDatabaseReference.child("Requests").child("TrafficAccidentsHelpRequest").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,location,helpTAMessage,latitude,longitude));
+                TrafficAccidentsDatabaseReference.child("Requests").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,TrafficAccidentsAddressLocation,helpTAMessage,requestType,latitude,longitude));
                 String helpMessage="Traffic Help Request: "+helpTAMessage;
                 sendNotification(helpMessage);
             }

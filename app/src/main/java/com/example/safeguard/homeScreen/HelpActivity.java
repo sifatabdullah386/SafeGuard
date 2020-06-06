@@ -185,12 +185,12 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
 
                 String message=MessageRequest.getText().toString().trim();
+                String requestType="Help Request";
 
-                String location=Address_location;
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
-                databaseReference.child("Requests").child("HelpRequest").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,location,message,latitude,longitude));
+                databaseReference.child("Requests").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,Address_location,message,requestType,latitude,longitude));
 
                 String helpMessage="Help Request: "+message;
                 sendNotification(helpMessage);

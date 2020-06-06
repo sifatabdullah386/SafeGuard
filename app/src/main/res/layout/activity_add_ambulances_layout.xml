@@ -48,7 +48,6 @@
           android:layout_marginTop="10dp"
           android:layout_marginBottom="10dp"
           android:textSize="18sp"
-          android:textStyle="bold"
           android:inputType="textPersonName"
           android:hint="@string/add_ambulance_name"
           android:importantForAutofill="no" />
@@ -57,7 +56,6 @@
           android:id="@+id/add_ambulance_location"
           android:layout_width="match_parent"
           android:layout_height="0dp"
-          android:textStyle="bold"
           android:textSize="18sp"
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
@@ -88,7 +86,6 @@
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
           android:textSize="18sp"
-          android:textStyle="bold"
           android:importantForAutofill="no" />
 
       <EditText
@@ -107,7 +104,6 @@
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
           android:textSize="18sp"
-          android:textStyle="bold"
           android:importantForAutofill="no" />
       <Spinner
           android:id="@+id/add_ambulances_type"
@@ -137,7 +133,6 @@
           android:paddingStart="10dp"
           android:paddingEnd="10dp"
           android:textSize="18sp"
-          android:textStyle="bold"
           android:importantForAutofill="no" />
       <Button
           android:id="@+id/add_ambulance_submit"

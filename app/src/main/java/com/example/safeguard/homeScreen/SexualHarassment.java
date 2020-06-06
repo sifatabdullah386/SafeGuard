@@ -185,11 +185,11 @@ public class SexualHarassment extends FragmentActivity implements OnMapReadyCall
                 String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
                 String helpSHMessage=MessageRequest.getText().toString().trim();
-                String location=sexualHarassmentAddress_location;
+                String requestType="Sexual Harassment Help Request";
                 double latitude=mLastLocation.getLatitude();
                 double longitude=mLastLocation.getLongitude();
 
-                sexualHarassmentDatabaseReference.child("Requests").child("SexualHarassmentHelpRequest").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,location,helpSHMessage,latitude,longitude));
+                sexualHarassmentDatabaseReference.child("Requests").child(userId).setValue(new FreeConstructor(userHelpName,userHelpPhoneNumber,sexualHarassmentAddress_location,helpSHMessage,requestType,latitude,longitude));
                 String helpMessage="Sexual Harassment Help Request: "+helpSHMessage;
                 sendNotification(helpMessage);
             }

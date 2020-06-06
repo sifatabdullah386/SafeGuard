@@ -110,32 +110,6 @@ public class TabFireStationMaps extends Fragment implements OnMapReadyCallback,
             }
         });
 
-/*        ValueEventListener eventListener1 = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    final String marker_title=ds.getValue(String.class);
-                    ValueEventListener eventListener2 = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                                double latitude=Double.valueOf(ds.child("latitude").toString());
-                                Double longitude=ds.child("longitude").getValue(Double.class);
-                                LatLng location=new LatLng(latitude,longitude);
-                                mMap.addMarker(new MarkerOptions().position(location).title(marker_title));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    };
-                    latLangReferences.addListenerForSingleValueEvent(eventListener2);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        };
-         LocationReferences.addListenerForSingleValueEvent(eventListener1);*/
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

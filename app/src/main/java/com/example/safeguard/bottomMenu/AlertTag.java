@@ -17,7 +17,6 @@ import com.example.safeguard.homeScreen.FireStations;
 import com.example.safeguard.homeScreen.HelpActivity;
 import com.example.safeguard.R;
 import com.example.safeguard.homeScreen.TotalUsers;
-import com.example.safeguard.homeScreen.TotalVolunteers;
 import com.example.safeguard.homeScreen.TrafficAccidents;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,8 +43,6 @@ public class AlertTag extends Fragment {
         CardView SexualHarassment=view.findViewById(R.id.sexual_harassment_card_view);
         CardView TrafficAccident=view.findViewById(R.id.traffic_accident_card_view);
         CardView TotalUser=view.findViewById(R.id.total_user_card_view);
-        CardView TotalOrganization=view.findViewById(R.id.total_organizations_card_view);
-        final CardView TotalVolunteer=view.findViewById(R.id.total_volunteers_card_view);
         TotalUserNumber=view.findViewById(R.id.total_user_number);
         TotalVolunteerNumber = view.findViewById(R.id.total_user_volunteer);
         TotalOrganizationNumber = view.findViewById(R.id.total_user_organization);
@@ -162,19 +159,6 @@ public class AlertTag extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), TotalUsers.class);
-                startActivity(intent);
-            }
-        });
-        TotalOrganization.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new Organizations()).commit();
-            }
-        });
-        TotalVolunteer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), TotalVolunteers.class);
                 startActivity(intent);
             }
         });

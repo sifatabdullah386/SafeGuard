@@ -4,19 +4,21 @@ public class FreeConstructor {
 
     private String UserName;
     private String UserPhoneName;
-    private String location;
-    private String message;
+    private String Location;
+    private String Message;
+    private String RequestType;
     private double latitude;
     private double longitude;
 
     public FreeConstructor() {
     }
 
-    public FreeConstructor(String userName, String userPhoneName, String location, String message, double latitude, double longitude) {
+    public FreeConstructor(String userName, String userPhoneName, String location, String message, String requestType, double latitude, double longitude) {
         UserName = userName;
         UserPhoneName = userPhoneName;
-        this.location = location;
-        this.message = message;
+        Location = location;
+        Message = message;
+        RequestType = requestType;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -38,19 +40,27 @@ public class FreeConstructor {
     }
 
     public String getLocation() {
-        return location;
+        return Location;
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        Location = location;
     }
 
     public String getMessage() {
-        return message;
+        return Message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        Message = message;
+    }
+
+    public String getRequestType() {
+        return RequestType;
+    }
+
+    public void setRequestType(String requestType) {
+        RequestType = requestType;
     }
 
     public double getLatitude() {

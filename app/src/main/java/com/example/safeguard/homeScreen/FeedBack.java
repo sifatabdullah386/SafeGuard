@@ -52,9 +52,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
+    private Marker mCurrLocationMarker;
     private GoogleMap mMap;
     private DatabaseReference databaseReference;
 
@@ -87,7 +85,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
 
-        databaseReference.child("HelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
@@ -96,21 +94,34 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
                     double longitude=m.getLongitude();
                     final String message=m.getMessage();
                     final String user=m.getUserName();
-                    final String phone=m.getUserPhoneName();
+                    final String phoneNumber=m.getUserPhoneName();
+                    final String RequestType=m.getRequestType();
+                    final LatLng location=new LatLng(latitude,longitude);
 
-                    LatLng location=new LatLng(latitude,longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title(user+":"+message))
-                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
+                    if(RequestType.equals("Sexual Harassment Help Request")){
+                        mMap.addMarker(new MarkerOptions().position(location).title(user + ":" + message + "\n" + phoneNumber)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F));
+                    }
+                    else if(RequestType.equals("Traffic Accidents Help Request")){
+                        mMap.addMarker(new MarkerOptions().position(location).title(user + ":" + message + "\n" + phoneNumber)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F));
+                    }
+                    else if(RequestType.equals("Emergency Medical Help Request")){
+                        mMap.addMarker(new MarkerOptions().position(location).title(user + ":" + message + "\n" + phoneNumber)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F));
+                    }
+                    else{
+                        mMap.addMarker(new MarkerOptions().position(location).title(user + ":" + message + "\n" + phoneNumber)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F));
+                    }
 
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                         @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            String call="tel:"+phone.trim();
+                        public void onInfoWindowClick(Marker marker) {
+                            String call="tel:"+phoneNumber.trim();
                             Intent callIntent=new Intent(Intent.ACTION_DIAL);
                             callIntent.setData(Uri.parse(call));
                             startActivity(callIntent);
-                            return false;
                         }
                     });
                 }
@@ -119,60 +130,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-        databaseReference.child("SexualHarassmentHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot s : dataSnapshot.getChildren()){
-                    FreeConstructor m = s.getValue(FreeConstructor.class);
-                    double latitude=m.getLatitude();
-                    double longitude=m.getLongitude();
-                    String message=m.getMessage();
-                    LatLng location=new LatLng(latitude,longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title(message))
-                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-        databaseReference.child("EmergencyMedicalHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot s : dataSnapshot.getChildren()){
-                    FreeConstructor m = s.getValue(FreeConstructor.class);
-                    double latitude=m.getLatitude();
-                    double longitude=m.getLongitude();
-                    String message=m.getMessage();
-                    LatLng location=new LatLng(latitude,longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title(message))
-                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-        databaseReference.child("TrafficAccidentsHelpRequest").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot s : dataSnapshot.getChildren()){
-                    FreeConstructor m = s.getValue(FreeConstructor.class);
-                    double latitude=m.getLatitude();
-                    double longitude=m.getLongitude();
-                    String message=m.getMessage();
-                    LatLng location=new LatLng(latitude,longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title(message))
-                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,5F));
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
 
@@ -198,7 +155,7 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
     }
 
     public void onConnected(Bundle bundle) {
-        mLocationRequest = new LocationRequest();
+        LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
@@ -211,7 +168,6 @@ public class FeedBack extends FragmentActivity implements OnMapReadyCallback,
     }
 
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }

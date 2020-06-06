@@ -297,8 +297,8 @@
                 android:orientation="vertical">
                     <Button
                         android:id="@+id/button_help"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/btn_shape_help"
                         android:gravity="center"
                         android:text="@string/panic_button"
@@ -456,49 +456,7 @@
                     android:layout_height="match_parent"
                     android:weightSum="3"
                     android:orientation="horizontal">
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/total_user_card_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:cardBackgroundColor="@color/colorTotalCardView">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:weightSum="2"
-                            android:background="@drawable/btn_shape_gradient"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/total_user_number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:text="@string/total_user_number"
-                                android:layout_weight="1"
-                                android:textColor="@color/white"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="2dp"
-                                android:text="@string/total_user"
-                                android:layout_weight="1"
-                                android:textColor="@color/colorTotalList"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <View
-                        android:layout_width="3dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorHelpLisView"/>
                     <androidx.cardview.widget.CardView
                         android:id="@+id/total_volunteers_card_view"
                         android:layout_width="match_parent"
@@ -539,6 +497,49 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
 
+                    </androidx.cardview.widget.CardView>
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorHelpLisView"/>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/total_user_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorTotalCardView">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:weightSum="2"
+                            android:background="@drawable/btn_shape_gradient"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/total_user_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:text="@string/total_user_number"
+                                android:layout_weight="1"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="2dp"
+                                android:text="@string/total_user"
+                                android:layout_weight="1"
+                                android:textColor="@color/colorTotalList"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
                     <View
                         android:layout_width="3dp"

@@ -1,7 +1,6 @@
 package com.example.safeguard.homeScreen;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import com.example.safeguard.R;
 import com.example.safeguard.tabActivity.TabFireStationPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Objects;
 
 public class FireStations extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
@@ -21,10 +19,6 @@ public class FireStations extends AppCompatActivity implements TabLayout.OnTabSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire_stations);
 
-        Toolbar toolbar =  findViewById(R.id.fire_station_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
         TabLayout tabLayout = findViewById(R.id.fire_station_tabLayout);
 

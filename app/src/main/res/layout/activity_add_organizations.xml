@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".admin.addOrganizations">
     <androidx.appcompat.widget.Toolbar
@@ -24,7 +24,7 @@
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:elevation="18dp"
             android:orientation="vertical"
@@ -34,7 +34,7 @@
             <EditText
                 android:id="@+id/add_organization_name"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/organization_name"
@@ -44,16 +44,14 @@
                 android:drawablePadding="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="15dp"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:autofillHints="@string/organization_name" />
 
             <EditText
                 android:id="@+id/add_organization_location"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/organization_location"
@@ -63,16 +61,14 @@
                 android:drawablePadding="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="15dp"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:autofillHints="@string/organization_location" />
 
             <EditText
                 android:id="@+id/add_organization_phone_number"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/organization_phone_number"
@@ -82,15 +78,13 @@
                 android:drawablePadding="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="15dp"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:autofillHints="@string/organization_phone_number" />
             <EditText
                 android:id="@+id/add_organization_email"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/organization_email"
@@ -100,26 +94,23 @@
                 android:drawablePadding="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="15dp"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:autofillHints="@string/organization_email" />
             <Spinner
                 android:id="@+id/add_organization_type"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
+                android:padding="15dp"
                 android:background="@drawable/edit_text_background"
                 android:entries="@array/add_organization_type" />
             <EditText
                 android:id="@+id/add_organization_description"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/organization_description"
@@ -128,17 +119,15 @@
                 android:drawableStart="@drawable/ic_description_black_24dp"
                 android:drawablePadding="15dp"
                 android:layout_marginTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="15dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:autofillHints="no" />
             <Button
                 android:id="@+id/add_organization_submit"
                 android:layout_weight="1"
                 android:layout_width="200dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#6200EA"
@@ -148,6 +137,7 @@
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="22sp"
+                android:padding="15dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

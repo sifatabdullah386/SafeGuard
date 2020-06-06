@@ -22,17 +22,12 @@
                     android:textSize="22sp"
                     android:textStyle="bold"/>
         </androidx.appcompat.widget.Toolbar>
-
-<!--    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="3dp">-->
         <SearchView
             android:id="@+id/hospitals_searches"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#DAD7D7"
+            android:background="@drawable/custom_search_view"
+            android:layout_margin="5dp"
             android:queryHint="Search Hospitals Here">
         </SearchView>
         <androidx.recyclerview.widget.RecyclerView
@@ -40,18 +35,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
-<!--    </LinearLayout>-->
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button_add_hospitals"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:backgroundTint="#3d226d"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add_black_24dp"
-        app:elevation="6dp"
-        app:fabSize="normal" />-->
 
 </LinearLayout>

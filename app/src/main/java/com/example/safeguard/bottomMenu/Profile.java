@@ -1,22 +1,17 @@
 package com.example.safeguard.bottomMenu;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.safeguard.R;
 import com.example.safeguard.homeScreen.Request;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,12 +21,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import com.example.safeguard.constractor.userDataConstructor;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import static android.app.Activity.RESULT_OK;
 
 public class Profile extends Fragment {
@@ -41,14 +34,11 @@ public class Profile extends Fragment {
     private TextView profilePhoneNumber;
     private TextView profileEmail;
     private TextView profileLocation;
-    private TextView profileRequest;
-    private TextView profileResponse;
 
     private StorageReference userStorageReference;
     private DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private String uid = fAuth.getCurrentUser().getUid();
-    private int h_reqCount,s_reqCount,m_reqCount,t_reqCount;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -59,8 +49,6 @@ public class Profile extends Fragment {
         profileEmail = view.findViewById(R.id.profile_email);
         profileLocation = view.findViewById(R.id.profile_location);
         ImageView captureImage = view.findViewById(R.id.profile_image);
-        profileRequest = view.findViewById(R.id.profile_request);
-        profileResponse = view.findViewById(R.id.profile_response);
         ImageView profileSettings = view.findViewById(R.id.go_profile_settings);
 
         userStorageReference=FirebaseStorage.getInstance().getReference().child("profileImages/");
@@ -101,41 +89,7 @@ public class Profile extends Fragment {
                 startActivity(intent);
             }
         });
-        getRequestCount();
-        getResponseCount();
         return view;
-    }
-
-    private void getResponseCount() {
-    }
-
-    private void getRequestCount() {
-        DatabaseReference requestCount=databaseReference.child("Requests");
-
-        requestCount.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    h_reqCount = (int) dataSnapshot.child("HelpRequest").getChildrenCount();
-                    s_reqCount = (int) dataSnapshot.child("SexualHarassmentHelpRequest").getChildrenCount();
-                    m_reqCount = (int) dataSnapshot.child("TrafficAccidentsHelpRequest").getChildrenCount();
-                    t_reqCount = (int) dataSnapshot.child("EmergencyMedicalHelpRequest").getChildrenCount();
-
-                    int totalReq=h_reqCount+s_reqCount+m_reqCount+t_reqCount;
-
-                    profileRequest.setText(Integer.toString(totalReq));
-                }
-                else{
-                    profileRequest.setText(R.string._0);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override
@@ -168,23 +122,5 @@ public class Profile extends Fragment {
                 });
             }
         }
-    }
-
-    //for settings menu items multiple selection
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.update_profile:
-                Toast.makeText(getContext(),"Update Profile",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.your_requests:
-                Toast.makeText(getContext(),"Your Request",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.your_response:
-                Toast.makeText(getContext(),"Your Response",Toast.LENGTH_SHORT).show();
-                break;
-            default:
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

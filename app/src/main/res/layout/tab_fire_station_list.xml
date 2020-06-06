@@ -13,7 +13,8 @@
             android:id="@+id/fire_services_searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#DAD7D7"
+            android:background="@drawable/custom_search_view"
+            android:layout_margin="5dp"
             android:queryHint="Search Organizations Here">
         </SearchView>
         <androidx.recyclerview.widget.RecyclerView

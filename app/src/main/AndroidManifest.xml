@@ -28,6 +28,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -44,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".admin.addAmbulances" />
         <activity android:name=".admin.addEmergencyContacts" />
@@ -60,11 +61,9 @@
         <activity android:name=".homeScreen.TrafficAccidents" />
         <activity android:name=".homeScreen.PoliceStations" />
         <activity android:name=".homeScreen.FeedBack" />
-        <activity android:name=".homeScreen.TotalVolunteers" />
         <activity android:name=".homeScreen.TotalUsers" />
         <activity android:name=".homeScreen.Response" />
         <activity android:name=".homeScreen.Request" />
-
         <activity android:name=".homeScreen.FireStations" />
         <activity android:name=".admin.CriminalPhotos" />
         <activity android:name=".drawerMenu.HospitalsActivity" />
