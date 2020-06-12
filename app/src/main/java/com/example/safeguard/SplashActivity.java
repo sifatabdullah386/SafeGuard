@@ -13,7 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class SplashActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
@@ -40,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         int progress;
         for(progress=1;progress<=100;progress=progress+5){
             try {
-                Thread.sleep(50);
+                Thread.sleep(30);
                 progressBar.setProgress(progress);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -50,30 +49,15 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void doAutomaticLogin() {
 
-        //read data from shared preferences
         SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
 
-            if(sharedPreferences.contains("usernameKey")&& sharedPreferences.contains("emailKey") && sharedPreferences.contains("passwordKey")){
-                String userEmail=sharedPreferences.getString("emailKey","Data Not Found");
-                String password=sharedPreferences.getString("passwordKey","Data Not Found");
-
-                //firebase login
-                firebaseAuth.signInWithEmailAndPassword(userEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                        else{
-                            Intent intent2 = new Intent(SplashActivity.this, RegisterActivity.class);
-                            startActivity(intent2);
-                        }
-                    }
-                });
-            }
-            else{
-                Toast.makeText(SplashActivity.this, "Login failed! " , Toast.LENGTH_SHORT).show();
-            }
+        if(sharedPreferences.getBoolean("logged",false)){
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(SplashActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 }

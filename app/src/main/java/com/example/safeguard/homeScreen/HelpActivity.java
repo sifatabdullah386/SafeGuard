@@ -240,8 +240,8 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
 
-                    //ZDdiNmFmNDQtYzEyYS00ZDJhLTgzMWQtZjI1MDYyODg1ZDE2
-                    //2a6c9e7c-ba71-4b43-8775-b87e209dc5da
+                    //ZmQ4YzFkMDktODFkYS00MGYyLTk1MzctOWVkZjYyZTc2M2Fi
+                    //e258b318-aec7-418f-8223-405ec69bce0f
                     try {
                         String jsonResponse;
 
@@ -252,11 +252,11 @@ public class HelpActivity extends FragmentActivity implements OnMapReadyCallback
                         con.setDoInput(true);
 
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic ZDdiNmFmNDQtYzEyYS00ZDJhLTgzMWQtZjI1MDYyODg1ZDE2");
+                        con.setRequestProperty("Authorization", "Basic ZmQ4YzFkMDktODFkYS00MGYyLTk1MzctOWVkZjYyZTc2M2Fi");
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                +   "\"app_id\": \"2a6c9e7c-ba71-4b43-8775-b87e209dc5da\","
+                                +   "\"app_id\": \"e258b318-aec7-418f-8223-405ec69bce0f\","
                                 +   "\"included_segments\": [\"All\"],"
                                 +   "\"data\": {\"foo\": \"bar\"},"
                                 +   "\"contents\": {\"en\": \"" + helpRequestMessage + "\"}"

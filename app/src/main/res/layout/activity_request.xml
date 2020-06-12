@@ -124,7 +124,7 @@
                     android:background="@drawable/btn_shape_delete"/>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/request_list_no_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,6 +140,6 @@
                 android:textSize="24sp"
                 android:padding="5dp"
                 android:textStyle="bold"/>
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 </LinearLayout>

@@ -27,7 +27,7 @@ public class Request extends AppCompatActivity {
 
     TextView RequestMessages,RequestLocation,RequestCategory;
     ImageView RequestEdit;
-    LinearLayout RequestLayout,RequestNoLayout;
+    LinearLayout RequestLayout;
     DatabaseReference helpReference = FirebaseDatabase.getInstance().getReference().child("Requests");
     private String uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -46,7 +46,6 @@ public class Request extends AppCompatActivity {
         RequestCategory=findViewById(R.id.request_list_category);
         RequestEdit=findViewById(R.id.request_list_edit);
         RequestLayout =findViewById(R.id.request_list_layout);
-        RequestNoLayout =findViewById(R.id.request_list_no_layout);
 
         RequestEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +66,9 @@ public class Request extends AppCompatActivity {
                     RequestLocation.setText(requestLocation);
                     RequestCategory.setText(requestCategory);
 
-                    RequestNoLayout.setVisibility(View.GONE);
                 }
                 else{
                     RequestLayout.setVisibility(View.GONE);
-                    RequestNoLayout.setVisibility(View.VISIBLE);
                 }
             }
 

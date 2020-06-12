@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SafeGuard</string>
+    <string name="app_name">E-Self Redeemer</string>
     <string name="google_maps_key" translatable="false">AIzaSyAQ51Bejel1ohyxPdoK4-N9q8yMmYJYnDA</string>
     <string name="title_activity_maps">Current Place Details</string>
     <string name="default_info_title">Default Location</string>
@@ -124,7 +124,7 @@
     <string name="traffic_help">Request Help For Traffic Accident</string>
     <string name="sexual_harassment_help">"Request Help For Sexual Harassment "</string>
     <string name="request_for_emergency_medical_help">Request For Emergency Medical Help</string>
-    <string name="app_theme">Request For Any Help \n Response it Willingly</string>
+    <string name="app_theme">Rescue assistant for helpless people</string>
     <string name="donate">Donate Food / Clothes / Utilities</string>
     <string name="donation_feedback">Donation \n Feedback</string>
     <string name="request_food_clothes_utilities">Request Food / Clothes / Utilities</string>
@@ -135,5 +135,6 @@
     <string name="volunteer_name">Volunteer Name</string>
     <string name="volunteer_location">Volunteer Location</string>
     <string name="about_yourself">About Yourself</string>
+    <string name="logout">Logout</string>
 
 </resources>

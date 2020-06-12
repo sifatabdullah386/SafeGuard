@@ -37,9 +37,10 @@ public class DialogLogin extends AppCompatDialogFragment {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String LoginEmail = LoginUserEmail.getText().toString().trim();
-                        final String LoginPassword = LoginUserPassword.getText().toString().trim();
-                        listener.applyTexts(LoginEmail,LoginPassword);
+                        final String email = LoginUserEmail.getText().toString().trim();
+                        final String password = LoginUserPassword.getText().toString().trim();
+                        listener.applyTexts(email,password);
+
                     }
                 });
 
@@ -61,6 +62,6 @@ public class DialogLogin extends AppCompatDialogFragment {
     }
 
     public  interface  DialogLoginListener{
-        void applyTexts(String LoginEmail,String LoginPassword);
+        void applyTexts(String email,String password);
     }
 }

@@ -1,7 +1,10 @@
 package com.example.safeguard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -141,14 +144,24 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Privacy Policy",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.drawer_share:
-                    Toast.makeText(getApplicationContext(),"Share",Toast.LENGTH_SHORT).show();
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Check out the App at: https://play.google.com/store/apps/details?id=" + getPackageName());
+                    sendIntent.setType("text/plain");
+                    String shareBody = "Your body is here";
+                    String shareSub = "Your subject";
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+                    startActivity(shareIntent);
                     break;
                 case R.id.drawer_rate_us:
-                    Toast.makeText(getApplicationContext(),"Rate US",Toast.LENGTH_SHORT).show();
+                    Intent rateUs=new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com"));
+                    startActivity(rateUs);
                     break;
                 case R.id.drawer_about_the_apps:
-                    //setContentView(R.layout.about_the_app);
-                    Toast.makeText(getApplicationContext(),"About the Developers",Toast.LENGTH_SHORT).show();
+                    Intent aboutApp=new Intent(Intent.ACTION_VIEW, Uri.parse("http://facebook.com"));
+                    startActivity(aboutApp);
                     break;
                 default:
             }
@@ -183,11 +196,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Notification Settings",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.facebook:
-                Toast.makeText(getApplicationContext(),"Facebook Settings",Toast.LENGTH_SHORT).show();
+                Intent aboutApp=new Intent(Intent.ACTION_VIEW, Uri.parse("http://facebook.com"));
+                startActivity(aboutApp);
                 break;
-            case R.id.drawer_exit:
-                exit(0);
-                Toast.makeText(getApplicationContext(),"Exit Settings",Toast.LENGTH_SHORT).show();
+            case R.id.drawer_logout:
+                FirebaseAuth.getInstance().signOut();
+                SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putBoolean("logged",false);
+                editor.apply();
+                Intent i=new Intent(MainActivity.this,SplashActivity.class);
+                startActivity(i);
                 break;
             default:
         }

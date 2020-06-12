@@ -10,8 +10,8 @@
       android:title="@string/facebook"
       app:showAsAction="never"/>
   <item
-      android:id="@+id/drawer_exit"
-      android:title="@string/drawer_exit"
+      android:id="@+id/drawer_logout"
+      android:title="@string/logout"
       app:showAsAction="never"/>
 
 </menu>

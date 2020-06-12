@@ -11,8 +11,6 @@ import androidx.core.content.ContextCompat;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -178,10 +176,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 final String userName = UserName.getText().toString().trim();
                 final String phoneNumber = UserPhoneNumber.getText().toString().trim();
                 final String email = UserEmail.getText().toString().trim();
+                final String password = UserPassword.getText().toString().trim();
                 final String UserLocation=userLocation;
                 final double LocationLatitude=latitude;
                 final double LocationLongitude=longitude;
-                final String password = UserPassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(userName) ||TextUtils.isEmpty(phoneNumber) ||TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     Toast.makeText(RegisterActivity.this, "Please enter all details!", Toast.LENGTH_SHORT).show();
@@ -200,8 +198,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 //For auto login
                                 SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("emailKey",email);
-                                editor.putString("passwordKey",password);
+                                editor.putBoolean("logged",true);
                                 editor.apply();
 
                                 //For Real time Data Store
@@ -224,35 +221,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //read data from shared preferences
         SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
 
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-
-            if(sharedPreferences.contains("usernameKey")&& sharedPreferences.contains("emailKey") && sharedPreferences.contains("passwordKey")){
-                String userEmail=sharedPreferences.getString("emailKey","Data Not Found");
-                String password=sharedPreferences.getString("passwordKey","Data Not Found");
-
-                //firebase login
-                firebaseAuth.signInWithEmailAndPassword(userEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(RegisterActivity.this, "Login failed! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-            else{
-                Toast.makeText(RegisterActivity.this,"Complete your Registration First ",Toast.LENGTH_LONG).show();
-            }
+        if(sharedPreferences.getBoolean("logged",false)){
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            startActivity(intent);
         }
-        else{
-            Toast.makeText(RegisterActivity.this,"Connect your Internet/wifi",Toast.LENGTH_LONG).show();
-        }
+
         progressBar.setVisibility(View.GONE);
     }
     //open dialog login
@@ -264,16 +237,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     //Dialog Login
     @Override
-    public void applyTexts(String LoginEmail, String LoginPassword) {
+    public void applyTexts(String email, String password) {
         //For auto login
         SharedPreferences sharedPreferences=getSharedPreferences("userDetails", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("emailKey",LoginEmail);
-        editor.putString("passwordKey",LoginPassword);
+        editor.putBoolean("logged",true);
         editor.apply();
 
         //firebase login
-        firebaseAuth.signInWithEmailAndPassword(LoginEmail,LoginPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.VISIBLE);
