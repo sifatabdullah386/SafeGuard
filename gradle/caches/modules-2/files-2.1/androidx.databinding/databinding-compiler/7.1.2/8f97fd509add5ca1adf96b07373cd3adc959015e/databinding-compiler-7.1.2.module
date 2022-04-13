@@ -1,0 +1,197 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.databinding",
+    "module": "databinding-compiler",
+    "version": "7.1.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "databinding-compiler-7.1.2.jar",
+          "url": "databinding-compiler-7.1.2.jar",
+          "size": 1192223,
+          "sha512": "aad1f12e72656cf3dbd1cdf1470d406afb754dabc1b5731962da49255d063e8041a85a079a77fde2da0386dbc21628c0d9bafd2cdea7120017f2e7c3f2d3826b",
+          "sha256": "b94f0a5eb8da492e351dbdfcfdea2f658d6820d0d027e2c6d0c51102892c7ed6",
+          "sha1": "aeb9bcad0a29ed44c8d851c1eb31b55be42c3fb2",
+          "md5": "461645e71ecf3768840e4eca75555fca"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-compiler-common",
+          "version": {
+            "requires": "7.1.2"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "7.1.2"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "annotations",
+          "version": {
+            "requires": "30.1.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.4.32"
+          }
+        },
+        {
+          "group": "com.google.auto",
+          "module": "auto-common",
+          "version": {
+            "requires": "0.10"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "javapoet",
+          "version": {
+            "requires": "1.10.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "30.1-jre"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.4"
+          }
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.10"
+          }
+        },
+        {
+          "group": "org.antlr",
+          "module": "antlr4",
+          "version": {
+            "requires": "4.5.3"
+          }
+        },
+        {
+          "group": "com.googlecode.juniversalchardet",
+          "module": "juniversalchardet",
+          "version": {
+            "requires": "1.0.3"
+          }
+        },
+        {
+          "group": "org.glassfish.jaxb",
+          "module": "jaxb-runtime",
+          "version": {
+            "requires": "2.3.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "databinding-compiler-7.1.2.jar",
+          "url": "databinding-compiler-7.1.2.jar",
+          "size": 1192223,
+          "sha512": "aad1f12e72656cf3dbd1cdf1470d406afb754dabc1b5731962da49255d063e8041a85a079a77fde2da0386dbc21628c0d9bafd2cdea7120017f2e7c3f2d3826b",
+          "sha256": "b94f0a5eb8da492e351dbdfcfdea2f658d6820d0d027e2c6d0c51102892c7ed6",
+          "sha1": "aeb9bcad0a29ed44c8d851c1eb31b55be42c3fb2",
+          "md5": "461645e71ecf3768840e4eca75555fca"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "databinding-compiler-7.1.2-javadoc.jar",
+          "url": "databinding-compiler-7.1.2-javadoc.jar",
+          "size": 757636,
+          "sha512": "90fb1dd1384a7b91ec752ccf7b19029ecdcb69c913a567ed5020c6750da3d35ddd648c1cf26d65077c1ea06bbe04b3e492ea0396756c7e537a57cf3a5e8b2654",
+          "sha256": "e1b1ccf238ba45d4a5624e1833c06a8e869418d334a1f7352a5fd59b01ec30d3",
+          "sha1": "f57f5afee4c790d08ae0057d3fcc81a84249c963",
+          "md5": "a189747f909f2f591e1233a19ba41b2c"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "databinding-compiler-7.1.2-sources.jar",
+          "url": "databinding-compiler-7.1.2-sources.jar",
+          "size": 569380,
+          "sha512": "a9e585060e099c17861d2fee2eb7f7b879dfccacb52dede63867e32d19c1bb5143c9c0a793776cb12e463bf580609272cdbf0fe3ad3f392553c8867f6e47f09f",
+          "sha256": "7af1e2e2d938aa80bdde48a39a5d9d7404f1723c6cbf66bf0d738a8785fff45b",
+          "sha1": "916450bfe47ad9e1a08535a4e50a9ff5280d539b",
+          "md5": "515886d1a9d2da6683aba07e4d639a81"
+        }
+      ]
+    }
+  ]
+}

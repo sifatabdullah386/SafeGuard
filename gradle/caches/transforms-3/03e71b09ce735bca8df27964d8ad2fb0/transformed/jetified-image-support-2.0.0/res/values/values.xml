@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Support</string>
+    <declare-styleable name="ImageBadgeView">
+
+        <attr format="integer" name="ibv_badgeValue"/>
+        <attr format="integer" name="ibv_maxBadgeValue"/>
+        <attr format="dimension" name="ibv_badgePadding"/>
+        <attr format="dimension" name="ibv_fixedBadgeRadius"/>
+
+        <attr format="boolean" name="ibv_visibleBadge"/>
+        <attr format="boolean" name="ibv_badgeLimitValue"/>
+        <attr format="boolean" name="ibv_roundBadge"/>
+        <attr format="boolean" name="ibv_fixedRadius"/>
+        <!-- Use for the custom badge drawable -->
+        <attr format="boolean" name="ibv_badgeOvalAfterFirst"/>
+        <attr format="boolean" name="ibv_showCounter"/>
+        <attr name="ibv_badgePosition">
+            <enum name="top_left" value="0"/>
+            <enum name="top_right" value="1"/>
+            <enum name="bottom_left" value="2"/>
+            <enum name="bottom_right" value="3"/>
+            <enum name="center" value="4"/>
+        </attr>
+
+        <attr format="dimension" name="ibv_badgeTextSize"/>
+        <attr format="string|reference" name="ibv_badgeTextFont"/>
+        <attr name="ibv_badgeTextStyle">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+            <enum name="italic_bold" value="3"/>
+        </attr>
+
+        <attr format="color|reference" name="ibv_badgeBackground"/>
+        <attr format="color" name="ibv_badgeColor"/>
+        <attr format="color" name="ibv_badgeTextColor"/>
+
+    </declare-styleable>
+</resources>
